@@ -3,6 +3,11 @@ const htmlWebpackPlugin = require('html-webpack-plugin') //creates index.html
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
+const fs = require('fs');
+
+const lessToJs = require('less-vars-to-js');
+const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './src/client/theme.less'), 'utf8'));
+
 
 module.exports = {
 
@@ -42,6 +47,22 @@ module.exports = {
                         },
                     },
                 ],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    { loader: "style-loader" },
+                    { loader: "css-loader" },
+                    {
+                        loader: "less-loader",
+                        options: {
+                            modifyVars: themeVariables,
+                            root: path.resolve(__dirname, './'),
+                            javascriptEnabled: true
+
+                        }
+                    }
+                ]
             }
         ]
     },

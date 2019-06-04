@@ -1,0 +1,116 @@
+pwd : dim912dim912
+
+yum install git
+
+
+
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+
+yum install nodejs
+
+
+
+---- INSTALLING MONGODB _____________
+
+* Follow the documentation for yum install
+
+https://docs.mongodb.com/manual/administration/install-on-linux/
+
+* Do below permission operaitons on server to run Mongo and to access from outside
+
+change data and log directories, if needed.
+ vi /etc/mongod.conf
+
+#SELinux configs
+
+semanage fcontext -a -t mongod_var_lib_t /apps/opt/mongodb/storage.*
+semanage fcontext -a -t mongod_log_t /apps/opt/mongodb/storage.*
+semanage fcontext -a -t mongod_var_run_t /apps/opt/mongodb/storage.*
+
+chcon -Rv -u system_u -t mongod_var_lib_t /apps/opt/mongodb/storage
+chcon -Rv -u system_u -t mongod_log_t /apps/opt/mongodb/storage
+chcon -Rv -u system_u -t mongod_var_run_t /apps/opt/mongodb/storage
+
+restorecon -R -v /apps/opt/mongodb/storage 
+
+
+semanage fcontext -a -t mongod_var_lib_t /apps/opt/mongodb/logs.*
+semanage fcontext -a -t mongod_log_t /apps/opt/mongodb/logs.*
+semanage fcontext -a -t mongod_var_run_t /apps/opt/mongodb/logs.*
+
+
+chcon -Rv -u system_u -t mongod_var_lib_t /apps/opt/mongodb/logs
+chcon -Rv -u system_u -t mongod_log_t /apps/opt/mongodb/logs
+chcon -Rv -u system_u -t mongod_var_run_t /apps/opt/mongodb/logs
+
+
+restorecon -R -v /apps/opt/mongodb/logs
+
+
+Enabled MongoDb on all IPs
+
+ vi /etc/mongod.conf
+
+
+
+## install Elastic search (java is needed)
+
+
+yum install java
+
+
+
+sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+sudo vi /etc/yum.repos.d/elasticsearch.repo
+
+[elasticsearch-6.x]
+name=Elasticsearch repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+
+
+sudo yum install elasticsearch
+
+sudo systemctl enable elasticsearch.service
+sudo systemctl start elasticsearch.service
+
+
+
+mkdir -p /apps/opt/elasticsearch/data
+
+mkdir -p /apps/opt/elasticsearch/logs
+
+
+ to directory where to store the data (separate multiple locations by comma):
+#
+path.data: /apps/opt/elasticsearch/data
+#
+# Path to log files:
+#
+path.logs: /apps/opt/elasticsearch/logs
+
+
+adjust jvm memory size in : /etc/elasticsearch/jvm.options 
+
+Add hosts to below config in /etc/elasticsearch/elasticsearch.yml
+discovery.seed_hosts: <nodeNames>
+network.host: 0.0.0.0
+http.port: 9200
+
+
+data/log folder ownership and permissions
+
+chown -R elasticsearch:elasticsearch elasticsearch/
+
+
+
+
+
+
+
+
