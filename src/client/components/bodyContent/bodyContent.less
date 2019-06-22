@@ -1,0 +1,52 @@
+
+.leftNavBar ,  .rightNavBar{
+   flex : 1 2
+}
+
+.middleContent{
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    flex:10 0 ;
+}
+
+
+.SearchArea{
+    background : rgba(231, 226, 226, 0.651);
+    padding: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.searchBox{
+    flex : 2;
+    text-align: center
+}
+
+.registerNowBox{
+    flex : 1;
+    text-align: center
+}
+
+.moto{
+    font-size: 2em;
+    padding: 5px;
+    padding-top: 20px;
+    font-weight: 800;
+    color:blue;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .SearchArea{
+        flex-direction: column;
+        padding:0px
+    }
+
+    .leftNavBar,.rightNavBar , .moto{
+        display: none
+    }
+}

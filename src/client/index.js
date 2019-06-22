@@ -1,46 +1,49 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Header from './components/Header'
-import SearchCard from './components/MiddleContent'
-import '../client/index.css'
-//import 'antd/dist/antd.less'; // Import Ant Design styles by less entry
-//import '../client/theme.less'; // variables to override above
-
-
-//import '../client/index.less'; // Import Ant Design styles by less entry
-
+import BodyContent from './components/BodyContent/BodyContent'
+import style from '../client/index.less'
 
 import { Row, Col, Affix } from 'antd';
-import MiddleContent from './components/MiddleContent';
-
-//import Main from './components/Main'
-//import { Provider } from 'react-redux' //this is actually a component which glue react redux
-//import store from './store'
+import NavBar from './components/navbar/NavBar'
 
 const App = () => {
 
-  return <div>
+  return <React.Fragment>
 
-    <Row>
-      <Col span={24}>
+    <div className={ style.header }>
 
-        <Affix>
-          <Header />
-        </Affix>
+      <NavBar style={ { position: 'fixed', top: '0' } } />
 
+    </div>
 
-        <MiddleContent />
+    <div className={ style.contentContainer }>
+      <BodyContent />
+    </div>
 
-      </Col>
-    </Row>
+    <div className={ style.footer }> Copy Rigted by Gorilla </div>
 
-  </div>
-
-  //return <Provider store={store}>
-  //    {/* This is the wrapper to enable redux as a provider*/}
-  //    {/* <Main /> */}.
-  // </Provider>
-
+  </React.Fragment>
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+
+ReactDOM.render( <App />, document.getElementById( 'app' ) )
+
+
+/**
+<Affix>
+  <NavBar />
+</Affix>
+
+<div className={ style.flexMainContainer }>
+  <div className={ `${ style.mainContainerItem } ${ style.main }` }>
+    Main
+</div>
+
+  <div className={ `${ style.mainContainerItem } ${ style.footer }` }>
+    Footer
+</div>
+
+</div >
+*
+*/

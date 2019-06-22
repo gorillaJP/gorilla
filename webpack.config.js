@@ -1,19 +1,19 @@
-const path = require('path')
-const htmlWebpackPlugin = require('html-webpack-plugin') //creates index.html
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require( 'path' )
+const htmlWebpackPlugin = require( 'html-webpack-plugin' ) //creates index.html
+const MiniCssExtractPlugin = require( "mini-css-extract-plugin" );
 
 
-const fs = require('fs');
+const fs = require( 'fs' );
 
-const lessToJs = require('less-vars-to-js');
-const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './src/client/theme.less'), 'utf8'));
+const lessToJs = require( 'less-vars-to-js' );
+const themeVariables = lessToJs( fs.readFileSync( path.join( __dirname, './src/client/theme.less' ), 'utf8' ) );
 
 
 module.exports = {
 
     entry: './src/client/index.js',
     output: {
-        path: path.join(__dirname, './src/server/public'),
+        path: path.join( __dirname, './src/server/public' ),
         filename: 'frontend_bundle.js'
     },
     module: {
@@ -52,12 +52,19 @@ module.exports = {
                 test: /\.less$/,
                 use: [
                     { loader: "style-loader" },
-                    { loader: "css-loader" },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true,
+                            modules: true,
+                            localIdentName: "[path][name]__[local]--[hash:base64:5]",
+                        }
+                    },
                     {
                         loader: "less-loader",
                         options: {
                             modifyVars: themeVariables,
-                            root: path.resolve(__dirname, './'),
+                            root: path.resolve( __dirname, './' ),
                             javascriptEnabled: true
 
                         }
@@ -73,14 +80,14 @@ module.exports = {
         }
     },
     plugins: [
-        new htmlWebpackPlugin({
+        new htmlWebpackPlugin( {
             template: './src/client/index.html'
-        }),
-        new MiniCssExtractPlugin({
+        } ),
+        new MiniCssExtractPlugin( {
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
+        } )
     ]
 }

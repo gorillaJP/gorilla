@@ -17,31 +17,36 @@ class CreateUserForm extends React.Component {
     render() {
         return (
             <div>
-                <div style={{ marginBottom: 16 }}>
-                    Create Profile
+                <div style={ { marginBottom: 16 } }>
+                    <h3>
+                        Create Profile
+                    </h3>
+
                 </div>
-                <div >
-                    <Tabs tabPosition={this.state.tabPosition} >
-                        <TabPane tab="Login Details" key="1">
+                <div>
+
+                    <div style={ { display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap' } }>
+
+                        <div style={ { flex: '2 1 800px' } }>
                             <CreateLoginInfo />
-                        </TabPane>
-                        <TabPane tab="Personal Info" key="8">
+                        </div>
+                        <div style={ { flex: '2 1 800px' } }>
                             <CreateProfileInfo />
-                        </TabPane>
-                        <TabPane tab="Education" key="3">
+                        </div>
+                        <div style={ { flex: '2 1 800px' } }>
                             <CreateEducation />
-                        </TabPane>
-                        <TabPane tab="Employment History" key="2">
+                        </div>
+                        <div style={ { flex: '2 1 800px' } }>
                             <CreateEducation />
-                        </TabPane>
-
-
-                        <TabPane tab="Skills" key="4">
+                        </div>
+                        <div style={ { flex: '2 1 800px' } }>
                             <CreateLoginInfo />
-                        </TabPane>
-                    </Tabs>
+                        </div>
+                    </div>
+
+
                 </div>
-            </div>
+            </div >
         );
     }
 }

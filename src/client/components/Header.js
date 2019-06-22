@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Affix, Button, PageHeader } from "antd";
+import { Affix, Button, PageHeader, Icon } from "antd";
 import '../components/LoginDrawer'
 
 
 
-import { Menu, Icon, Col, Row, Divider } from 'antd';
+import { Menu, Col, Row, Divider } from 'antd';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -14,22 +14,22 @@ import LoginDrawer from "../components/LoginDrawer";
 
 
 class Header extends React.Component {
-  state = {
-    top: 10,
-    bottom: 10
-  };
+
 
   render() {
     return (
 
       <PageHeader >
+
+        <Icon type="menu" style={ { fontSize: '50px' } } />
+
         <Menu mode="horizontal">
 
           <SubMenu
             title={
               <span className="submenu-title-wrapper">
 
-                <div style={{ fontSize: '16px', fontWeight: "bold" }}>
+                <div style={ { fontSize: '16px', fontWeight: "bold" } }>
                   CITY
                 </div>
               </span>
@@ -46,7 +46,7 @@ class Header extends React.Component {
           <SubMenu
             title={
               <span className="submenu-title-wrapper">
-                <div style={{ fontSize: '16px', fontWeight: "bold" }}>
+                <div style={ { fontSize: '16px', fontWeight: "bold" } }>
                   FIELDS
                 </div>
               </span>
@@ -62,7 +62,7 @@ class Header extends React.Component {
           <SubMenu
             title={
               <span className="submenu-title-wrapper">
-                <div style={{ fontSize: '16px', fontWeight: "bold" }}>
+                <div style={ { fontSize: '16px', fontWeight: "bold" } }>
                   CATEGORIES
                 </div>
               </span>
@@ -75,11 +75,11 @@ class Header extends React.Component {
 
           </SubMenu>
 
-          <Menu.Item style={{ float: 'right' }}>
+          <Menu.Item style={ { float: 'right' } }>
             <LoginModel lable="EMPLOYER LOGIN" />
           </Menu.Item>
 
-          <Menu.Item style={{ float: 'right' }} >
+          <Menu.Item style={ { float: 'right' } } >
             <LoginModel lable="JOB SEEKER LOGIN" />
           </Menu.Item>
 
