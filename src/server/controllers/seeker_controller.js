@@ -4,7 +4,6 @@ import Seeker from '../models/Seeker'
 import { success, error } from '../util/constants'
 import HttpStatus from 'http-status-codes'
 
-
 const getSeeker = ( req, res ) => {
 
     Seeker.findOne( { '_id': req.params.id } ).exec().then( data => {
@@ -32,7 +31,6 @@ const isUserNameTaken = ( req, res ) => {
 
 }
 
-
 const addSeeker = ( req, res ) => {
 
     var seeker = new Seeker( req.body )
@@ -50,6 +48,7 @@ const addSeeker = ( req, res ) => {
     } )
 
 }
+
 
 
 export default { getSeeker, addSeeker, isUserNameTaken }

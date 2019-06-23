@@ -6,6 +6,7 @@ import { Input } from 'antd';
 import style from './bodyContent.less'
 import SearchBox from './searchBox/SearchBox'
 import RegisterNowBox from './registerNow/RegisterNowBox'
+import LoginModal from './loginModal/LoginModal'
 
 const Search = Input.Search
 
@@ -37,10 +38,10 @@ class BodyContent extends React.Component {
 
                 </div>
 
-
                 <div>
                 </div>
 
+                <LoginModal />
 
 
             </div>
