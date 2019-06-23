@@ -12,10 +12,12 @@ const themeVariables = lessToJs( fs.readFileSync( path.join( __dirname, './src/c
 module.exports = {
 
     entry: './src/client/index.js',
+    /*
     output: {
         path: path.join( __dirname, './src/server/public' ),
         filename: 'frontend_bundle.js'
     },
+    */
     module: {
         rules: [
             {
@@ -73,12 +75,14 @@ module.exports = {
             }
         ]
     },
+    /*
     devServer: {
         port: 3000,
         proxy: {
             "/api": "http://localhost:8080"
         }
     },
+    */
     plugins: [
         new htmlWebpackPlugin( {
             template: './src/client/index.html'

@@ -13,7 +13,7 @@ import { logFilter } from './filters/filter'
  * At dev mode -> front, back ends runs on their own ports(3000, 8080)
  * 
  */
-const htmlPath = path.join( __dirname, '../client' );
+const htmlPath = path.join( __dirname, 'public' );
 
 //create instance
 const app = express();
