@@ -1,6 +1,11 @@
 const merge = require( 'webpack-merge' );
 const common = require( './webpack.common.js' );
 
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+
+
+
+
 module.exports = merge( common, {
     mode: 'development',
     devtool: 'inline-source-map',
@@ -11,6 +16,9 @@ module.exports = merge( common, {
             "/api": "http://localhost:8080"
         }
     },
+    plugins: [
+        new BundleAnalyzerPlugin()
+    ]
 } );
 
 //--host 0.0.0.0 --port 3002 --mode=development

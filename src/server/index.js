@@ -20,10 +20,17 @@ const options = {
 };
 
 
-const htmlPath = path.join( __dirname, 'public' );
-
 //create instance
 const app = express();
+
+app.get( '*.js', function ( req, res, next ) {
+    req.url = req.url + '.gz';
+    res.set( 'Content-Encoding', 'gzip' );
+    res.set( 'Content-Type', 'text/javascript' );
+    next();
+} );
+
+const htmlPath = path.join( __dirname, 'public' );
 
 app.use( bodyParser.json() );
 
