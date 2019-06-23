@@ -8,20 +8,16 @@ var http = require( 'http' );
 var https = require( 'https' )
 
 
-var hskey = fs.readFileSync( './src/server/keys/server.key', 'utf8' )
+/* certificate */
 
-console.log( hskey )
+const hskey = fs.readFileSync( './src/server/keys/server.key', 'utf8' )
 
-var hscert = fs.readFileSync( './src/server/keys/server.cert', 'utf8' )
+const hscert = fs.readFileSync( './src/server/keys/server.cert', 'utf8' )
 
-console.log( hscert )
-
-
-var options = {
+const options = {
     key: hskey,
     cert: hscert
 };
-
 
 
 const htmlPath = path.join( __dirname, 'public' );
@@ -35,7 +31,6 @@ app.use( bodyParser.json() );
 app.disable( 'etag' );
 app.use( express.static( htmlPath ) ) //static route
 
-
 app.use( '/api', logFilter )
 
 
@@ -44,9 +39,5 @@ app.use( '/health', ( req, res ) => { res.send( { status: "OK" } ) } ) //directi
 
 app.use( '/api', router )
 
-//listen oon 8080
-//app.listen( 8080, () => console.log( "Listening onn portt 8080    !" ) );
-
-
-var server = https.createServer( options, app ).listen( 8080 );
-console.log( 'HTTPS Server listening on %s:%s', 'HOST', 8080 );
+https.createServer( options, app ).listen( 443 );
+console.log( 'HTTPS Server listening on %s:%s', 'HOST', 443 );
