@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Header from './components/Header'
-import BodyContent from './components/BodyContent/BodyContent'
+import BodyContent from './components/bodyContent/BodyContent'
 import style from '../client/index.less'
 
 import { Row, Col, Affix } from 'antd';
