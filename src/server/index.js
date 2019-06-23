@@ -3,16 +3,27 @@ import express from "express"
 import router from './router'
 import bodyParser from 'body-parser'
 import { logFilter } from './filters/filter'
-//import router from './router'
-//import frontFilter from './middleware/frontFilter'
-//import startUps from './utils/startUps'
+const fs = require( 'fs' );
+var http = require( 'http' );
+var https = require( 'https' )
 
-/**
- * 
- * At production webpack copy frontend build to 'server > public' folder.
- * At dev mode -> front, back ends runs on their own ports(3000, 8080)
- * 
- */
+
+var hskey = fs.readFileSync( './src/server/keys/server.key', 'utf8' )
+
+console.log( hskey )
+
+var hscert = fs.readFileSync( './src/server/keys/server.cert', 'utf8' )
+
+console.log( hscert )
+
+
+var options = {
+    key: hskey,
+    cert: hscert
+};
+
+
+
 const htmlPath = path.join( __dirname, 'public' );
 
 //create instance
@@ -34,4 +45,8 @@ app.use( '/health', ( req, res ) => { res.send( { status: "OK" } ) } ) //directi
 app.use( '/api', router )
 
 //listen oon 8080
-app.listen( 8080, () => console.log( "Listening onn portt 8080    !" ) );
+//app.listen( 8080, () => console.log( "Listening onn portt 8080    !" ) );
+
+
+var server = https.createServer( options, app ).listen( 8080 );
+console.log( 'HTTPS Server listening on %s:%s', 'HOST', 8080 );
