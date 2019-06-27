@@ -4,10 +4,7 @@ const path = require( 'path' )
 var CompressionPlugin = require( 'compression-webpack-plugin' );
 const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' )
 
-
-
-const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
-
+//const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 
 module.exports = merge( common, {
   mode: 'production',
@@ -23,7 +20,7 @@ module.exports = merge( common, {
   },
 
   plugins: [
-    new BundleAnalyzerPlugin(),
+    //new BundleAnalyzerPlugin(),
     new CompressionPlugin( {
       test: /\.js(\?.*)?$/i,
     } )
