@@ -12,6 +12,17 @@ const Search = Input.Search
 
 class BodyContent extends React.Component {
 
+    constructor( props ) {
+        super( props )
+        this.state = { showLogin: true }
+        this.hideLogin = this.hideLogin.bind( this )
+    }
+
+    hideLogin = () => {
+        this.setState( { showLogin: false } )
+    }
+
+
     render() {
 
         return <React.Fragment>
@@ -41,8 +52,9 @@ class BodyContent extends React.Component {
                 <div>
                 </div>
 
-                <LoginModal />
-
+                {
+                    ( this.state.showLogin ? <LoginModal hideLogin={ this.hideLogin } /> : '' )
+                }
 
             </div>
             <div className={ style.rightNavBar }> </div>

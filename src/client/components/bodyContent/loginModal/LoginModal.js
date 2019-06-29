@@ -16,9 +16,17 @@ class HorizontalLoginForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields( ( err, values ) => {
-            if ( !err ) {
-                console.log( 'Received values of form: ', values );
-            }
+
+            axios.post( '/api/login', values ).then( res => {
+
+                if ( res.status === 200 ) {
+                    this.props.hideLogin()
+                }
+
+            } ).catch( err => {
+                callback( 'Error at validating' )
+            } )
+
         } );
     };
 
@@ -84,6 +92,7 @@ class HorizontalLoginForm extends React.Component {
                                                 message: 'Please enter a username',
                                             },
                                             {
+                                                /*
                                                 validator: ( rule, value, callback ) => {
 
                                                     if ( value )
@@ -103,6 +112,7 @@ class HorizontalLoginForm extends React.Component {
                                                     }
 
                                                 },
+                                                */
                                             },
                                         ],
                                     } ],

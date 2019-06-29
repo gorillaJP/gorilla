@@ -21,9 +21,12 @@ const login = ( '/login', ( req, res, next ) => {
                 res.send( err );
             }
 
+            delete user.password
+            delete user.username
+
             const token = jwt.sign( user, 'your_jwt_secret' );
 
-            return res.json( { token } );
+            return res.json( { token, user } );
         } );
     } )
         ( req, res, next );
