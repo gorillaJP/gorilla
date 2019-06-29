@@ -16,12 +16,12 @@ const routes = [
     {
         'method': 'get',
         'path': '/seeker/:id',
-        'auth': true,
+        'auth': false,
         'controller': user_controller.getSeeker
     },
     {
         'method': 'get',
-        'auth': true,
+        'auth': false,
         'path': '/exist/seeker/username/:username',
         'controller': user_controller.isUserNameTaken
     },

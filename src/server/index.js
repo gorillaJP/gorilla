@@ -46,6 +46,11 @@ app.use( '/api', router )
 app.use( '/health', ( req, res ) => { res.send( { status: "OK" } ) } ) //directing to global router(dispatcher)
 
 //app.use( '/api', router )
-
-https.createServer( options, app ).listen( 443 );
-console.log( 'HTTPS Server listening on %s:%s', 'HOST', 443 );
+if ( process.env.NODE_ENV === 'production' ) {
+    https.createServer( options, app ).listen( 443 )
+    console.log( 'HTTPS Server listening on %s:%s', 'HOST', 443 )
+}
+else {
+    http.createServer( app ).listen( 8080 )
+    console.log( 'HTTPS Server listening on %s:%s', 'HOST', 8080 )
+}
