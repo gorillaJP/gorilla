@@ -26,24 +26,24 @@ class SearchBox extends React.Component {
 
                 <div className={ style.fastAccessMenuBar }>
 
-                    <div class={ style.menuItems }>
-                        <a class={ style.menuLinks }>All</a>
+                    <div className={ style.menuItems }>
+                        <a className={ style.menuLinks }>All</a>
                     </div>
 
-                    <div class={ style.menuItems }>
-                        <a class={ style.menuLinks }>Software</a>
+                    <div className={ style.menuItems }>
+                        <a className={ style.menuLinks }>Software</a>
                     </div>
 
-                    <div class={ style.menuItems }>
-                        <a class={ style.menuLinks }>Contract</a>
+                    <div className={ style.menuItems }>
+                        <a className={ style.menuLinks }>Contract</a>
                     </div>
 
-                    <div class={ style.menuItems }>
-                        <a class={ style.menuLinks }>Fresher</a>
+                    <div className={ style.menuItems }>
+                        <a className={ style.menuLinks }>Fresher</a>
                     </div>
 
-                    <div class={ style.menuItems }>
-                        <a class={ style.menuLinks }>Part time</a>
+                    <div className={ style.menuItems }>
+                        <a className={ style.menuLinks }>Part time</a>
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@ class SearchBox extends React.Component {
                 <div className={ style.advancedSearchLink }>
 
                     <div>
-                        <a class={ style.menuLinks }>Advanced Search</a>
+                        <a className={ style.menuLinks }>Advanced Search</a>
                     </div>
                 </div>
 

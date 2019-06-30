@@ -1,49 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Header from './components/Header'
-import BodyContent from './components/bodyContent/BodyContent'
-import style from '../client/index.less'
+import ReactApp from './components/ReactApp'
+import { Provider } from 'react-redux' //this is actually a component which glue react redux
+import store from './store'
 
-import { Row, Col, Affix } from 'antd';
-import NavBar from './components/navbar/NavBar'
+
 
 const App = () => {
 
-  return <React.Fragment>
+  return <Provider store={ store }>
 
-    <div className={ style.header }>
+    <ReactApp />
 
-      <NavBar style={ { position: 'fixed', top: '0' } } />
+  </Provider>
 
-    </div>
-
-    <div className={ style.contentContainer }>
-      <BodyContent />
-    </div>
-
-    <div className={ style.footer }> Copy Rigted by Gorilla </div>
-
-  </React.Fragment>
 }
 
-
 ReactDOM.render( <App />, document.getElementById( 'app' ) )
-
-
-/**
-<Affix>
-  <NavBar />
-</Affix>
-
-<div className={ style.flexMainContainer }>
-  <div className={ `${ style.mainContainerItem } ${ style.main }` }>
-    Main
-</div>
-
-  <div className={ `${ style.mainContainerItem } ${ style.footer }` }>
-    Footer
-</div>
-
-</div >
-*
-*/
