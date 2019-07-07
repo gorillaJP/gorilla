@@ -24,6 +24,8 @@ const options = {
 const app = express();
 
 //enable gzip for prod env
+
+console.log( 'process.env.NODE_ENV : ' + process.env.NODE_ENV )
 if ( process.env.NODE_ENV === 'production' ) {
     app.get( '*.js', function ( req, res, next ) {
         req.url = req.url + '.gz';
