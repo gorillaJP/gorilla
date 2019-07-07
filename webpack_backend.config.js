@@ -1,21 +1,21 @@
-const path = require('path')
-const htmlWebpackPlugin = require('html-webpack-plugin') //creates index.html
-var nodeExternals = require('webpack-node-externals');
+const path = require( 'path' )
+const htmlWebpackPlugin = require( 'html-webpack-plugin' ) //creates index.html
+var nodeExternals = require( 'webpack-node-externals' );
 
 module.exports = {
-
+    mode: 'production',
     entry: './src/server/index.js',
     target: 'node',
-    externals: [nodeExternals()],
+    externals: [ nodeExternals() ],
     output: {
-        path: path.join(__dirname, './src/server'),
+        path: path.join( __dirname, './src/server' ),
         filename: 'backend.js'
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                include: path.resolve(__dirname, "./src/server"),
+                include: path.resolve( __dirname, "./src/server" ),
                 use: {
                     loader: 'babel-loader'
                 }
