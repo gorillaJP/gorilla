@@ -8,7 +8,10 @@
     "client": "webpack-dev-server  --config webpack.dev.js ",
     "server": "nodemon --exec babel-node  src/server/index.js",
     "prod": "webpack --config webpack.prod.js && webpack  --config webpack_backend.config.js && node ./src/server/backend.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "uiProdBuild": "webpack --config webpack.prod.js",
+    "backEndBuild": "webpack  --config webpack_backend.config.js",
+    "startBackend": "node ./src/server/backend.js"
   },
   "repository": {
     "type": "git",

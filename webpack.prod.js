@@ -4,6 +4,9 @@ const path = require( 'path' )
 var CompressionPlugin = require( 'compression-webpack-plugin' );
 const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' )
 
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+
+
 //const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 
 module.exports = merge( common, {
@@ -15,12 +18,31 @@ module.exports = merge( common, {
 
   optimization: {
     minimizer: [
-      new UglifyJsPlugin()
-    ]
+      new UglifyJsPlugin( {
+        sourceMap: true,
+        uglifyOptions: {
+          compress: {
+            inline: false
+          }
+        }
+      } )
+    ],
+    runtimeChunk: false,
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor_app',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
+    }
   },
 
   plugins: [
-    //new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new CompressionPlugin( {
       test: /\.js(\?.*)?$/i,
     } )

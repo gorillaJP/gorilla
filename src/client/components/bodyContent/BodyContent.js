@@ -1,13 +1,9 @@
-import SearchCard from '../SearchCrad'
+
 import React from 'react'
-import { Card, Row, Col, Spin } from 'antd'
-import CreateuserForm from '../CreateUserFrom'
 import { Input } from 'antd';
 import style from './bodyContent.less'
 import SearchBox from './searchBox/SearchBox'
-import RegisterNowBox from './registerNow/RegisterNowBox'
-import LoginModal from './loginModal/LoginModal'
-import { connect } from 'react-redux'
+
 
 
 const Search = Input.Search
