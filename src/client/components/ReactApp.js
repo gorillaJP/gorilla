@@ -2,25 +2,45 @@ import React from 'react'
 import BodyContent from './bodyContent/BodyContent'
 import style from './reactApp.less'
 import NavBar from './navbar/NavBar'
+import Loading from './utils/Loading'
+import { connect } from 'react-redux'
 
-const ReactApp = () => {
+class ReactApp extends React.Component {
 
-    return <React.Fragment>
+    render() {
 
-        <div className={ style.header }>
+        return <React.Fragment>
 
-            <NavBar style={ { position: 'fixed', top: '0' } } />
+            { /*header */ }
+            < div className={ style.header }>
+                <NavBar style={ { position: 'fixed', top: '0' } } />
+            </div>
 
-        </div>
+            { /*body */ }
+            <div className={ style.contentContainer }>
+                <BodyContent />
+            </div>
 
-        <div className={ style.contentContainer }>
-            <BodyContent />
-        </div>
+            { /*footer */ }
+            <div className={ style.footer }> Copy Rigted by Gorilla </div>
 
-        <div className={ style.footer }> Copy Rigted by Gorilla </div>
+            { this.props.showLoading ? <Loading /> : '' }
 
-    </React.Fragment>
+        </React.Fragment >
+    }
+
 }
 
 
-export default ReactApp
+const mapStateToProps = state => {
+
+    if ( state ) {
+        return {
+            showLoading: state.loading,
+        }
+    }
+}
+
+
+
+export default connect( mapStateToProps, undefined )( ReactApp )

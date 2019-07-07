@@ -4,12 +4,26 @@
   border-bottom: solid 1px #e8e8e8;
   overflow: auto;
   box-shadow: 0 0 30px #f3f1f1;
-  background-color: white
+  background-color: white;
+  display:flex;
 }
 .logo{
   width: 150px;
-  float: left;
 }
+.menuCon{
+  width: calc(100% - 150px);
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.menuCon .leftMenu{
+}
+.menuCon .rightMenu{
+}
+
+
+
 .logo .link{
   display: inline-block;
   font-size: 20px;
@@ -19,10 +33,7 @@
   font-size: 24;
   color:blue;
 }
-.menuCon{
-  width: calc(100% - 150px);
-  float: left;
-}
+
 .menuCon .ant-menu-item{
   font-weight: 600;
   padding: 0px 5px;
@@ -37,12 +48,7 @@
 .menuCon .ant-menu-horizontal{
   border-bottom: none;
 }
-.menuCon .leftMenu{
-  float: left;
-}
-.menuCon .rightMenu{
-  float: right;
-}
+
 .barsMenu{
   float: right;
   height: 32px;
@@ -85,6 +91,21 @@
   border-bottom-color: transparent;
 }
 
+.nameTagContainer {
+  display:flex;
+  align-items: center;
+}
+.nameTag{
+  border-style: solid;
+  border-radius: 50%;
+  border-color: blue;
+  background:#f0f8ff;
+  height: 50px;
+  width: 50px;
+  text-align:center !important;
+  line-height : 50px;
+}
+
 @media(max-width: 767px){
   .barsMenu{
     display: inline-block;
@@ -92,6 +113,11 @@
   .leftMenu,.rightMenu{
     display: none;
   }
+  .menuCon{
+    justify-content: flex-end;
+    align-items: center
+  }
+
   .logo a{
     margin-left: -20px;
   }

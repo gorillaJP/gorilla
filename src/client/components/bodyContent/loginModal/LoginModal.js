@@ -1,14 +1,17 @@
 import React from 'react'
 import { Form, Icon, Input, Button, Modal, Checkbox } from 'antd';
 import style from './loginmodal.less'
-import axios from 'axios'
+import axios from 'axios';
+import { connect } from 'react-redux'
+import Loading from '../../utils/Loading'
+import { login } from '../../../actions/userActions'
+
 
 function hasErrors( fieldsError ) {
     return Object.keys( fieldsError ).some( field => fieldsError[ field ] );
 }
 
 class HorizontalLoginForm extends React.Component {
-
 
     componentDidMount() {
     }
@@ -17,15 +20,7 @@ class HorizontalLoginForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFields( ( err, values ) => {
 
-            axios.post( '/api/login', values ).then( res => {
-
-                if ( res.status === 200 ) {
-                    this.props.hideLogin()
-                }
-
-            } ).catch( err => {
-                callback( 'Error at validating' )
-            } )
+            this.props.login( values )
 
         } );
     };
@@ -66,11 +61,9 @@ class HorizontalLoginForm extends React.Component {
 
         return (
 
-
-
             <React.Fragment>
-                <div>
 
+                <div style={ { background: 'red', backgroundColor: 'pink', borderStyle: 'solid' } }>
 
                     <Modal
                         title={ this.titleNode }
@@ -80,6 +73,13 @@ class HorizontalLoginForm extends React.Component {
                         footer={ null }
                     >
 
+                        {
+                            console.log( 'mmmmmmm', JSON.stringify( this.props.user ) )
+                        }
+                        {
+                            this.props && this.props.user && this.props.user && this.props.user.user ?
+                                this.props.user.user.user.firstname : ''
+                        }
 
                         <Form onSubmit={ this.handleSubmit } className="login-form">
                             <Form.Item>
@@ -94,10 +94,10 @@ class HorizontalLoginForm extends React.Component {
                                             {
                                                 /*
                                                 validator: ( rule, value, callback ) => {
-
+    
                                                     if ( value )
                                                         axios.get( '/api/exist/seeker/username/' + value ).then( res => {
-
+    
                                                             if ( res.data.payload.count != 0 ) {
                                                                 callback( 'This username is not available' )
                                                             }
@@ -110,7 +110,7 @@ class HorizontalLoginForm extends React.Component {
                                                     else {
                                                         callback()
                                                     }
-
+    
                                                 },
                                                 */
                                             },
@@ -165,8 +165,6 @@ class HorizontalLoginForm extends React.Component {
 
                             </Form.Item>
                         </Form>
-
-
                     </Modal>
 
                 </div>
@@ -180,4 +178,24 @@ class HorizontalLoginForm extends React.Component {
 const WrappedHorizontalLoginForm = Form.create( { name: 'horizontal_login' } )( HorizontalLoginForm );
 
 
-export default WrappedHorizontalLoginForm
+const mapStateToProps = state => {
+    console.log( 'in map state to props', state )
+    if ( state ) {
+        return {
+            user: state.user
+        }
+    }
+    return {
+        haha: 'empty'
+    }
+}
+
+const mapDispatchtoProps = ( dispatch ) => {
+    return {
+        login: ( user ) => {
+            dispatch( login( user ) )
+        }
+    }
+}
+
+export default connect( mapStateToProps, mapDispatchtoProps )( WrappedHorizontalLoginForm )

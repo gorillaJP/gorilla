@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
+import promiseMiddleware from 'redux-promise-middleware';
 
 const initState = {}
 
-const middleware = [ thunk ]
+const middleware = [ thunk, promiseMiddleware ]
 
 /* 
 minimal store needs
