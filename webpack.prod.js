@@ -42,7 +42,6 @@ module.exports = merge( common, {
   },
 
   plugins: [
-    new BundleAnalyzerPlugin(),
     new CompressionPlugin( {
       test: /\.js(\?.*)?$/i,
     } )
