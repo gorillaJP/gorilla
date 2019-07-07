@@ -40,6 +40,7 @@
     "react-dom": "^16.5.2",
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
@@ -64,7 +65,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "nodemon": "^1.18.5",
-    "npm": "^6.4.1",
+    "npm": "^6.10.0",
     "redux-devtools-extension": "^2.13.8",
     "redux-promise-middleware": "^6.1.1",
     "sass-loader": "^7.1.0",

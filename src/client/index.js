@@ -2,15 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactApp from './components/ReactApp'
 import { Provider } from 'react-redux' //this is actually a component which glue react redux
-import store from './store'
+import storeInit from './store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 
+const store = storeInit()
 
 const App = () => {
 
-  return <Provider store={ store }>
+  return <Provider store={ store.store }>
 
-    <ReactApp />
+    <PersistGate loading={ null } persistor={ store.persistor }>
+
+      <ReactApp />
+
+    </PersistGate>
 
   </Provider>
 
