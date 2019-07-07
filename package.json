@@ -7,6 +7,7 @@
     "start": "node ./src/client/index.js ; node ./src/server/index.js ",
     "client": "webpack-dev-server  --config webpack.dev.js ",
     "server": "nodemon --exec babel-node  src/server/index.js",
+    "serverProd": "webpack  --config webpack_backend.config.js && node ./src/server/backend.js",
     "prod": "webpack --config webpack.prod.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
