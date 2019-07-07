@@ -14,7 +14,8 @@ export default function ( state = initState, action ) { //reducer needs state an
             else {
                 return initState
             }
-
+        case 'LOGOUT':
+            return initState
         default:
             return state;
             break;
