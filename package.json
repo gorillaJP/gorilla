@@ -7,8 +7,7 @@
     "start": "node ./src/client/index.js ; node ./src/server/index.js ",
     "client": "webpack-dev-server  --config webpack.dev.js ",
     "server": "nodemon --exec babel-node  src/server/index.js",
-    "serverProd": "webpack  --config webpack_backend.config.js && node ./src/server/backend.js",
-    "prod": "webpack --config webpack.prod.js",
+    "prod": "webpack --config webpack.prod.js && webpack  --config webpack_backend.config.js && node ./src/server/backend.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
@@ -42,7 +41,8 @@
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
     "redux-persist": "^5.10.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

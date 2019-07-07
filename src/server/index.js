@@ -3,6 +3,8 @@ import express from "express"
 import router from './router'
 import bodyParser from 'body-parser'
 import auth from './filters/auth'
+import favicon from 'serve-favicon'
+
 
 const fs = require( 'fs' );
 var http = require( 'http' );
@@ -23,6 +25,8 @@ const options = {
 //create instance
 const app = express();
 
+
+
 //enable gzip for prod env
 
 console.log( 'process.env.NODE_ENV : ' + process.env.NODE_ENV )
@@ -36,6 +40,8 @@ if ( process.env.NODE_ENV === 'production' ) {
 }
 
 const htmlPath = path.join( __dirname, 'public' );
+app.use( favicon( path.join( __dirname, 'public', 'favicon.png' ) ) )
+
 
 app.use( bodyParser.json() );
 
