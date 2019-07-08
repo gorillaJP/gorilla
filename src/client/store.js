@@ -24,15 +24,30 @@ minimal store needs
     b. a reducer
 */
 
+
+let wrappedMW
+if ( process.env.NODE_ENV === 'production' ) {
+    console.log( 'prodd' )
+    wrappedMW = applyMiddleware( ...middleware )
+}
+else { //enable redux dev tools only for dev
+    console.log( 'devvv' )
+
+    wrappedMW = compose(
+        applyMiddleware( ...middleware ),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //This is to enable redux dev tool at chrome browser
+    )
+}
+
+
+
+
 export default () => {
 
     let store = createStore(
         persistedRootReducer,
         initState,
-        compose(
-            applyMiddleware( ...middleware ),
-            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //This is to enable redux dev tool at chrome browser
-        )
+        wrappedMW
     )
 
     let persistor = persistStore( store )
