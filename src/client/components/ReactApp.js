@@ -1,11 +1,16 @@
 import React from 'react'
-import BodyContent from './bodyContent/BodyContent'
 import style from './reactApp.less'
-import NavBar from './navbar/NavBar'
 import Loading from './utils/Loading'
 import { connect } from 'react-redux'
 
+
+const BodyContent = React.lazy( () => import( './bodyContent/BodyContent' ) )
+
+const NavBar = React.lazy( () => import( './navbar/NavBar' ) )
+
+
 class ReactApp extends React.Component {
+
 
     render() {
 
@@ -13,12 +18,18 @@ class ReactApp extends React.Component {
 
             { /*header */ }
             < div className={ style.header }>
-                <NavBar style={ { position: 'fixed', top: '0' } } />
+                <React.Suspense fallback={ <Loading /> }>
+                    <NavBar />
+                </React.Suspense>
             </div>
 
             { /*body */ }
             <div className={ style.contentContainer }>
-                <BodyContent />
+
+                <React.Suspense fallback={ <Loading /> }>
+                    <BodyContent />
+                </React.Suspense>
+
             </div>
 
             { /*footer */ }
