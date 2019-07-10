@@ -17,3 +17,8 @@ pwd :
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 
 
+pm2
+
+npm install pm2 -g
+
+

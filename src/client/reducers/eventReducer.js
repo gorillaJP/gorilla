@@ -1,24 +1,26 @@
 
-const initState = null
+const initState = {}
 
 export default function ( state = initState, action ) { //reducer needs state and action
 
-    console.log( action.type )
     switch ( action.type ) {
         case 'LOGIN_FULFILLED':
 
             if ( action.payload.status === 200 ) {
-                return action.payload.data
+                return {
+                    ...initState,
+                    loginFailed: false
+                }
             }
             else {
-                return initState
+                return {
+                    ...initState,
+                    loginFailed: true
+                }
             }
 
-        case 'LOGOUT':
-            return initState
         default:
             return state;
-            break;
     }
 
 }

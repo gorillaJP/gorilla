@@ -11,6 +11,15 @@ function hasErrors( fieldsError ) {
     return Object.keys( fieldsError ).some( field => fieldsError[ field ] );
 }
 
+
+const InvalidLoginDetails = () => {
+
+    return <div className={ style.inavlidLoginDetails }>
+        Invalid user name or password
+    </div>
+}
+
+
 class HorizontalLoginForm extends React.Component {
 
     componentDidMount() {
@@ -74,9 +83,6 @@ class HorizontalLoginForm extends React.Component {
                     >
 
                         {
-                            console.log( 'mmmmmmm', JSON.stringify( this.props.user ) )
-                        }
-                        {
                             this.props && this.props.user && this.props.user && this.props.user.user ?
                                 this.props.user.user.user.firstname : ''
                         }
@@ -90,32 +96,9 @@ class HorizontalLoginForm extends React.Component {
                                             {
                                                 required: true,
                                                 message: 'Please enter a username',
-                                            },
-                                            {
-                                                /*
-                                                validator: ( rule, value, callback ) => {
-    
-                                                    if ( value )
-                                                        axios.get( '/api/exist/seeker/username/' + value ).then( res => {
-    
-                                                            if ( res.data.payload.count != 0 ) {
-                                                                callback( 'This username is not available' )
-                                                            }
-                                                            else {
-                                                                callback()
-                                                            }
-                                                        } ).catch( err => {
-                                                            callback( 'Error at validating' )
-                                                        } )
-                                                    else {
-                                                        callback()
-                                                    }
-    
-                                                },
-                                                */
-                                            },
-                                        ],
-                                    } ],
+                                            }
+                                        ]
+                                    } ]
 
                                 } )(
                                     <Input size="large"
@@ -124,8 +107,8 @@ class HorizontalLoginForm extends React.Component {
                                     />,
                                 ) }
 
-
                             </Form.Item>
+
                             <Form.Item>
                                 { getFieldDecorator( 'password', {
                                     rules: [ { required: true, message: 'Please input your Password!' } ],
@@ -137,6 +120,12 @@ class HorizontalLoginForm extends React.Component {
                                     />,
                                 ) }
                             </Form.Item>
+
+                            {
+                                this.props.event.loginFailed ?
+                                    <InvalidLoginDetails /> : ''
+                            }
+
                             <Button style={ {
                                 size: 'large ',
                                 width: '100%', marginBottom: '10px',
@@ -179,10 +168,10 @@ const WrappedHorizontalLoginForm = Form.create( { name: 'horizontal_login' } )( 
 
 
 const mapStateToProps = state => {
-    console.log( 'in map state to props', state )
     if ( state ) {
         return {
-            user: state.user
+            user: state.user,
+            event: state.event
         }
     }
     return {
