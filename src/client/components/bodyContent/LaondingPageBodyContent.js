@@ -57,5 +57,5 @@ class LaondingPageBodyContent extends React.Component {
 
 
 
-export default BodyContent
+export default LaondingPageBodyContent
 

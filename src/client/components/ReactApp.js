@@ -4,7 +4,7 @@ import Loading from './utils/Loading'
 import { connect } from 'react-redux'
 
 
-const BodyContent = React.lazy( () => import( './bodyContent/BodyContent' ) )
+const LaondingPageBodyContent = React.lazy( () => import( './bodyContent/LaondingPageBodyContent' ) )
 
 const NavBar = React.lazy( () => import( './navbar/NavBar' ) )
 
@@ -26,8 +26,14 @@ class ReactApp extends React.Component {
             { /*body */ }
             <div className={ style.contentContainer }>
 
+                { /** 
                 <React.Suspense fallback={ <Loading /> }>
                     <BodyContent />
+                </React.Suspense>
+                */ }
+
+                <React.Suspense fallback={ <Loading /> }>
+                    <LaondingPageBodyContent />
                 </React.Suspense>
 
             </div>
