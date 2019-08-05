@@ -52,6 +52,7 @@ module.exports = {
             },
             {
                 test: /\.less$/,
+                exclude: /node_modules/,
                 use: [
                     { loader: "style-loader" },
                     {
@@ -66,7 +67,26 @@ module.exports = {
                         loader: "less-loader",
                         options: {
                             modifyVars: themeVariables,
-                            root: path.resolve( __dirname, './' ),
+                            //root: path.resolve( __dirname, './' ),
+                            javascriptEnabled: true
+
+                        }
+                    }
+                ]
+            },
+            {
+                exclude: /src/,
+                test: /\.less$/,
+                use: [
+                    { loader: "style-loader" },
+                    {
+                        loader: "css-loader"
+                    },
+                    {
+                        loader: "less-loader",
+                        options: {
+                            modifyVars: themeVariables,
+                            //root: path.resolve( __dirname, './' ),
                             javascriptEnabled: true
 
                         }

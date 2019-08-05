@@ -22,13 +22,10 @@ const InvalidLoginDetails = () => {
 
 class HorizontalLoginForm extends React.Component {
 
-    componentDidMount() {
-    }
 
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields( ( err, values ) => {
-
             this.props.login( values )
 
         } );
@@ -37,12 +34,15 @@ class HorizontalLoginForm extends React.Component {
     state = { visible: true };
 
     showModal = () => {
+        console.log( 'showModal' )
         this.setState( {
             visible: true,
         } );
     };
 
     handleOk = e => {
+        console.log( 'handleOk' )
+
         console.log( e );
         this.setState( {
             visible: false,
@@ -50,6 +50,8 @@ class HorizontalLoginForm extends React.Component {
     };
 
     handleCancel = e => {
+        console.log( 'handleCancel' )
+
         console.log( e );
         this.setState( {
             visible: false,
@@ -68,18 +70,22 @@ class HorizontalLoginForm extends React.Component {
         const passwordError = isFieldTouched( 'password' ) && getFieldError( 'password' );
 
 
+        console.log( '&&&&&&&&&' )
+
         return (
+
 
             <React.Fragment>
 
-                <div style={ { background: 'red', backgroundColor: 'pink', borderStyle: 'solid' } }>
+                <div>
 
                     <Modal
                         title={ this.titleNode }
-                        visible={ this.state.visible }
+                        visible={ this.props.showLoginModel }
                         onOk={ this.handleOk }
-                        onCancel={ this.handleCancel }
+                        onCancel={ this.props.afterClose }
                         footer={ null }
+                        afterClose={ this.props.afterClose }
                     >
 
                         {
@@ -171,11 +177,9 @@ const mapStateToProps = state => {
     if ( state ) {
         return {
             user: state.user,
-            event: state.event
+            event: state.event,
+            showLoginModel: state.ui.showLoginModel
         }
-    }
-    return {
-        haha: 'empty'
     }
 }
 
@@ -183,6 +187,10 @@ const mapDispatchtoProps = ( dispatch ) => {
     return {
         login: ( user ) => {
             dispatch( login( user ) )
+        },
+        afterClose: () => {
+            console.log( 'rrrrrrrrrrrrrrrr' )
+            dispatch( { type: 'LOGIN_MODEL_CLOSE' } )
         }
     }
 }

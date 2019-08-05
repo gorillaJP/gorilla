@@ -2,12 +2,13 @@ import React from 'react'
 import style from './reactApp.less'
 import Loading from './utils/Loading'
 import { connect } from 'react-redux'
-
+import Register from './register/register'
 
 const LaondingPageBodyContent = React.lazy( () => import( './bodyContent/LaondingPageBodyContent' ) )
 
 const NavBar = React.lazy( () => import( './navbar/NavBar' ) )
 
+const SearchResultContent = React.lazy( () => import( './searchResultContent/SearchResultContent' ) )
 
 class ReactApp extends React.Component {
 
@@ -17,24 +18,28 @@ class ReactApp extends React.Component {
         return <React.Fragment>
 
             { /*header */ }
-            < div className={ style.header }>
-                <React.Suspense fallback={ <Loading /> }>
-                    <NavBar />
-                </React.Suspense>
-            </div>
+            <React.Suspense fallback={ <Loading /> }>
+                <NavBar />
+            </React.Suspense>
+
 
             { /*body */ }
             <div className={ style.contentContainer }>
 
-                { /** 
-                <React.Suspense fallback={ <Loading /> }>
-                    <BodyContent />
-                </React.Suspense>
-                */ }
 
+                { /* 
                 <React.Suspense fallback={ <Loading /> }>
                     <LaondingPageBodyContent />
                 </React.Suspense>
+                */}
+
+                {/*
+                <React.Suspense fallback={ <Loading /> }>
+                    <SearchResultContent />
+                </React.Suspense>
+                */}
+
+                <Register />
 
             </div>
 
@@ -48,7 +53,6 @@ class ReactApp extends React.Component {
 
 }
 
-
 const mapStateToProps = state => {
 
     if ( state ) {
@@ -57,7 +61,5 @@ const mapStateToProps = state => {
         }
     }
 }
-
-
 
 export default connect( mapStateToProps, undefined )( ReactApp )

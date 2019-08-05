@@ -32,7 +32,7 @@ class RightMenu extends Component {
       <React.Fragment>
 
         <Menu className={ style[ 'ant-menu-horizontal' ] } mode="horizontal">
-          <Menu.Item className={ style[ 'ant-menu-item' ] } key="mail" onClick={ this.popUpLoginModel }>
+          <Menu.Item className={ style[ 'ant-menu-item' ] } key="mail" onClick={ this.props.onLoginButtonClick }>
             <a>Login</a>
           </Menu.Item>
           <Menu.Item className={ style[ 'ant-menu-item' ] } key="app">
@@ -40,8 +40,7 @@ class RightMenu extends Component {
           </Menu.Item>
         </Menu>
 
-        { this.state.showLoginModel ? <LoginModal /> : undefined }
-
+        <LoginModal />
 
 
 
@@ -59,5 +58,14 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect( mapStateToProps, undefined )( RightMenu )
+const mapDispatchToProps = ( dispatch ) => {
+
+  return {
+    onLoginButtonClick: () => {
+      dispatch( { type: 'LOGIN_BUTTON_CLICK' } )
+    }
+  }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( RightMenu )
 

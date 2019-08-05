@@ -22,3 +22,7 @@ pm2
 npm install pm2 -g
 
 
+
+pm2 start appname
+pm2 stop appname
+
