@@ -1,6 +1,8 @@
 import express from 'express'
 import auth_controller from './controllers/auth_controller'
-import user_controller from './controllers/seeker_controller'
+import seeker_controller from './controllers/seeker_controller'
+import register_controller from './controllers/register_controller'
+
 import passport from 'passport'
 import { logFilter } from './filters/filter'
 
@@ -17,36 +19,41 @@ const routes = [
         'method': 'get',
         'path': '/seeker/:id',
         'auth': false,
-        'controller': user_controller.getSeeker
+        'controller': seeker_controller.getSeeker
     },
     {
         'method': 'get',
         'auth': false,
-        'path': '/exist/seeker/username/:username',
-        'controller': user_controller.isUserNameTaken
+        'path': '/exist/seeker/:prop/:value',
+        'controller': register_controller.isValueTaken
     },
     {
         'method': 'post',
         'auth': true,
         'path': '/seeker',
-        'controller': user_controller.addSeeker
+        'controller': seeker_controller.addSeeker
+    },
+    {
+        'method': 'post',
+        'auth': false,
+        'path': '/register',
+        'controller': register_controller.registerSeeker
     }
 
 ]
 
-router.use( '/', logFilter )
+router.use('/', logFilter)
 
-//router.use( '/', passport.authenticate( 'jwt', { session: false } ) );
-const authFilter = passport.authenticate( 'jwt', { session: false } )
+const authFilter = passport.authenticate('jwt', { session: false })
 
 /** loading all routes */
-routes.forEach( route => {
+routes.forEach(route => {
 
-    if ( route.auth )
-        router[ route.method ]( route.path, authFilter, route.controller )
+    if (route.auth)
+        router[route.method](route.path, authFilter, route.controller)
 
-    router[ route.method ]( route.path, route.controller )
+    router[route.method](route.path, route.controller)
 
-} )
+})
 
 export default router

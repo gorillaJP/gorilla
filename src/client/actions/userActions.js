@@ -1,13 +1,26 @@
 import axios from 'axios'
 
-const login = user => {
-    return ( dispatch, getState ) => {
-        dispatch( {
+const loginAction = user => {
+    return (dispatch, getState) => {
+        dispatch({
             type: 'LOGIN',
-            payload: axios.post( '/api/login', user )
-        } )
+            payload: axios.post('/api/login', user)
+        })
+    }
+}
+
+const registerAction = user => {
+    return (dispatch, getState) => {
+
+        console.log('tata')
+        dispatch({
+            type: 'REGISTER',
+            payload: axios.post('/api/register', user)
+        })
     }
 }
 
 
-export { login }
+
+
+export { loginAction, registerAction }

@@ -1,37 +1,40 @@
 import React from 'react'
 import { Form, Icon, Input, Button, Modal, Checkbox } from 'antd';
 import style from './register.less'
+import { registerAction } from '../../actions/userActions'
+import { isValidUsreNameAction, isValidEmailAction } from '../../actions/validationActions'
 
-const Lable = ( props ) => {
+import { connect } from 'react-redux'
 
-    return <div style={ { display: 'inline-block', width: '100px' } }>
-        <div style={ { display: 'inline', color: 'red' } } >
-            { props.required ? '* ' : '' }
+const Lable = (props) => {
+
+    return <div style={{ display: 'inline-block', width: '100px' }}>
+        <div style={{ display: 'inline', color: 'red' }} >
+            {props.required ? '* ' : ''}
         </div>
-        <div style={ { display: 'inline' } }>
-            { props.text }
+        <div style={{ display: 'inline' }}>
+            {props.text}
         </div>
     </div >
 
 }
 
-const firstNameLabel = <Lable text="First Name" required={ true } />
-const surName = <Lable text="Surname" required={ true } />
-const email = <Lable text="Email" required={ true } />
-const password = <Lable text="Password" required={ true } />
+const nameLabel = <Lable text="Name" required={true} />
+const surName = <Lable text="Surname" required={true} />
+const email = <Lable text="Email" required={true} />
+const username = <Lable text="Username" required={true} />
+const password = <Lable text="Password" required={true} />
 
 class Register extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.form.validateFields( ( err, values ) => {
+        this.props.form.validateFields((err, values) => {
 
-            if ( err )
+            if (err)
                 return
-
-
-            
-        } );
+            this.props.registerFun(values)
+        });
     };
 
     render() {
@@ -40,70 +43,78 @@ class Register extends React.Component {
 
         return <React.Fragment>
 
-            <div className={ style.bodyContainer }>
+            <div className={style.bodyContainer}>
 
-                <div className={ style.formContainer }>
+                <div className={style.formContainer}>
 
-                    <Form hideRequiredMark={ true } onSubmit={ this.handleSubmit } className={ style.form }>
-                        < div className={ style.leftPanel } >
-                            <Form.Item label={ firstNameLabel } className={ style.testStyle }>
-                                { getFieldDecorator( 'firstName', {
-                                    validate: [ {
+                    <Form hideRequiredMark={true} onSubmit={this.handleSubmit} className={style.form}>
+                        < div className={style.leftPanel} >
+                            <Form.Item label={nameLabel} className={style.testStyle}>
+                                {getFieldDecorator('name', {
+                                    validate: [{
                                         trigger: 'onBlur',
                                         rules: [
                                             {
                                                 required: true,
-                                                message: <div style={ { display: 'inline' } }></div>
+                                                message: <div style={{ display: 'inline' }}></div>
                                             }
                                         ]
-                                    } ]
+                                    }]
 
-                                } )(
+                                })(
                                     <Input />,
-                                ) }
-
-                            </Form.Item>
-
-                            <Form.Item label={ surName } className={ style.testStyle } >
-                                { getFieldDecorator( 'surname', {
-                                    validate: [ {
-                                        trigger: 'onBlur',
-                                        rules: [
-                                            {
-                                                required: true,
-                                                message: <div></div>
-                                            }
-                                        ]
-                                    } ]
-
-                                } )(
-                                    <Input />,
-                                ) }
+                                )}
 
                             </Form.Item>
 
 
-                            <Form.Item label={ email } className={ style.testStyle } >
-                                { getFieldDecorator( 'email', {
-                                    validate: [ {
+                            <Form.Item label={email} className={style.testStyle} >
+                                {getFieldDecorator('email', {
+                                    validate: [{
                                         trigger: 'onBlur',
                                         rules: [
                                             {
                                                 required: true,
                                                 message: <div></div>,
+                                            },
+                                            {
+                                                validator: this.props.isValidEmailFunc
                                             }
                                         ]
-                                    } ]
+                                    }]
 
-                                } )(
+                                })(
                                     <Input />,
-                                ) }
+                                )}
 
                             </Form.Item>
 
-                            <Form.Item label={ password } className={ style.testStyle } >
-                                { getFieldDecorator( 'password', {
-                                    validate: [ {
+                            <Form.Item label={username} className={style.testStyle} >
+                                {getFieldDecorator('username', {
+                                    validate: [{
+                                        trigger: 'onBlur',
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: <div></div>
+                                            },
+                                            {
+                                                validator: this.props.isValidUserNameFunc
+                                            }
+                                        ]
+                                    }]
+
+                                })(
+                                    <Input
+                                    />,
+                                )}
+
+                            </Form.Item>
+
+
+                            <Form.Item label={password} className={style.testStyle} >
+                                {getFieldDecorator('password', {
+                                    validate: [{
                                         trigger: 'onBlur',
                                         rules: [
                                             {
@@ -111,21 +122,21 @@ class Register extends React.Component {
                                                 message: <div></div>
                                             }
                                         ]
-                                    } ]
+                                    }]
 
-                                } )(
+                                })(
                                     <Input
                                         type="password"
                                     />,
-                                ) }
+                                )}
 
                             </Form.Item>
 
-                            <Button style={ {
+                            <Button style={{
                                 size: 'large ',
                                 width: '100%', marginBottom: '10px',
                                 marginTop: '20px'
-                            } } type="primary" htmlType="submit" className="login-form-button">
+                            }} type="primary" htmlType="submit" className="login-form-button">
                                 Register
                             </Button>
                         </div>
@@ -136,6 +147,22 @@ class Register extends React.Component {
     }
 }
 
-const RegisterForm = Form.create( { name: 'register' } )( Register );
 
-export default RegisterForm
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        registerFun: (user) => {
+            dispatch(registerAction(user))
+        },
+        isValidUserNameFunc: (rule, value, callback) => {
+            dispatch(isValidUsreNameAction(rule, value, callback))
+        },
+        isValidEmailFunc: (rule, value, callback) => {
+            dispatch(isValidEmailAction(rule, value, callback))
+        }
+    }
+}
+
+
+const RegisterForm = Form.create({ name: 'register' })(Register);
+
+export default connect(undefined, mapDispatchtoProps)(RegisterForm)
