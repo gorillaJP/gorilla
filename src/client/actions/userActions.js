@@ -16,6 +16,12 @@ const registerAction = user => {
         dispatch({
             type: 'REGISTER',
             payload: axios.post('/api/register', user)
+                .then(() => {
+                    dispatch({
+                        type: 'LOGIN',
+                        payload: axios.post('/api/login', user)
+                    })
+                })
         })
     }
 }

@@ -12,8 +12,8 @@ const SubMenu = Menu.SubMenu;
 
 class NavBar extends Component {
 
-	constructor( props ) {
-		super( props )
+	constructor(props) {
+		super(props)
 		this.state = {}
 	}
 
@@ -21,30 +21,34 @@ class NavBar extends Component {
 		visible: false
 	}
 	showDrawer = () => {
-		this.setState( {
+		this.setState({
 			visible: true,
-		} );
+		});
 	};
 
 	onClose = () => {
-		this.setState( {
+		this.setState({
 			visible: false,
-		} );
+		});
 	};
 
 	render() {
+
+		//get the short name to display in login icon
+		let letteredName = getLetteredName(this.props)
+
 		return (
-			<nav className={ style.menuBar }>
-				<div className={ style.logo }>
-					<a href="" className={ style.link }>Gorilla</a>
+			<nav className={style.menuBar}>
+				<div className={style.logo}>
+					<a href="" className={style.link}>Gorilla</a>
 				</div>
-				<div className={ style.menuCon }>
-					<div className={ style.leftMenu }>
+				<div className={style.menuCon}>
+					<div className={style.leftMenu}>
 						<LeftMenu />
 					</div>
 
-					{ this.props.session ?
-						<div className={ style.nameTagContainer }>
+					{this.props.session ?
+						<div className={style.nameTagContainer}>
 
 
 							<Dropdown overlay={
@@ -52,12 +56,12 @@ class NavBar extends Component {
 								(
 									<Menu>
 										<Menu.Item size="large">
-											<a target="_blank" rel="noopener noreferrer" onClick={ () => { } }>
+											<a target="_blank" rel="noopener noreferrer" onClick={() => { }}>
 												Profile
       										</a>
 										</Menu.Item>
 										<Menu.Item size="large">
-											<a target="_blank" rel="noopener noreferrer" onClick={ this.props.logout }>
+											<a target="_blank" rel="noopener noreferrer" onClick={this.props.logout}>
 												Logout
       										</a>
 										</Menu.Item>
@@ -65,8 +69,10 @@ class NavBar extends Component {
 								)
 							}>
 								<a className="ant-dropdown-link" href="#">
-									<div className={ style.nameTag } >
-										{ this.props.session.user.firstname.charAt( 0 ) + this.props.session.user.surname.charAt( 0 ) }
+									<div className={style.nameTag} >
+										{
+											letteredName
+										}
 									</div>
 								</a>
 							</Dropdown>
@@ -74,46 +80,61 @@ class NavBar extends Component {
 
 						</div>
 						:
-						<div className={ style.rightMenu }>
+						<div className={style.rightMenu}>
 							<RightMenu />
 						</div>
 					}
 
-					{ !this.props.session ?
-						<Button className={ style.barsMenu } type="primary" onClick={ this.showDrawer }>
-							<span className={ style.barsBtn }></span>
+					{!this.props.session ?
+						<Button className={style.barsMenu} type="primary" onClick={this.showDrawer}>
+							<span className={style.barsBtn}></span>
 						</Button>
 						: undefined
 					}
 					<Drawer
 						title="Basic Drawer"
 						placement="right"
-						closable={ false }
-						onClose={ this.onClose }
-						visible={ this.state.visible }
+						closable={false}
+						onClose={this.onClose}
+						visible={this.state.visible}
 					>
 					</Drawer>
 
 
 				</div>
-			</nav> );
+			</nav>);
 	}
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const getLetteredName = (props) => {
+	let letteredName = ""
+	if (props.session && props.session.user && props.session.user.name) {
+
+		const nameParts = props.session.user.name.split(" ")
+
+		if (nameParts.length > 1) {
+			letteredName = nameParts[0].charAt(0) + nameParts[1].charAt(0)
+		}
+		else {
+			letteredName = nameParts[0].charAt(0)
+		}
+	}
+	return letteredName
+}
+
+const mapDispatchToProps = (dispatch) => {
 	return {
-		logout: () => { dispatch( { type: 'LOGOUT' } ) }
+		logout: () => { dispatch({ type: 'LOGOUT' }) }
 	}
 }
-
 
 const mapStateToProps = state => {
 
-	if ( state ) {
+	if (state) {
 		return {
 			session: state.session
 		}
 	}
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( NavBar )
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

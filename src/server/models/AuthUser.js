@@ -2,6 +2,9 @@ import mongoose from 'mongoose'
 var uniqueValidator = require('mongoose-unique-validator');
 
 var authUser = {
+    name: {
+        type: String
+    },
     username: {
         type: String,
         index: true,

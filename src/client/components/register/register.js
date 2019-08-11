@@ -41,96 +41,115 @@ class Register extends React.Component {
 
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
+
+        const formItemLayout = {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 10 },
+        };
+
         return <React.Fragment>
 
             <div className={style.bodyContainer}>
 
                 <div className={style.formContainer}>
 
-                    <Form hideRequiredMark={true} onSubmit={this.handleSubmit} className={style.form}>
-                        < div className={style.leftPanel} >
-                            <Form.Item label={nameLabel} className={style.testStyle}>
-                                {getFieldDecorator('name', {
-                                    validate: [{
-                                        trigger: 'onBlur',
-                                        rules: [
-                                            {
-                                                required: true,
-                                                message: <div style={{ display: 'inline' }}></div>
-                                            }
-                                        ]
-                                    }]
+                    <Form hideRequiredMark={true} onSubmit={this.handleSubmit} className={style.form}  {...formItemLayout} >
+                        <Form.Item label={nameLabel}>
+                            {getFieldDecorator('name', {
+                                validate: [{
+                                    trigger: 'onBlur',
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: <div style={{ display: 'inline' }}></div>
+                                        }
+                                    ]
+                                }]
 
-                                })(
-                                    <Input />,
-                                )}
+                            })(
+                                <Input />,
+                            )}
 
-                            </Form.Item>
+                        </Form.Item>
 
+                        <Form.Item label={email} hasFeedback>
+                            {getFieldDecorator('email', {
+                                validate: [{
+                                    trigger: 'onBlur',
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: <div></div>,
+                                        },
+                                        {
+                                            type: "email",
+                                            message: <div>Invalid email address</div>,
 
-                            <Form.Item label={email} className={style.testStyle} >
-                                {getFieldDecorator('email', {
-                                    validate: [{
-                                        trigger: 'onBlur',
-                                        rules: [
-                                            {
-                                                required: true,
-                                                message: <div></div>,
-                                            },
-                                            {
-                                                validator: this.props.isValidEmailFunc
-                                            }
-                                        ]
-                                    }]
+                                        },
+                                        {
+                                            validator: this.props.isValidEmailFunc
+                                        }
+                                    ]
+                                }]
 
-                                })(
-                                    <Input />,
-                                )}
+                            })(
+                                <Input
+                                />
+                            )}
 
-                            </Form.Item>
+                        </Form.Item>
 
-                            <Form.Item label={username} className={style.testStyle} >
-                                {getFieldDecorator('username', {
-                                    validate: [{
-                                        trigger: 'onBlur',
-                                        rules: [
-                                            {
-                                                required: true,
-                                                message: <div></div>
-                                            },
-                                            {
-                                                validator: this.props.isValidUserNameFunc
-                                            }
-                                        ]
-                                    }]
+                        <Form.Item label={username} hasFeedback>
+                            {getFieldDecorator('username', {
+                                validate: [{
+                                    trigger: 'onBlur',
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: <div></div>
+                                        },
+                                        {
+                                            min: 4,
+                                            message: <div>Username should be longer than 3 letters</div>
+                                        },
+                                        {
+                                            validator: this.props.isValidUserNameFunc
+                                        }
+                                    ]
+                                }]
 
-                                })(
-                                    <Input
-                                    />,
-                                )}
+                            })(
+                                <Input
+                                />,
+                            )}
 
-                            </Form.Item>
+                        </Form.Item>
 
+                        <Form.Item label={password} >
+                            {getFieldDecorator('password', {
+                                validate: [{
+                                    trigger: 'onBlur',
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: <div></div>
+                                        },
+                                        {
+                                            min: 4,
+                                            message: <div>Password should be longer than 3 letters</div>
+                                        }
+                                    ]
+                                }]
 
-                            <Form.Item label={password} className={style.testStyle} >
-                                {getFieldDecorator('password', {
-                                    validate: [{
-                                        trigger: 'onBlur',
-                                        rules: [
-                                            {
-                                                required: true,
-                                                message: <div></div>
-                                            }
-                                        ]
-                                    }]
+                            })(
+                                <Input
+                                    type="password"
+                                />,
+                            )}
 
-                                })(
-                                    <Input
-                                        type="password"
-                                    />,
-                                )}
+                        </Form.Item>
 
-                            </Form.Item>
+                        <Form.Item wrapperCol={{ span: 10, offset: 5 }}>
 
                             <Button style={{
                                 size: 'large ',
@@ -139,7 +158,8 @@ class Register extends React.Component {
                             }} type="primary" htmlType="submit" className="login-form-button">
                                 Register
                             </Button>
-                        </div>
+                        </Form.Item>
+
                     </Form>
                 </div>
             </div>
