@@ -6,16 +6,17 @@ import { connect } from 'react-redux'
 import Loading from '../../utils/Loading'
 import { loginAction } from '../../../actions/userActions'
 import { Link, Redirect } from 'react-router-dom'
+import { UI_LOGIN_FAIL_CLEAR } from '../../../actions/types'
 
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
+function hasErrors( fieldsError ) {
+    return Object.keys( fieldsError ).some( field => fieldsError[ field ] );
 }
 
 
 const InvalidLoginDetails = () => {
 
-    return <div className={style.inavlidLoginDetails}>
+    return <div className={ style.inavlidLoginDetails }>
         Invalid user name or password
     </div>
 }
@@ -24,93 +25,30 @@ const InvalidLoginDetails = () => {
 class HorizontalLoginForm extends React.Component {
 
 
-    constructor(props) {
-        console.log(props)
-
-        super(props)
-        this.state = {
-            loginFailed: false, visible: true
-        }
+    afterClose = () => {
+        this.props.loginFailClear()
+        this.props.history.push( "/" )
     }
-
-    /* get called just before render method */
-    componentDidUpdate(prevProps) {
-
-        console.log('ttx')
-        console.log(this.props.loginFailed)
-        console.log(this.state.loginFailed)
-
-        console.log(this.props)
-        console.log(prevProps)
-
-
-
-        if (this.props.loginFailed != this.state.loginFailed && this.props.loginFailed) {
-            return { loginFailed: true }
-        }
-
-    }
-
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            this.props.loginFun(values)
+        this.props.form.validateFields( ( err, values ) => {
+            this.props.loginFun( values )
 
-        });
+        } );
     };
 
-    state = { visible: true };
-
-    showModal = () => {
-        console.log('showModal')
-        this.setState({
-            visible: true,
-        });
-    };
-
-    handleOk = e => {
-        console.log('handleOk')
-
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
-    handleCancel = e => {
-        console.log('handleCancel')
-
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
-    afterClose = () => {
-        this.setState({
-            visible: false,
-        });
-    }
-
-    titleNode = <div className={style.titleNode}>
+    titleNode = <div className={ style.titleNode }>
         Welcome to Gorilla
     </div >
-
-
 
 
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-        // Only show error after a field is touched.
-        const usernameError = isFieldTouched('username') && getFieldError('username');
-        const passwordError = isFieldTouched('password') && getFieldError('password');
 
-
-        console.log(this.props.user)
-        if (!this.state.visible || this.props.session) {
-            return <Redirect to='/' />
+        if ( this.props.session ) {
+            this.props.history.push( "/" )
 
         }
 
@@ -121,19 +59,19 @@ class HorizontalLoginForm extends React.Component {
                 <div>
 
                     <Modal
-                        title={this.titleNode}
-                        visible={this.state.visible}
-                        onOk={this.handleOk}
-                        onCancel={this.afterClose}
-                        footer={null}
-                        afterClose={this.afterClose}
+                        title={ this.titleNode }
+                        visible={ true }
+                        onOk={ this.handleOk }
+                        onCancel={ this.afterClose }
+                        footer={ null }
+                        afterClose={ this.afterClose }
                     >
 
 
-                        <Form onSubmit={this.handleSubmit} className="login-form">
+                        <Form onSubmit={ this.handleSubmit } className="login-form">
                             <Form.Item>
-                                {getFieldDecorator('username', {
-                                    validate: [{
+                                { getFieldDecorator( 'username', {
+                                    validate: [ {
                                         trigger: 'onBlur',
                                         rules: [
                                             {
@@ -141,47 +79,47 @@ class HorizontalLoginForm extends React.Component {
                                                 message: 'Please enter a username',
                                             }
                                         ]
-                                    }]
+                                    } ]
 
-                                })(
+                                } )(
                                     <Input size="large"
-                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={ <Icon type="user" style={ { color: 'rgba(0,0,0,.25)' } } /> }
                                         placeholder="Username"
                                     />,
-                                )}
+                                ) }
 
                             </Form.Item>
 
                             <Form.Item>
-                                {getFieldDecorator('password', {
-                                    rules: [{ required: true, message: 'Please input your Password!' }],
-                                })(
+                                { getFieldDecorator( 'password', {
+                                    rules: [ { required: true, message: 'Please input your Password!' } ],
+                                } )(
                                     <Input size="large"
-                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={ <Icon type="lock" style={ { color: 'rgba(0,0,0,.25)' } } /> }
                                         type="password"
                                         placeholder="Password"
                                     />,
-                                )}
+                                ) }
                             </Form.Item>
 
                             {
-                                this.state.loginFailed ?
+                                this.props.loginFailed ?
                                     <InvalidLoginDetails /> : ''
                             }
 
-                            <Button style={{
+                            <Button style={ {
                                 size: 'large ',
                                 width: '100%', marginBottom: '10px',
                                 marginTop: '20px'
-                            }} className={style.loginButton} type="primary" htmlType="submit" className="login-form-button">
+                            } } className={ style.loginButton } type="primary" htmlType="submit" className="login-form-button">
                                 Log in
                             </Button>
 
-                            <Button style={{
+                            <Button style={ {
                                 size: 'large ',
                                 width: '100%',
                                 marginBottom: '20px'
-                            }} className={style.registerButton} type="primary" className="login-form-button"
+                            } } className={ style.registerButton } type="primary" className="login-form-button"
 
                             >
                                 <Link to='/register'>Register Now</Link>
@@ -189,10 +127,10 @@ class HorizontalLoginForm extends React.Component {
 
 
                             <Form.Item>
-                                {getFieldDecorator('remember', {
+                                { getFieldDecorator( 'remember', {
                                     valuePropName: 'checked',
                                     initialValue: true,
-                                })(<Checkbox>Remember me</Checkbox>)}
+                                } )( <Checkbox>Remember me</Checkbox> ) }
                                 <a className="login-form-forgot" href="">
                                     Forgot password
                                 </a>
@@ -209,13 +147,14 @@ class HorizontalLoginForm extends React.Component {
     }
 }
 
-const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(HorizontalLoginForm);
+const WrappedHorizontalLoginForm = Form.create( { name: 'horizontal_login' } )( HorizontalLoginForm );
 
 
 const mapStateToProps = state => {
 
-    console.log('rr-', state.event.loginFailed)
-    if (state) {
+    console.log( state.event.loginFailed )
+
+    if ( state ) {
         return {
             session: state.session,
             loginFailed: state.event.loginFailed
@@ -223,13 +162,15 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchtoProps = (dispatch) => {
+const mapDispatchtoProps = ( dispatch ) => {
     return {
-        loginFun: (user) => {
-
-            dispatch(loginAction(user))
-        }
+        loginFun: ( user ) => {
+            dispatch( loginAction( user ) )
+        },
+        loginFailClear: ( () => {
+            dispatch( { type: UI_LOGIN_FAIL_CLEAR } )
+        } )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(WrappedHorizontalLoginForm)
+export default connect( mapStateToProps, mapDispatchtoProps )( WrappedHorizontalLoginForm )

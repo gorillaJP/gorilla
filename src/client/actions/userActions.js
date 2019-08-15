@@ -1,28 +1,27 @@
 import axios from 'axios'
 
 const loginAction = user => {
-    return (dispatch, getState) => {
-        dispatch({
+    return ( dispatch, getState ) => {
+        dispatch( {
             type: 'LOGIN',
-            payload: axios.post('/api/login', user)
-        })
+            payload: axios.post( '/api/login', user )
+        } )
     }
 }
 
 const registerAction = user => {
-    return (dispatch, getState) => {
+    return ( dispatch, getState ) => {
 
-        console.log('tata')
-        dispatch({
+        dispatch( {
             type: 'REGISTER',
-            payload: axios.post('/api/register', user)
-                .then(() => {
-                    dispatch({
+            payload: axios.post( '/api/register', user )
+                .then( () => {
+                    dispatch( {
                         type: 'LOGIN',
-                        payload: axios.post('/api/login', user)
-                    })
-                })
-        })
+                        payload: axios.post( '/api/login', user )
+                    } )
+                } )
+        } )
     }
 }
 
