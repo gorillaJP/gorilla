@@ -1,12 +1,14 @@
 
-const initState = {}
+const initState = {
+    loginFailed: false
+}
 
-export default function ( state = initState, action ) { //reducer needs state and action
+export default function (state = initState, action) { //reducer needs state and action
 
-    switch ( action.type ) {
+    switch (action.type) {
         case 'LOGIN_FULFILLED':
 
-            if ( action.payload.status === 200 ) {
+            if (action.payload.status === 200) {
                 return {
                     ...initState,
                     loginFailed: false

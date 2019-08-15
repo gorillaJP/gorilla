@@ -7,9 +7,8 @@ import uiReducer from './uiResucer'
 
 
 
-export default combineReducers( {
+export default combineReducers({
     loading: loadingReducer,
     session: sessionReducer,
     event: eventReducer,
-    ui: uiReducer
-} )
+})

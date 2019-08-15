@@ -40,7 +40,7 @@ class NavBar extends Component {
 		return (
 			<nav className={style.menuBar}>
 				<div className={style.logo}>
-					<a href="" className={style.link}>Gorilla</a>
+					<a href="/" className={style.link}>Gorilla</a>
 				</div>
 				<div className={style.menuCon}>
 					<div className={style.leftMenu}>

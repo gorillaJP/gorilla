@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import Loading from '../../utils/Loading'
 import { loginAction } from '../../../actions/userActions'
+import { Link, Redirect } from 'react-router-dom'
 
 
 function hasErrors(fieldsError) {
@@ -21,6 +22,34 @@ const InvalidLoginDetails = () => {
 
 
 class HorizontalLoginForm extends React.Component {
+
+
+    constructor(props) {
+        console.log(props)
+
+        super(props)
+        this.state = {
+            loginFailed: false, visible: true
+        }
+    }
+
+    /* get called just before render method */
+    componentDidUpdate(prevProps) {
+
+        console.log('ttx')
+        console.log(this.props.loginFailed)
+        console.log(this.state.loginFailed)
+
+        console.log(this.props)
+        console.log(prevProps)
+
+
+
+        if (this.props.loginFailed != this.state.loginFailed && this.props.loginFailed) {
+            return { loginFailed: true }
+        }
+
+    }
 
 
     handleSubmit = e => {
@@ -58,9 +87,18 @@ class HorizontalLoginForm extends React.Component {
         });
     };
 
+    afterClose = () => {
+        this.setState({
+            visible: false,
+        });
+    }
+
     titleNode = <div className={style.titleNode}>
         Welcome to Gorilla
     </div >
+
+
+
 
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -68,6 +106,13 @@ class HorizontalLoginForm extends React.Component {
         // Only show error after a field is touched.
         const usernameError = isFieldTouched('username') && getFieldError('username');
         const passwordError = isFieldTouched('password') && getFieldError('password');
+
+
+        console.log(this.props.user)
+        if (!this.state.visible || this.props.session) {
+            return <Redirect to='/' />
+
+        }
 
         return (
 
@@ -77,17 +122,13 @@ class HorizontalLoginForm extends React.Component {
 
                     <Modal
                         title={this.titleNode}
-                        visible={this.props.showLoginModel}
+                        visible={this.state.visible}
                         onOk={this.handleOk}
-                        onCancel={this.props.afterClose}
+                        onCancel={this.afterClose}
                         footer={null}
-                        afterClose={this.props.afterClose}
+                        afterClose={this.afterClose}
                     >
 
-                        {
-                            this.props && this.props.user && this.props.user && this.props.user.user ?
-                                this.props.user.user.user.firstname : ''
-                        }
 
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <Form.Item>
@@ -124,7 +165,7 @@ class HorizontalLoginForm extends React.Component {
                             </Form.Item>
 
                             {
-                                this.props.event.loginFailed ?
+                                this.state.loginFailed ?
                                     <InvalidLoginDetails /> : ''
                             }
 
@@ -140,8 +181,10 @@ class HorizontalLoginForm extends React.Component {
                                 size: 'large ',
                                 width: '100%',
                                 marginBottom: '20px'
-                            }} className={style.registerButton} type="primary" htmlType="submit" className="login-form-button">
-                                Register Now
+                            }} className={style.registerButton} type="primary" className="login-form-button"
+
+                            >
+                                <Link to='/register'>Register Now</Link>
                             </Button>
 
 
@@ -170,11 +213,12 @@ const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(Hor
 
 
 const mapStateToProps = state => {
+
+    console.log('rr-', state.event.loginFailed)
     if (state) {
         return {
-            user: state.user,
-            event: state.event,
-            showLoginModel: state.ui.showLoginModel
+            session: state.session,
+            loginFailed: state.event.loginFailed
         }
     }
 }
@@ -184,10 +228,6 @@ const mapDispatchtoProps = (dispatch) => {
         loginFun: (user) => {
 
             dispatch(loginAction(user))
-        },
-        afterClose: () => {
-            console.log('rrrrrrrrrrrrrrrr')
-            dispatch({ type: 'LOGIN_MODEL_CLOSE' })
         }
     }
 }

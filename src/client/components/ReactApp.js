@@ -3,6 +3,9 @@ import style from './reactApp.less'
 import Loading from './utils/Loading'
 import { connect } from 'react-redux'
 import Register from './register/register'
+import { Route } from "react-router-dom";
+import LoginModal from './bodyContent/loginModal/LoginModal';
+
 
 const LaondingPageBodyContent = React.lazy(() => import('./bodyContent/LaondingPageBodyContent'))
 
@@ -27,19 +30,27 @@ class ReactApp extends React.Component {
             <div className={style.contentContainer}>
 
 
-                {
-                    /*
-                    <React.Suspense fallback={<Loading />}>
+                <Route exact path='/' exact strict render={() => {
+
+                    return <React.Suspense fallback={<Loading />}>
                         <LaondingPageBodyContent />
                     </React.Suspense>
-                */
-                }
+
+                }} />
 
                 {
+                    /** 
                     <React.Suspense fallback={<Loading />}>
                         <SearchResultContent />
                     </React.Suspense>
+                    */
                 }
+
+                <Route exact path='/register' exact strict component={Register} />
+
+                <Route exact path='/login' exact strict component={LoginModal} />
+
+
 
                 {
                     /**
