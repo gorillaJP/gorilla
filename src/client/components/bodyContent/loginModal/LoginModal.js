@@ -24,7 +24,6 @@ const InvalidLoginDetails = () => {
 
 class HorizontalLoginForm extends React.Component {
 
-
     afterClose = () => {
         this.props.loginFailClear()
         this.props.history.push( "/" )
@@ -33,6 +32,10 @@ class HorizontalLoginForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields( ( err, values ) => {
+
+            if ( err )
+                return
+
             this.props.loginFun( values )
 
         } );
@@ -66,7 +69,6 @@ class HorizontalLoginForm extends React.Component {
                         footer={ null }
                         afterClose={ this.afterClose }
                     >
-
 
                         <Form onSubmit={ this.handleSubmit } className="login-form">
                             <Form.Item>
@@ -151,8 +153,6 @@ const WrappedHorizontalLoginForm = Form.create( { name: 'horizontal_login' } )( 
 
 
 const mapStateToProps = state => {
-
-    console.log( state.event.loginFailed )
 
     if ( state ) {
         return {
