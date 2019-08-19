@@ -2,9 +2,10 @@ import express from 'express'
 import auth_controller from './controllers/auth_controller'
 import seeker_controller from './controllers/seeker_controller'
 import register_controller from './controllers/register_controller'
-
+import meta_controller from './controllers/meta_controller'
 import passport from 'passport'
 import { logFilter } from './filters/filter'
+import job_add_controller from './controllers/job_add_controller';
 
 const router = express.Router()
 
@@ -38,22 +39,34 @@ const routes = [
         'auth': false,
         'path': '/register',
         'controller': register_controller.registerSeeker
+    },
+    {
+        'method': 'get',
+        'auth': false,
+        'path': '/meta/:property',
+        'controller': meta_controller.getMeta
+    },
+    {
+        'method': 'get',
+        'auth': false,
+        'path': '/jobadds',
+        'controller': job_add_controller.getJobs
     }
 
 ]
 
-router.use('/', logFilter)
+router.use( '/', logFilter )
 
-const authFilter = passport.authenticate('jwt', { session: false })
+const authFilter = passport.authenticate( 'jwt', { session: false } )
 
 /** loading all routes */
-routes.forEach(route => {
+routes.forEach( route => {
 
-    if (route.auth)
-        router[route.method](route.path, authFilter, route.controller)
+    if ( route.auth )
+        router[ route.method ]( route.path, authFilter, route.controller )
 
-    router[route.method](route.path, route.controller)
+    router[ route.method ]( route.path, route.controller )
 
-})
+} )
 
 export default router

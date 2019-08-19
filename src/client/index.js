@@ -5,6 +5,7 @@ import { Provider } from 'react-redux' //this is actually a component which glue
 import storeInit from './store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom'
 
 
 
@@ -12,18 +13,18 @@ const store = storeInit()
 
 const App = () => {
 
-  return <Provider store={store.store}>
+  return <Provider store={ store.store }>
 
-    <PersistGate loading={null} persistor={store.persistor}>
-      <BrowserRouter>
+    <PersistGate loading={ null } persistor={ store.persistor }>
+      <HashRouter >
 
         <ReactApp />
 
-      </BrowserRouter>
+      </HashRouter >
     </PersistGate>
 
   </Provider>
 
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render( <App />, document.getElementById( 'app' ) )

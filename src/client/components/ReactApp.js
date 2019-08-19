@@ -5,66 +5,72 @@ import { connect } from 'react-redux'
 import Register from './register/register'
 import { Route } from "react-router-dom";
 import LoginModal from './bodyContent/loginModal/LoginModal';
+import { loadMeta } from '../actions/metaActions'
 
 
-const LaondingPageBodyContent = React.lazy(() => import('./bodyContent/LaondingPageBodyContent'))
 
-const NavBar = React.lazy(() => import('./navbar/NavBar'))
+const LaondingPageBodyContent = React.lazy( () => import( './bodyContent/LaondingPageBodyContent' ) )
 
-const SearchResultContent = React.lazy(() => import('./searchResultContent/SearchResultContent'))
+const NavBar = React.lazy( () => import( './navbar/NavBar' ) )
+
+const SearchResultContent = React.lazy( () => import( './searchResultContent/SearchResultContent' ) )
 
 class ReactApp extends React.Component {
+
+
+    componentDidMount() {
+        this.props.loadMeta()
+    }
 
 
     render() {
 
         return <React.Fragment>
 
-            { /*header */}
-            <React.Suspense fallback={<Loading />}>
+            { /*header */ }
+            <React.Suspense fallback={ <Loading /> }>
                 <NavBar />
             </React.Suspense>
 
 
-            { /*body */}
-            <div className={style.contentContainer}>
+            { /*body */ }
+            <div className={ style.contentContainer }>
 
 
-                <Route exact path='/' exact strict render={() => {
+                <Route exact path='/' exact strict render={ () => {
 
-                    return <React.Suspense fallback={<Loading />}>
+                    return <React.Suspense fallback={ <Loading /> }>
                         <LaondingPageBodyContent />
                     </React.Suspense>
 
-                }} />
+                } } />
 
-                {
-                    /** 
-                    <React.Suspense fallback={<Loading />}>
+
+                <Route exact path='/jobSearchResult' exact strict render={ () => {
+
+                    return <React.Suspense fallback={ <Loading /> }>
                         <SearchResultContent />
                     </React.Suspense>
-                    */
-                }
 
-                <Route exact path='/register' exact strict component={Register} />
-
-                <Route exact path='/login' exact strict component={LoginModal} />
-
-
+                } } />
 
                 {
-                    /**
-                                     <Register />
 
-                     */
+
+
                 }
+
+                <Route exact path='/register' exact strict component={ Register } />
+
+                <Route exact path='/login' exact strict component={ LoginModal } />
+
 
             </div>
 
-            { /*footer */}
-            <div className={style.footer}> Copy Rigted by Gorilla </div>
+            { /*footer */ }
+            <div className={ style.footer }> Copy Rigted by Gorilla </div>
 
-            {this.props.showLoading ? <Loading /> : ''}
+            { this.props.showLoading ? <Loading /> : '' }
 
         </React.Fragment >
     }
@@ -73,11 +79,19 @@ class ReactApp extends React.Component {
 
 const mapStateToProps = state => {
 
-    if (state) {
+    if ( state ) {
         return {
             showLoading: state.loading,
         }
     }
 }
 
-export default connect(mapStateToProps, undefined)(ReactApp)
+const mapDispatchToProps = ( dispatch ) => {
+    return {
+        loadMeta: () => { dispatch( loadMeta() ) }
+    }
+
+
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( ReactApp )

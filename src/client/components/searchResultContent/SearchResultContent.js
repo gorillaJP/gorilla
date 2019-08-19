@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AddInstance from './AddInstance/AddInstance'
 import style from './searchResultContent.less'
 import { Checkbox } from 'antd';
-
+import axios from 'axios'
+import { connect } from 'react-redux'
 
 
 
@@ -18,79 +19,99 @@ const text = `
 
 const TestComp = () => { return <div style={ { fontWeight: 600 } }>Industry</div> }
 
-class SearchResultContent extends React.Component {
+
+const SearchResultContent = ( props ) => {
+
+    const [ jobAdds, setJobAdds ] = useState( [] )
+
+    const test = {}
+
+    useEffect( () => {
+
+        props.loading( true )
+
+        axios.get( '/api/jobadds' )
+            .then( resp => {
+                setJobAdds( resp.data.payload )
+            } )
+            .finally( () => {
+                props.loading( false )
+            } )
+    }, [] )
 
 
-    onChange = ( e ) => {
-        console.log( `checked = ${ e.target.checked }` );
-    }
+    const onChange = () => { }
 
-    render() {
-
-        return <React.Fragment>
+    return <React.Fragment>
 
 
-            <div className={ style.searchResultContent }>
+        <div className={ style.searchResultContent }>
 
-                <div className={ style.filterPanel } >
-                    <Collapse expandIconPosition='right' bordered={ true }>
-                        <Panel header={ <TestComp /> } key="1" showArrow={ true }>
-                            <div style={ { display: 'flex', flexDirection: 'column' } }>
+            <div className={ style.filterPanel } >
+                <Collapse expandIconPosition='right' bordered={ true }>
+                    <Panel header={ <TestComp /> } key="1" showArrow={ true }>
+                        <div style={ { display: 'flex', flexDirection: 'column' } }>
 
-                                <div>
-                                    <Checkbox onChange={ this.onChange }>IT</Checkbox>
-                                </div>
+                            <div>
+                                <Checkbox onChange={ onChange }>IT</Checkbox>
+                            </div>
 
-                                <div>
-                                    <Checkbox onChange={ this.onChange }>Civil</Checkbox>
-                                </div>
-                                <div>
-                                    <Checkbox onChange={ this.onChange }>Mechanial</Checkbox>
-                                </div>
+                            <div>
+                                <Checkbox onChange={ onChange }>Civil</Checkbox>
+                            </div>
+                            <div>
+                                <Checkbox onChange={ onChange }>Mechanial</Checkbox>
+                            </div>
 
-                                <div>
-                                    <Checkbox onChange={ this.onChange }>Government</Checkbox>
-                                </div>
-                                <div>
-                                    <Checkbox onChange={ this.onChange }>Office</Checkbox>
-
-                                </div>
-
+                            <div>
+                                <Checkbox onChange={ onChange }>Government</Checkbox>
+                            </div>
+                            <div>
+                                <Checkbox onChange={ onChange }>Office</Checkbox>
 
                             </div>
-                        </Panel>
-                        <Panel header="This is panel header 2" key="2">
-                            <p>{ text }</p>
-                        </Panel>
-                        <Panel header="This is panel header 3" key="3">
-                            <p>{ text }</p>
-                        </Panel>
-                    </Collapse>
-                </div>
 
-                <div className={ style.matchingJobsPanel }>
 
-                    <AddInstance />
-
-                    <AddInstance />
-
-                    <AddInstance />
-
-                    <AddInstance />
-
-                </div>
-
+                        </div>
+                    </Panel>
+                    <Panel header="This is panel header 2" key="2">
+                        <p>{ text }</p>
+                    </Panel>
+                    <Panel header="This is panel header 3" key="3">
+                        <p>{ text }</p>
+                    </Panel>
+                </Collapse>
             </div>
 
-        </React.Fragment >
-    }
+            <div className={ style.matchingJobsPanel }>
+                {
+                    jobAdds.map( ( jobAdd, i ) => {
+                        return < AddInstance jobAdd={ jobAdd } />
+                    } )
+                }
+            </div>
 
+        </div>
+
+    </React.Fragment >
 
 }
 
-export default SearchResultContent
+const mapDispatchtoProps = dispath => {
+
+    return {
+        loading: loading => {
+            if ( loading )
+                dispath( { type: 'PENDING' } )
+            else
+                dispath( { type: 'FULFILLED' } )
+        }
+    }
+
+}
 
 
+export default connect( undefined, mapDispatchtoProps )( SearchResultContent )
 
 
 
