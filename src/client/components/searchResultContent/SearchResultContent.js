@@ -48,8 +48,8 @@ const SearchResultContent = ( props ) => {
         <div className={ style.searchResultContent }>
 
             <div className={ style.filterPanel } >
-                <Collapse expandIconPosition='right' bordered={ true }>
-                    <Panel header={ <TestComp /> } key="1" showArrow={ true }>
+                <Collapse expandIconPosition='right' bordered={ false } defaultActiveKey={ [ '1', '2', '3' ] } >
+                    <Panel header={ <TestComp /> } key="1" showArrow={ false }>
                         <div style={ { display: 'flex', flexDirection: 'column' } }>
 
                             <div>
@@ -74,11 +74,49 @@ const SearchResultContent = ( props ) => {
 
                         </div>
                     </Panel>
-                    <Panel header="This is panel header 2" key="2">
-                        <p>{ text }</p>
+                    <Panel header="This 2" key="2" showArrow={ false }>
+                        <div>
+                            <Checkbox onChange={ onChange }>IT</Checkbox>
+                        </div>
+
+                        <div>
+                            <Checkbox onChange={ onChange }>Civil</Checkbox>
+                        </div>
+                        <div>
+                            <Checkbox onChange={ onChange }>Mechanial</Checkbox>
+                        </div>
+
+                        <div>
+                            <Checkbox onChange={ onChange }>Government</Checkbox>
+                        </div>
+                        <div>
+                            <Checkbox onChange={ onChange }>Office</Checkbox>
+
+                        </div>
+
+
                     </Panel>
-                    <Panel header="This is panel header 3" key="3">
-                        <p>{ text }</p>
+                    <Panel header="This 3" key="3" showArrow={ false }>
+                        <div>
+                            <Checkbox onChange={ onChange }>IT</Checkbox>
+                        </div>
+
+                        <div>
+                            <Checkbox on
+                                Change={ onChange }>Civil</Checkbox>
+                        </div>
+                        <div>
+                            <Checkbox onChange={ onChange }>Mechanial</Checkbox>
+                        </div>
+
+                        <div>
+                            <Checkbox onChange={ onChange }>Government</Checkbox>
+                        </div>
+                        <div>
+                            <Checkbox onChange={ onChange }>Office</Checkbox>
+
+                        </div>
+
                     </Panel>
                 </Collapse>
             </div>
