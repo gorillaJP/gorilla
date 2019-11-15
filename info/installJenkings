@@ -1,0 +1,13 @@
+    9  sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+   10  yum install wget
+   11  sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+   12  sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+   13  sudo dnf upgrade && sudo dnf install jenkins java
+   14  yum install dnf
+   15  sudo dnf upgrade && sudo dnf install jenkins java
+   16  sudo service jenkins start
+   17  sudo dnf upgrade && sudo dnf install jenkins java
+   18  sudo service jenkins start
+   19  sudo chkconfig jenkins on
+   20  systemctl status jenkins
+   28  cat /var/lib/jenkins/secrets/initialAdminPassword
