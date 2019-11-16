@@ -100,7 +100,7 @@ http://ip-address:5601
 sudo firewall-cmd --add-port=5601/tcp --permanent
 sudo firewall-cmd --reload
 
-sudo systemctl status kibana
+sudo systemctl status kibana 1
 
 #access kibana
  http://192.168.1.227:5601/app/kibana
