@@ -1,4 +1,5 @@
 pipeline {
+    triggers { cron('H */4 * * 1-5') }
     agent {
         docker { image 'node:7-alpine' }
     }
