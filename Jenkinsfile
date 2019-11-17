@@ -11,7 +11,6 @@ pipeline {
     }
     post {
         always {
-            echo 'This will always run'
              slackSend channel: 'https://gorilla-llo5458.slack.com/archives/CQ924G1H8',
                   color: 'good',
                   message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."        
