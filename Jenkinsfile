@@ -20,7 +20,7 @@ pipeline {
 
     stage('Publish') {
       steps {
-        sh 'echo "publish"'
+        sh 'echo "published"'
       }
     }
 
