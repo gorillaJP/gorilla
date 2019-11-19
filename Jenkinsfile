@@ -1,14 +1,11 @@
 pipeline {
-  agent {
-    node {
-      label 'node'
-    }
-
-  }
+  agent none
   stages {
     stage('Test') {
       steps {
-        sh 'echo "Test completed"'
+        sh '''echo "building"
+
+npm install;'''
       }
     }
 
