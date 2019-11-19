@@ -7,6 +7,12 @@ pipeline {
       }
     }
 
+    stage('Build') {
+      steps {
+        sh 'echo "build"'
+      }
+    }
+
   }
   post {
     always {
