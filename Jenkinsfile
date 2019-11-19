@@ -1,12 +1,9 @@
 pipeline {
   agent none
-  triggers {
-     githubPush()
-  } 
   stages {
     stage('Build') {
       steps {
-        sh 'node --version'
+        sh 'java --version'
       }
     }
 
@@ -45,5 +42,8 @@ pipeline {
       echo 'For example, if the Pipeline was previously failing but is now successful'
     }
 
+  }
+  triggers {
+    githubPush()
   }
 }
