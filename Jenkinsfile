@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'node'
+    }
+
+  }
   stages {
     stage('Test') {
       steps {
@@ -13,6 +18,9 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    name = 'val'
   }
   post {
     always {
