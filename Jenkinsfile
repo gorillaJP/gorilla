@@ -1,6 +1,8 @@
 pipeline {
   agent none
-  triggers : 'githubPush'
+  triggers {
+     githubPush()
+  } 
   stages {
     stage('Build') {
       steps {
