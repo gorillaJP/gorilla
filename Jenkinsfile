@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'node'
+      label 'node12'
     }
 
   }
@@ -19,9 +19,6 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    name = 'val'
   }
   post {
     always {
