@@ -1,21 +1,9 @@
 pipeline {
-  agent none
+  agent any
   stages {
-    stage('Build') {
-      steps {
-        sh 'java --version'
-      }
-    }
-
     stage('Test') {
       steps {
         sh 'echo "test"'
-      }
-    }
-
-    stage('Publish') {
-      steps {
-        sh 'echo "published"'
       }
     }
 
