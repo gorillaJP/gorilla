@@ -14,7 +14,7 @@ pipeline {
       // This token is arbitrary, but is used to trigger this pipeline.
       // Without a token, ALL pipelines that use the Generic Webhook Trigger
       // plugin will trigger. The example below was generated with `uuidgen` 
-      token: '6BE4BF6E-A319-40A8-8FE9-D82AE08ABD03',
+      //token: '6BE4BF6E-A319-40A8-8FE9-D82AE08ABD03',
       printContributedVariables: true,
       printPostContent: true,
       silentResponse: false,
