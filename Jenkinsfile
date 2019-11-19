@@ -15,7 +15,9 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'echo "build"'
+        sh '''echo "build 12"
+
+npm install'''
       }
     }
 
