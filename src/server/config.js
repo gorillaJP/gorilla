@@ -1,6 +1,6 @@
 
 const mongo = {
-    url: 'mongodb://206.189.133.87:27017/gorilla'
+    url: 'mongodb://appadmin:appadmingorilla@206.189.133.87:27017/gorilla'
 }
 
 
