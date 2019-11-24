@@ -4,6 +4,7 @@ import { mongo } from '../config'
 
 const connection = new Promise( ( resolve, reject ) => {
 
+    console.log("test Comment")
     mongoose.connect( mongo.url, { useNewUrlParser: true } )
 
     var db = mongoose.connection;
@@ -21,7 +22,6 @@ const connection = new Promise( ( resolve, reject ) => {
     } );
 
 } )
-
 
 
 export default connection
