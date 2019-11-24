@@ -9,7 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''whoami
-nohup /usr/local/bin/docker-compose up --build &'''
+nohup /usr/local/bin/docker-compose up --build -d &'''
       }
     }
 
