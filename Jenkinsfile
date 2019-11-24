@@ -8,9 +8,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh './jenkins/scripts/build.sh'
+        sh '''whoami
+./jenkins/scripts/build.sh'''
       }
     }
+
   }
   post {
     always {
