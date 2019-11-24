@@ -12,7 +12,7 @@ pipeline {
         ./jenkins/scripts/build.sh'''
       }
     }
-
+  }
   
   post {
     always {
