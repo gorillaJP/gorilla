@@ -8,11 +8,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        ./jenkins/scripts/build.sh
+        '''whoami
+        ./jenkins/scripts/build.sh'''
       }
     }
 
-  }
+  
   post {
     always {
       echo 'this runs alwaysx y'
