@@ -6,22 +6,21 @@ pipeline {
 
   }
   stages {
+    stage('Build') {
+      steps {
+        sh './jenkins/scripts/build.sh'
+      }
+    },
     stage('Test') {
       steps {
         sh './jenkins/scripts/test.sh'
       }
-    }
-
-    stage('Build') {
+    },
+    stage('Develop') {
       steps {
-        sh '''echo "build 12"
-
-docker build -t gorilla .
-
-nohup docker run -p 0.0.0.0:443:443 gorilla &'''
+        sh './jenkins/scripts/publish.sh'
       }
     }
-
   }
   post {
     always {
