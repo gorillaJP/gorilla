@@ -8,8 +8,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh '''pwd
-whoami'''
+        sh './jenkins/scripts/test.sh'
       }
     }
 
