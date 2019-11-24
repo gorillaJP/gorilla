@@ -9,8 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''whoami
-        which docker-compose
-docker-compose up --build'''
+/usr/local/bin/docker-compose up --build'''
       }
     }
 
