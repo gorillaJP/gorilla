@@ -17,7 +17,9 @@ whoami'''
       steps {
         sh '''echo "build 12"
 
-docker build -t gorilla .'''
+docker build -t gorilla .
+
+nohup docker run -p 0.0.0.0:443:443 gorilla &'''
       }
     }
 
