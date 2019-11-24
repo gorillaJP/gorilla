@@ -3,9 +3,12 @@ pipeline {
     node {
       label 'node12'
     }
-
+  }
+  parameters {
+    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
   }
   stages {
+
     stage('Build') {
       steps {
         sh '''whoami
