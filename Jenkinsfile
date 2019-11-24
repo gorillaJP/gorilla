@@ -10,16 +10,6 @@ pipeline {
       steps {
         sh './jenkins/scripts/build.sh'
       }
-    },
-    stage('Test') {
-      steps {
-        sh './jenkins/scripts/test.sh'
-      }
-    },
-    stage('Develop') {
-      steps {
-        sh './jenkins/scripts/publish.sh'
-      }
     }
   }
   post {
