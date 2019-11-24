@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-    }
-
-  }
+  agent none
   stages {
     stage('Test') {
       steps {
@@ -17,7 +12,7 @@ whoami'''
       steps {
         sh '''echo "build 12"
 
-npm install'''
+docker build -t gorilla .'''
       }
     }
 
