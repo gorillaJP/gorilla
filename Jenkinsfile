@@ -8,8 +8,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''whoami
-./jenkins/scripts/build.sh'''
+          sh ./jenkins/scripts/build.sh
       }
     }
 
