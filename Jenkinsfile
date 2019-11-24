@@ -9,11 +9,11 @@ pipeline {
     stage('Build') {
       steps {
         sh '''whoami
-        ./jenkins/scripts/build.sh'''
+docker-compose up --build'''
       }
     }
+
   }
-  
   post {
     always {
       echo 'this runs alwaysx y'
