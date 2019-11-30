@@ -24,7 +24,7 @@ class LaondingPageBodyContent extends React.Component {
             <div className={ style.middleContent }>
 
                 <div className={ style.moto }>
-                    Find Your Dream Job with Gorilla..!kk
+                    Find Your Dream Job with Gorilla..!uu
                 </div>
 
 
