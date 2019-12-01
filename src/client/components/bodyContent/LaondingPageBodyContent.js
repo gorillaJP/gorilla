@@ -4,8 +4,6 @@ import { Input } from 'antd';
 import style from './LaondingPageBodyContent.less'
 import SearchBox from './searchBox/SearchBox'
 
-
-
 const Search = Input.Search
 
 class LaondingPageBodyContent extends React.Component {
@@ -24,9 +22,8 @@ class LaondingPageBodyContent extends React.Component {
             <div className={ style.middleContent }>
 
                 <div className={ style.moto }>
-                    Find Your Dream Job with Gorilla..!uu
+                    Find Your Dream Job with Gorilla..!ii
                 </div>
-
 
                 <div className={ style.SearchArea }>
 
