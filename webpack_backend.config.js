@@ -4,18 +4,18 @@ var nodeExternals = require( 'webpack-node-externals' );
 
 module.exports = {
     mode: 'production',
-    entry: './src/server/index.js',
+    entry: './src/index.js',
     target: 'node',
     externals: [ nodeExternals() ],
     output: {
-        path: path.join( __dirname, './src/server' ),
+        path: path.join( __dirname, './src' ),
         filename: 'backend.js'
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                include: path.resolve( __dirname, "./src/server" ),
+                include: path.resolve( __dirname, "./src" ),
                 use: {
                     loader: 'babel-loader'
                 }

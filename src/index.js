@@ -12,9 +12,9 @@ var https = require( 'https' )
 
 
 /* certificate */
-const hskey = fs.readFileSync( './src/server/keys/server.key', 'utf8' )
+const hskey = fs.readFileSync( './src/keys/server.key', 'utf8' )
 
-const hscert = fs.readFileSync( './src/server/keys/server.cert', 'utf8' )
+const hscert = fs.readFileSync( './src/keys/server.cert', 'utf8' )
 
 const options = {
     key: hskey,
@@ -39,14 +39,9 @@ if ( process.env.NODE_ENV === 'production' ) {
     } );
 }
 
-const htmlPath = path.join( __dirname, 'public' );
-app.use( favicon( path.join( __dirname, 'public', 'favicon.png' ) ) )
-
-
 app.use( bodyParser.json() );
 
 app.disable( 'etag' );
-app.use( express.static( htmlPath ) ) //static route
 
 app.use( '/api', router )
 
