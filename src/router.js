@@ -62,8 +62,9 @@ const authFilter = passport.authenticate( 'jwt', { session: false } )
 /** loading all routes */
 routes.forEach( route => {
 
-    if ( route.auth )
+    if ( route.auth ) {
         router[ route.method ]( route.path, authFilter, route.controller )
+    }
 
     router[ route.method ]( route.path, route.controller )
 
