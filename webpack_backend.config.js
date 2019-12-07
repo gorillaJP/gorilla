@@ -7,11 +7,11 @@ const nodeExternals = require( 'webpack-node-externals' );
 const fs = require( 'fs' )
 1
 
-fs.writeFileSync( path.resolve( __dirname, 'build/client.json' ), JSON.stringify( config ) )
+fs.writeFileSync( path.resolve( __dirname, 'config/client.json' ), JSON.stringify( config ) )
 
 
 console.log( 'asdfsdfsdfasdfasdfasdfasdfasdfasdfasdffasdfasdfasdfasdfasdfasdfasdfasdfasdf' )
-console.log( path.resolve( __dirname, 'config/tempConf.json' ) )
+console.log( path.resolve( __dirname, 'config/client.json' ) )
 
 module.exports = {
     mode: 'production',
@@ -40,7 +40,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            config: path.resolve( __dirname, 'build/client.json' )
+            config: path.resolve( __dirname, 'config/client.json' )
         }
     }
 }
