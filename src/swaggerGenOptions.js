@@ -1,12 +1,13 @@
 import config from 'config';
-export default  {
+
+export default {
     swaggerDefinition: {
         info: {
             description: 'Gorilla APIs',
             title: 'APIs',
             version: '1.0.0',
         },
-        host: config.get('host') + ':' + config.get('port'),
+        host: config.get( 'host' ) + ':' + '9864',
         basePath: '',
         produces: [
             "application/json",
