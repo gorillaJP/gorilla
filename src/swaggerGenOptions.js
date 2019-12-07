@@ -1,5 +1,8 @@
 import config from 'config';
 
+console.log( 'config object is ' )
+console.log( config )
+
 export default {
     swaggerDefinition: {
         info: {
@@ -7,7 +10,7 @@ export default {
             title: 'APIs',
             version: '1.0.0',
         },
-        host: config.get( 'host' ) + ':' + '9864',
+        host: config.host + ':' + config.port,
         basePath: '',
         produces: [
             "application/json",
