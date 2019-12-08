@@ -1,6 +1,9 @@
 version: '3'
 services:
   web:
-    build: .
+    build: 
+     context: .
+     args:
+      env: 'production'
     ports:
       - "443:443"
