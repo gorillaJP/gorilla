@@ -1,7 +1,5 @@
 import config from 'config';
 
-console.log( 'config object is ' )
-console.log( config )
 
 export default {
     swaggerDefinition: {

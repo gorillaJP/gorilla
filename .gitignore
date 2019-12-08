@@ -1,4 +1,5 @@
 node_modules/*
+build/*
 settings.json
 Db.db
 src/server/public/*
