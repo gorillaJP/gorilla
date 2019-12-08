@@ -2,6 +2,7 @@
  * This function comment is parsed by doctrine
  * @route GET /health
  * @group Health Check
+ * @returns {object} 200 - An array of user info
  */
 
 /**
@@ -13,5 +14,6 @@
 /**
 * @route POST /api/login
  * @param {User.model} username.body.required - usernameggO
+ * @returns {object} 200 - An array of user info
 * @group Auth
 */
