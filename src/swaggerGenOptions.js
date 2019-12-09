@@ -9,11 +9,11 @@ export default {
         },
         host: config.swagger.host + ':' + config.swagger.port,
         basePath: '/',
+        schemes: config.swagger.schemes,
         produces: [
             "application/json",
             "application/xml"
         ],
-        schemes: [ 'http', 'https' ],
         securityDefinitions: {
             JWT: {
                 type: 'apiKey',
