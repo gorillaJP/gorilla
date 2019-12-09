@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
-import { mongo } from '../config'
+import config from 'config';
 
 
 const connection = new Promise( ( resolve, reject ) => {
 
     console.log("test Comment")
-    mongoose.connect( mongo.url, { useNewUrlParser: true } )
+    mongoose.connect( config.mongourl, { useNewUrlParser: true } )
 
     var db = mongoose.connection;
 

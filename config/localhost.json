@@ -1,4 +1,7 @@
 {
-    "host": "localhost",
-    "port": "8080"
+    "mongourl": "mongodb://appadmin:appadmingorilla@206.189.133.87:27017/gorilla",
+    "swagger": {
+        "host": "localhost",
+        "port": "8080"
+    }
 }

@@ -1,0 +1,9 @@
+
+# monster
+monster 29
+
+#self signed certificate
+openssl req -nodes -new -x509 -keyout server.key -out server.cert
+
+#export the key to a fle
+in private.pem -outform PEM -pubout -out public.pem

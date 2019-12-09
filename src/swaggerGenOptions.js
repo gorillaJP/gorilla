@@ -1,6 +1,5 @@
 import config from 'config';
 
-
 export default {
     swaggerDefinition: {
         info: {
@@ -8,7 +7,7 @@ export default {
             title: 'APIs',
             version: '1.0.0',
         },
-        host: config.host + ':' + config.port,
+        host: config.swagger.host + ':' + config.swagger.port,
         basePath: '/',
         produces: [
             "application/json",
