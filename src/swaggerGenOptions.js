@@ -9,7 +9,7 @@ export default {
             version: '1.0.0',
         },
         host: config.host + ':' + config.port,
-        basePath: 'v1',
+        basePath: '/',
         produces: [
             "application/json",
             "application/xml"
