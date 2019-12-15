@@ -1,0 +1,34 @@
+//backed by REST Client 
+
+GET {{proto}}://{{host}}:{{port}}/health
+
+###
+POST {{proto}}://{{host}}:{{port}}/api/login HTTP/1.1
+content-type: application/json
+
+{
+"username" : "dimu",
+"password" : "dimu"
+}
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds/asdf HTTP/1.1
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
+
+###
+POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
+content-type: application/json
+
+{
+ "company" : "Dialog Axikata123",
+ "title" : "Software Engineer",
+ "location" : "Colombo",
+ "experiance" : "3 years ",
+ "skills" : ["java", "php", "nodejs"]
+}
+###
+
+
+GET {{proto}}://{{host}}:{{port}}/api/seeker/asdf HTTP/1.1

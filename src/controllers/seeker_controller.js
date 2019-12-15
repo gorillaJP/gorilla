@@ -1,5 +1,6 @@
 
 import mongoConnect from '../util/mongo_connect'
+import mongoose from 'mongoose'
 import Seeker from '../models/Seeker'
 import { success, error } from '../util/constants'
 import HttpStatus from 'http-status-codes'
@@ -11,11 +12,13 @@ const getSeeker = ( req, res ) => {
 
     console.log( 'received' )
 
-    Seeker.findOne( { '_id': req.params.id } ).exec().then( data => {
-
+    Seeker.findById(req.params.id).exec().then( data => {
+        console.log("dadasfda")
+        console.log(data)
         res.status( 200 ).send( success( data ) )
 
     } ).catch( err => {
+        console.log( err )
         res.status( HttpStatus.BAD_REQUEST ).send( error() )
     } )
 

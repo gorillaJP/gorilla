@@ -47,12 +47,17 @@ const routes = [
         'controller': meta_controller.getMeta
     },
     {
+        'method': 'post',
+        'auth': false,
+        'path': '/jobadds',
+        'controller': job_add_controller.postJobs
+    },
+    {
         'method': 'get',
         'auth': false,
         'path': '/jobadds',
         'controller': job_add_controller.getJobs
     }
-
 ]
 
 router.use( '/', logFilter )
@@ -61,6 +66,8 @@ const authFilter = passport.authenticate( 'jwt', { session: false } )
 
 /** loading all routes */
 routes.forEach( route => {
+
+    console.log('adding a rout to ', route.method, route.path)
 
     if ( route.auth ) {
         router[ route.method ]( route.path, authFilter, route.controller )

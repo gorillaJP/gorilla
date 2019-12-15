@@ -10,8 +10,6 @@ import swaggerGenOptions from './swaggerGenOptions'
 const fs = require( 'fs' );
 var http = require( 'http' );
 var https = require( 'https' )
-
-
 /* certificate */
 const hskey = fs.readFileSync( './src/keys/server.key', 'utf8' )
 
@@ -21,7 +19,6 @@ const options = {
     key: hskey,
     cert: hscert
 };
-
 
 //create instance
 const app = express();

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 var uniqueValidator = require( 'mongoose-unique-validator' );
 
-
 var seeker = {
     username: String,
     password: String,
@@ -16,10 +15,9 @@ var seeker = {
 
 }
 
-var seekerSchema = new mongoose.Schema( seeker )
+var seekerSchema = new mongoose.Schema( seeker, {autoCreate:true})
 
 seekerSchema.plugin(uniqueValidator);
-
 
 var Seeker = mongoose.model( 'Seeker', seekerSchema );
 
