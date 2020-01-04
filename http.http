@@ -12,9 +12,6 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds/asdf HTTP/1.1
-
-###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
 
 ###
@@ -30,5 +27,8 @@ content-type: application/json
 }
 ###
 
+###
+GET {{proto}}://{{host}}:{{port}}/api/meta/allcities?q= HTTP/1.1
 
-GET {{proto}}://{{host}}:{{port}}/api/seeker/asdf HTTP/1.1
+###
+GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=soft HTTP/1.1
