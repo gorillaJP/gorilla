@@ -1,6 +1,7 @@
 import config from 'config';
 import path from 'path'
 import express from "express"
+import cors from 'cors'
 import router from './router'
 import bodyParser from 'body-parser'
 import auth from './filters/auth'
@@ -22,6 +23,7 @@ const options = {
 
 //create instance
 const app = express();
+app.use(cors())
 const expressSwagger = require( 'express-swagger-generator' )( app );
 expressSwagger( swaggerGenOptions )
 

@@ -28,7 +28,8 @@ content-type: application/json
 ###
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/meta/allcities?q= HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/meta/allcities?q=co HTTP/1.1
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=soft HTTP/1.1
+
