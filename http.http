@@ -19,11 +19,12 @@ POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
 content-type: application/json
 
 {
- "company" : "Dialog Axikata123",
- "title" : "Software Engineer",
+ "company" : "MIT Sri Lanka",
+ "description" : "Job Description\nTo do Application Development\nExperience in Java programming language . Will use SQL (mysql, oracle, etc. ) , Angular js, spring, Hibernate, etc.\nWill handle technical development concepts, latest software tools and technologies, strong database concepts and designing techniques\n\nJob Requirement:\nAble to do development, modification, enhancement and support\nAt least 2 year experience working on Java\/J2EE environments and related technologies.\nInterested applicants may send in their detailed resumes, with subject title: 105 \u2013 Java, CV written in MS Word for immediate processing:\nWe regret that only shortlisted candidates will be notified.\nIT Consultancy & Services Pte Ltd\nVisit our website: www.itcspl.com\nEA License No.: 92C5311",
+ "title" : "Senior Java Developr",
  "location" : "Colombo",
  "experiance" : "3 years ",
- "skills" : ["java", "php", "nodejs"]
+ "skills" : ["Oracle", "java", "php", "nodejs", "Jsp", "React"]
 }
 ###
 

@@ -8,6 +8,9 @@ var jobAdd = {
     title: {
         type: String
     },
+    description: {
+        type: String
+    },
     location: {
         type: String
     },
