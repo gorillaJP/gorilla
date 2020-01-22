@@ -3,6 +3,10 @@
 GET {{proto}}://{{host}}:{{port}}/health
 
 ###
+
+GET https://localhost:3000/health
+
+###
 POST {{proto}}://{{host}}:{{port}}/api/login HTTP/1.1
 content-type: application/json
 
@@ -12,7 +16,11 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=xikata
+
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?skills=.net
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
@@ -24,7 +32,7 @@ content-type: application/json
  "title" : "Senior Java Developr",
  "location" : "Colombo",
  "experiance" : "3 years ",
- "skills" : ["Oracle", "java", "php", "nodejs", "Jsp", "React"]
+ "skills" : [ "Angular" , ".Net"] 
 }
 ###
 
@@ -32,5 +40,5 @@ content-type: application/json
 GET {{proto}}://{{host}}:{{port}}/api/meta/allcities?q=co HTTP/1.1
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=soft HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=so HTTP/1.1
 
