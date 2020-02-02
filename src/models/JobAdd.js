@@ -8,13 +8,49 @@ var jobAdd = {
     title: {
         type: String
     },
+    overview: {
+        type: String
+    },
     description: {
         type: String
     },
     location: {
         type: String
     },
-    experiance: {
+    experianceMin: {
+        type: String
+    },
+    experianceMax: {
+        type: String
+    },
+    type: {  //Perm / Contract / Parttimee 
+        type: String
+    },
+    level: {  //Fresher, experiance mid level, Senior level
+        type: String
+    },
+    industry: {
+        type: String
+    },
+    salaryMin: {
+        type: Number
+    },
+    salaryMax: {
+        type: Number
+    },
+    bonus: {
+        type: Number
+    },
+    bonusType: {  //per year, per quater, per month 
+        type: Number
+    },
+    expireDate: {
+        type: Number
+    },
+    notifyEmail: {
+        type: String
+    },
+    redirectURL: {
         type: String
     },
     skills: {
@@ -22,8 +58,8 @@ var jobAdd = {
     }
 }
 
-var jobAddSchema = new mongoose.Schema( jobAdd )
+var jobAddSchema = new mongoose.Schema(jobAdd)
 
-var Jobs = mongoose.model( 'jobadd', jobAddSchema );
+var Jobs = mongoose.model('jobadd', jobAddSchema);
 
 export default Jobs
