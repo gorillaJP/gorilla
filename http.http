@@ -16,7 +16,7 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobaddspaginated?company=axika
+GET {{proto}}://{{host}}:{{port}}/api/jobaddspaginated?q=java&company=dialog&offset=7
 
 
 ###
@@ -45,4 +45,13 @@ GET {{proto}}://{{host}}:{{port}}/api/meta/allcities?q=co HTTP/1.1
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=so HTTP/1.1
+
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=&company=
+
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
+
 

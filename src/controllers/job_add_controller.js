@@ -6,66 +6,86 @@ import { success, error } from '../util/constants'
 
 const maxNumberOfResults = 100 //max number of results to return in one api call
 
-const getJobById = ( req, res ) => {
+const getJobById = (req, res) => {
 
-    JobAdd.findById( req.params.id ).exec().then( data => {
+    JobAdd.findById(req.params.id).exec().then(data => {
 
-        res.status( 200 ).send( success( data ) )
+        res.status(200).send(success(data))
 
-    } ).catch( err => {
-        console.log( err )
-        res.status( HttpStatus.BAD_REQUEST ).send( error() )
-    } )
+    }).catch(err => {
+        console.log(err)
+        res.status(HttpStatus.BAD_REQUEST).send(error())
+    })
 }
 
+/*** 
+ * pagination control with pagination data meta 
+*/
+const getJobsPaginated = (req, res) => {
 
-const getJobsPaginated = ( req, res ) => {
+    let offset = req.query.offset ? Math.max(req.query.offset, 0) : 0
+    let limit = req.query.limit ? Math.max(maxNumberOfResults, req.query.limit) : maxNumberOfResults
 
-    let offset= Math.max(req.query.offset , 0)
-    let limit =  Math.max(maxNumberOfResults, req.query.limit)
+    const query = formQueryObject(req.query)
+    const facetQuery = buildFacet(query, offset, limit)
 
-    offset = 0
-    limit = 2000
+    JobAdd.aggregate([facetQuery]).then(docs => {
+        //format response
+        docs = docs[0]
+        docs.meta = docs.meta[0]
+        docs.meta.limit = limit
+        docs.meta.offset = offset
+        delete docs.meta._id
 
-    JobAdd.aggregate( [
-  { "$facet": {
-    "data": [
-      { "$match": formQueryObjec(req.query)},
-      { "$skip": offset },
-      { "$limit": limit }
-    ],
-    "meta": [
-      { "$group": {
-        "_id": null,
-        "count": { "$sum": 1 }
-      }}
-    ]
-  }}
+        res.status(200).send(success(docs))
 
-    ]).then( data => {
-
-        res.status( 200 ).send( success( data ) )
-
-    } ).catch( err =>   {
-        console.log( err )
-        res.status( HttpStatus.BAD_REQUEST ).send( error() )
-    } )
+    }).catch(err => {
+        console.log(err)
+        res.status(HttpStatus.BAD_REQUEST).send(error())
+    })
 }
 
+/*** 
+ * build aggrigation query 
+ * 
+*/
+const buildFacet = (query, offset, limit) => {
+    return {
+        "$facet": {
+            "data": [
+                { "$match": query },
+                { "$skip": offset },
+                { "$limit": limit }
+            ],
+            "meta": [
+                { "$match": query },
+                {
+                    "$group": {
+                        "_id": null, //group by condition
+                        "total": { "$sum": 1 },
+                    }
+                }
+            ]
+        }
+    }
+}
 
-const getJobs = ( req, res ) => {
+//Generic getJobs controller
+const getJobs = (req, res) => {
 
-    const offset= Math.max(req.query.offset , 0)
-    const limit =  Math.max(maxNumberOfResults, req.query.limit)
+    const offset = Math.max(req.query.offset, 0)
+    const limit = Math.max(maxNumberOfResults, req.query.limit)
 
-    JobAdd.find(formQueryObjec(req.query)).skip(offset).limit(limit).exec().then( data => {
+    let searchPromise = JobAdd.find(formQueryObject(req.query)).skip(offset).limit(limit).exec() //form the query and fire
 
-        res.status( 200 ).send( success( data ) )
+    searchPromise.then(data => {
 
-    } ).catch( err =>   {
-        console.log( err )
-        res.status( HttpStatus.BAD_REQUEST ).send( error() )
-    } )
+        res.status(200).send(success(data))
+
+    }).catch(err => {
+        console.log(err)
+        res.status(HttpStatus.BAD_REQUEST).send(error())
+    })
 }
 
 /**
@@ -74,9 +94,12 @@ const getJobs = ( req, res ) => {
  * create query : AND of like queries
  * 
  */
-const formQueryObjec = ( queryObject )=>{ 
+const formQueryObject = (queryObject) => {
 
-    if ( queryObject ) { 
+    //result query
+    let res = {}
+
+    if (queryObject) {
         delete queryObject.offset
         delete queryObject.limit
     }
@@ -84,31 +107,60 @@ const formQueryObjec = ( queryObject )=>{
     //skip skills since it is an array
     for (var key in queryObject) {
 
-        if ( key == 'skills' ) {
-            queryObject[ key ] = { $elemMatch: { $regex :  '.*' + queryObject[key], $options: "i"}}  
+        if (key == 'q') { //wild search on pre determineded fields by the service
+            res = { ...res, ...formWildQuery(queryObject[key]) }
         }
-        else { 
-            queryObject[key] =  {$regex: ".*"+queryObject[key], $options:"i"}
+        else if (key == 'skills') { //array search for skills
+            res[key] = { $elemMatch: { $regex: '.*' + queryObject[key], $options: "i" } }
         }
-
+        else { //general like search for all otehr fields
+            res[key] = { $regex: ".*" + queryObject[key], $options: "i" }
+        }
     }
-    console.log(queryObject)
+
+    return res
+}
+
+/***
+ * wild search, try to match against pre identififed properties. ( all logic is at backend. frontend does not have an idea)
+ * 
+ * 
+ */
+const formWildQuery = (q) => {
+
+    const matchProps = ["company", "title", "description", "skills"] //props for what q is matched
+
+    const queryNonArray = { $regex: ".*" + q, $options: "i" } //non case sensitive search 
+
+    const conditions = matchProps.map(prop => {
+
+        if (prop == "skills") {
+            return { [prop]: { $elemMatch: { $regex: '.*' + q, $options: "i" } } } //for array element match
+        }
+
+        return { [prop]: queryNonArray } //for all no array elements
+    })
+
+    var queryObject = { $or: conditions }
+
     return queryObject
+
 }
 
-const postJobs = ( req, res ) => {
 
-    var jobAdd = new JobAdd( req.body )
+const postJobs = (req, res) => {
 
-    jobAdd.save().then( (resp, resp1) => {
+    var jobAdd = new JobAdd(req.body)
 
-        jobAdd.id =resp.id
+    jobAdd.save().then((resp, resp1) => {
 
-        res.status( HttpStatus.OK ).send( success(jobAdd) )
+        jobAdd.id = resp.id
 
-    } ).catch( err => {
-        console.log( err )
-        res.status( HttpStatus.BAD_REQUEST ).send( error() )
-    } )
+        res.status(HttpStatus.OK).send(success(jobAdd))
+
+    }).catch(err => {
+        console.log(err)
+        res.status(HttpStatus.BAD_REQUEST).send(error())
+    })
 }
-export default { getJobs, postJobs , getJobsPaginated}
+export default { getJobs, postJobs, getJobsPaginated }

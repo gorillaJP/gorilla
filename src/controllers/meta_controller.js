@@ -22,10 +22,11 @@ const getMeta = ( req, res ) => {
 
 /**
  * Get the RegEx search object as per the query
+ * matching anything that has the query string in vlaue
  */
 const getSearchRegEx = ( query ) => {
 
-    let regExString= ".*" + query + ".*"
+    let regExString= ".*" + query + ".*"  
 
     return  new RegExp(regExString, "i");
 }
