@@ -16,6 +16,10 @@ content-type: application/json
 }
 
 ###
+GET {{proto}}://{{host}}:{{port}}/api/jobaddspaginated?company=axika
+
+
+###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=xikata
 
 

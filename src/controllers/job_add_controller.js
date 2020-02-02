@@ -18,6 +18,41 @@ const getJobById = ( req, res ) => {
     } )
 }
 
+
+const getJobsPaginated = ( req, res ) => {
+
+    let offset= Math.max(req.query.offset , 0)
+    let limit =  Math.max(maxNumberOfResults, req.query.limit)
+
+    offset = 0
+    limit = 2000
+
+    JobAdd.aggregate( [
+  { "$facet": {
+    "data": [
+      { "$match": formQueryObjec(req.query)},
+      { "$skip": offset },
+      { "$limit": limit }
+    ],
+    "meta": [
+      { "$group": {
+        "_id": null,
+        "count": { "$sum": 1 }
+      }}
+    ]
+  }}
+
+    ]).then( data => {
+
+        res.status( 200 ).send( success( data ) )
+
+    } ).catch( err =>   {
+        console.log( err )
+        res.status( HttpStatus.BAD_REQUEST ).send( error() )
+    } )
+}
+
+
 const getJobs = ( req, res ) => {
 
     const offset= Math.max(req.query.offset , 0)
@@ -76,4 +111,4 @@ const postJobs = ( req, res ) => {
         res.status( HttpStatus.BAD_REQUEST ).send( error() )
     } )
 }
-export default { getJobs, postJobs }
+export default { getJobs, postJobs , getJobsPaginated}

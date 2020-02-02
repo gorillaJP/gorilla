@@ -57,6 +57,12 @@ const routes = [
         'auth': false,
         'path': '/jobadds',
         'controller': job_add_controller.getJobs
+    },
+    {
+        'method': 'get',
+        'auth': false,
+        'path': '/jobaddspaginated',
+        'controller': job_add_controller.getJobsPaginated
     }
 ]
 
