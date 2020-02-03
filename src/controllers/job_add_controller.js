@@ -148,7 +148,13 @@ const formWildQuery = (q) => {
 }
 
 
+/***
+ * registers a job with the system
+ * the expiry date is expected to be null or milliseconds
+ */
 const postJobs = (req, res) => {
+
+    req.body.expireDate = req.body.expireDate ? new Date(req.body.expireDate) : null
 
     var jobAdd = new JobAdd(req.body)
 

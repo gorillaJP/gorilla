@@ -42,10 +42,10 @@ var jobAdd = {
         type: Number
     },
     bonusType: {  //per year, per quater, per month 
-        type: Number
+        type: String
     },
     expireDate: {
-        type: Number
+        type: Date
     },
     notifyEmail: {
         type: String
@@ -58,7 +58,7 @@ var jobAdd = {
     }
 }
 
-var jobAddSchema = new mongoose.Schema(jobAdd)
+var jobAddSchema = new mongoose.Schema(jobAdd, { timestamps: true }) //sets createdAt and updatedAt
 
 var Jobs = mongoose.model('jobadd', jobAddSchema);
 
