@@ -151,3 +151,20 @@ content-type: application/json
 ###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds
  
+    
+    
+
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_search
+content-type: application/json
+
+{
+    "query": {
+        "multi_match" : {
+            "query" : "java",
+            "fields" : ["company", "description"]
+        }
+    }
+}
+j
