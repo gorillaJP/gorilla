@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import esClient from '../util/esClient'
+import mongoosastic from 'mongoosastic'
 
 var jobAdd = {
 
@@ -59,6 +61,13 @@ var jobAdd = {
 }
 
 var jobAddSchema = new mongoose.Schema(jobAdd, { timestamps: true }) //sets createdAt and updatedAt
+
+jobAddSchema.plugin(mongoosastic, {
+    indexAutomatically: false, // the application does not write the record to ES. sycn happen at the back end
+    esClient: esClient,
+    index: 'gorilla.jobadds',
+    type: '_doc'
+})
 
 var Jobs = mongoose.model('jobadd', jobAddSchema);
 

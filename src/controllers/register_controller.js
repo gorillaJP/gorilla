@@ -1,5 +1,5 @@
 
-import mongoConnect from '../util/mongo_connect'
+import mongoConnect from '../util/mongoClient'
 import AuthUser from '../models/AuthUser'
 import { success, error } from '../util/constants'
 import HttpStatus from 'http-status-codes'

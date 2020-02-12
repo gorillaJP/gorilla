@@ -49,7 +49,7 @@ GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=so HTTP/1.1
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=&company=
-
+ 
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
@@ -81,3 +81,73 @@ content-type: application/json
  "skills" : [ "office package" , "communication", "systems", "product"] 
 }
 ###
+GET http://206.189.133.87:9200/gorilla.jobadds
+
+
+###
+GET http://206.189.133.87:9200/_aliases
+
+
+
+###
+#DELETE http://206.189.133.87:9200/gorilla.jobadds
+
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_search
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_search
+content-type: application/json
+
+{
+  "query": { 
+    "bool": { 
+      "must": [
+        { "match": { "title":   "DEVELOPR"        }},
+        { "match": { "company":   "MIT"        }}
+      ],
+      "filter": [ 
+      ]
+    }
+  }
+}
+
+###
+GET http://206.189.133.87:9200/game-of-thrones/_search
+
+
+
+GET https://localhost:3000/health
+
+###
+GET http://localhost:8080/api/estest
+
+
+###
+POST http://localhost:8080/api/estest
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_search
+
+###
+#DELETE http://206.189.133.87:9200/gorilla.testmodels
+
+###
+GET http://206.189.133.87:9200/_aliases
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/esjobaddspaginated?q=java&company=dialog&offset=7
+
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_search
+content-type: application/json
+
+{
+  "query": 
+}
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds
+ 

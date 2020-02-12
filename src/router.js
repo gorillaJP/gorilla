@@ -56,31 +56,31 @@ const routes = [
         'method': 'get',
         'auth': false,
         'path': '/jobadds',
-        'controller': job_add_controller.getJobs
+        'controller': job_add_controller.getJobsPaginated
     },
     {
         'method': 'get',
         'auth': false,
         'path': '/jobaddspaginated',
-        'controller': job_add_controller.getJobsPaginated
+        'controller': job_add_controller.getJobsPaginatedOld
     }
 ]
 
-router.use( '/', logFilter )
+router.use('/', logFilter)
 
-const authFilter = passport.authenticate( 'jwt', { session: false } )
+const authFilter = passport.authenticate('jwt', { session: false })
 
 /** loading all routes */
-routes.forEach( route => {
+routes.forEach(route => {
 
     console.log('adding a rout to ', route.method, route.path)
 
-    if ( route.auth ) {
-        router[ route.method ]( route.path, authFilter, route.controller )
+    if (route.auth) {
+        router[route.method](route.path, authFilter, route.controller)
     }
 
-    router[ route.method ]( route.path, route.controller )
+    router[route.method](route.path, route.controller)
 
-} )
+})
 
 export default router
