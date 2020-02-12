@@ -5,7 +5,8 @@ import register_controller from './controllers/register_controller'
 import meta_controller from './controllers/meta_controller'
 import passport from 'passport'
 import { logFilter } from './filters/filter'
-import job_add_controller from './controllers/job_add_controller';
+import job_add_controller from './controllers/job_add_controller'
+import job_add_search_controller from './controllers/job_add_search_controller'
 
 const router = express.Router()
 
@@ -56,7 +57,7 @@ const routes = [
         'method': 'get',
         'auth': false,
         'path': '/jobadds',
-        'controller': job_add_controller.getJobsPaginated
+        'controller': job_add_search_controller.getJobsPaginated
     },
     {
         'method': 'get',

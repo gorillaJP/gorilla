@@ -1,4 +1,3 @@
-
 import HttpStatus from 'http-status-codes'
 
 import JobAdd from '../models/JobAdd'
@@ -11,60 +10,6 @@ const getJobById = (req, res) => {
     JobAdd.findById(req.params.id).exec().then(data => {
 
         res.status(200).send(success(data))
-
-    }).catch(err => {
-        console.log(err)
-        res.status(HttpStatus.BAD_REQUEST).send(error())
-    })
-}
-
-/*** search from elastic search*/
-const getJobsPaginated = (req, res) => {
-
-    let offset = req.query.offset ? Math.max(req.query.offset, 0) : 0
-    let limit = req.query.limit ? Math.max(maxNumberOfResults, req.query.limit) : maxNumberOfResults
-
-    const query = formQueryObject(req.query)
-    const facetQuery = buildFacet(query, offset, limit)
-
-    JobAdd.search({
-        range: {
-            experianceMin: {
-                from: 1
-                , to: 900
-            }
-        }
-    }, (err, results) => {
-        if (results) {
-            res.status(200).send(success(results.body.hits.hits.map(u => {
-                u._source._id = u._id
-                return u._source
-            })))
-            return
-        }
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err)
-    });
-}
-/*** 
- * pagination control with pagination data meta 
-*/
-const getJobsPaginatedOld = (req, res) => {
-
-    let offset = req.query.offset ? Math.max(req.query.offset, 0) : 0
-    let limit = req.query.limit ? Math.max(maxNumberOfResults, req.query.limit) : maxNumberOfResults
-
-    const query = formQueryObject(req.query)
-    const facetQuery = buildFacet(query, offset, limit)
-
-    JobAdd.aggregate([facetQuery]).then(docs => {
-        //format response
-        docs = docs[0]
-        docs.meta = docs.meta[0]
-        docs.meta.limit = limit
-        docs.meta.offset = offset
-        delete docs.meta._id
-
-        res.status(200).send(success(docs))
 
     }).catch(err => {
         console.log(err)
@@ -196,4 +141,33 @@ const postJobs = (req, res) => {
         res.status(HttpStatus.BAD_REQUEST).send(error())
     })
 }
-export default { getJobs, postJobs, getJobsPaginated, getJobsPaginatedOld }
+
+/*** 
+ * pagination control with pagination data meta 
+ * fetch data from mongo db
+ * 
+*/
+const getJobsPaginatedOld = (req, res) => {
+
+    let offset = req.query.offset ? Math.max(req.query.offset, 0) : 0
+    let limit = req.query.limit ? Math.max(maxNumberOfResults, req.query.limit) : maxNumberOfResults
+
+    const query = formQueryObject(req.query)
+    const facetQuery = buildFacet(query, offset, limit)
+
+    JobAdd.aggregate([facetQuery]).then(docs => {
+        //format response
+        docs = docs[0]
+        docs.meta = docs.meta[0]
+        docs.meta.limit = limit
+        docs.meta.offset = offset
+        delete docs.meta._id
+
+        res.status(200).send(success(docs))
+
+    }).catch(err => {
+        console.log(err)
+        res.status(HttpStatus.BAD_REQUEST).send(error())
+    })
+}
+export default { getJobs, postJobs, getJobsPaginatedOld }
