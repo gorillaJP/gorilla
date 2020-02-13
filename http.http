@@ -61,10 +61,10 @@ POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
 content-type: application/json
 
 {
- "company" : "Mobitel Sri Lanka",
- "title" : "business analyst",
+ "company" : "Sampath Bank",
+ "title" : "Coparate banker",
  "overview" : "project manager with telecommunication backgroud" ,
- "description" : "Job Description\nTo do Application Development\nExperience in Java programming language . Will use SQL (mysql, oracle, etc. ) , Angular js, spring, Hibernate, etc.\nWill handle technical development concepts, latest software tools and technologies, strong database concepts and designing techniques\n\nJob Requirement:\nAble to do development, modification, enhancement and support\nAt least 2 year experience working on Java\/J2EE environments and related technologies.\nInterested applicants may send in their detailed resumes, with subject title: 105 \u2013 Java, CV written in MS Word for immediate processing:\nWe regret that only shortlisted candidates will be notified.\nIT Consultancy & Services Pte Ltd\nVisit our website: www.itcspl.com\nEA License No.: 92C5311",
+ "description" : "looking for a talented coparate banker",
  "location" : "Colombo",
  "experianceMin" : "3.5",
  "experianceMax" : "6.5",
@@ -78,7 +78,7 @@ content-type: application/json
  "expireDate" : 1598998690472 ,
  "notifyEmail" : "dim912@gmailcom",
  "redirectURL" : "carrers@gorilla.lk",
- "skills" : [ "office package" , "communication", "systems", "product"] 
+ "skills" : [ "account handling" , "front desk", "banking", "account"] 
 }
 ###
 GET http://206.189.133.87:9200/gorilla.jobadds
@@ -149,7 +149,7 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds?limit=3&offset=2
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?limit=3&offset=0&q=bank
 
 
 
@@ -159,12 +159,6 @@ GET http://206.189.133.87:9200/gorilla.jobadds/_search
 content-type: application/json
 
 {
-    "query": {
-        "multi_match" : {
-            "query" : "java",
-            "fields" : ["company", "title", "description", "skill"]
-        }
-    },
     "size": 10 ,
     "from" : 3
 }
