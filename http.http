@@ -90,7 +90,7 @@ GET http://206.189.133.87:9200/_aliases
 
 
 ###
-#DELETE http://206.189.133.87:9200/gorilla.jobadds
+DELETE http://206.189.133.87:9200/gorilla.jobadds
 
 
 ###
@@ -149,10 +149,9 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds
- 
-    
-    
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?limit=3&offset=2
+
+
 
 
 ###
@@ -163,8 +162,9 @@ content-type: application/json
     "query": {
         "multi_match" : {
             "query" : "java",
-            "fields" : ["company", "description"]
+            "fields" : ["company", "title", "description", "skill"]
         }
-    }
+    },
+    "size": 10 ,
+    "from" : 3
 }
-j
