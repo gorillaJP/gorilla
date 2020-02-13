@@ -12,10 +12,13 @@ const getJobsPaginated = (req, res) => {
     let limit = req.query.limit ? Math.max(maxNumberOfResults, req.query.limit) : maxNumberOfResults
 
 
-    JobAdd.search({
-        "multi_match": {
-            "query": "java",
-            "fields": ["description"]
+    JobAdd.esSearch({
+        "size": 100,
+        "query": {
+            "multi_match": {
+                "query": "java",
+                "fields": ["description"]
+            }
         }
     }, (err, results) => {
         if (results) {
