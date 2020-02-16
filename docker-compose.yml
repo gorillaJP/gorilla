@@ -8,4 +8,4 @@ services:
     ports:
       - "443:443"
     volumes:
-      - log:/apps/logs/service
+      - ./log:/apps/logs/service:rw
