@@ -1,10 +1,14 @@
 //backed by REST Client 
 
+###
 GET {{proto}}://{{host}}:{{port}}/health
 
 ###
 
-GET https://localhost:3000/health
+GET https://www.google.com/complete/search?q=sin&cp=3&client=psy-ab&xssi=t&gs_ri=gws-wiz&hl=en-SG&authuser=0&psi=axNJXoOCG43dz7sP95ebwAU.1581847404079&ei=axNJXoOCG43dz7sP95ebwAU
+content-type: application/json
+
+
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/login HTTP/1.1
@@ -80,14 +84,35 @@ content-type: application/json
  "redirectURL" : "carrers@gorilla.lk",
  "skills" : [ "account handling" , "front desk", "banking", "account"] 
 }
+
+
+GET https://localhost:3000/health
+
 ###
-GET http://206.189.133.87:9200/gorilla.jobadds
+GET http://localhost:8080/api/estest
+
+
+###
+POST http://localhost:8080/api/estest
+
+
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/esjobaddspaginated?q=java&company=dialog&offset=7
+
+
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?limit=3&offset=0&q=java
+
+############### DIRECT ElasticSearch
+
+###
+GET http://206.189.133.87:9200
 
 
 ###
 GET http://206.189.133.87:9200/_aliases
-
-
 
 ###
 DELETE http://206.189.133.87:9200/gorilla.jobadds
@@ -113,44 +138,12 @@ content-type: application/json
   }
 }
 
-###
-GET http://206.189.133.87:9200/game-of-thrones/_search
-
-
-
-GET https://localhost:3000/health
 
 ###
-GET http://localhost:8080/api/estest
-
-
+GET http://206.189.133.87:9200/gorilla.jobadds
 ###
-POST http://localhost:8080/api/estest
 
-###
-GET http://206.189.133.87:9200/gorilla.jobadds/_search
-
-###
-#DELETE http://206.189.133.87:9200/gorilla.testmodels
-
-###
-GET http://206.189.133.87:9200/_aliases
-
-###
-GET {{proto}}://{{host}}:{{port}}/api/esjobaddspaginated?q=java&company=dialog&offset=7
-
-
-###
-GET http://206.189.133.87:9200/gorilla.jobadds/_search
-content-type: application/json
-
-{
-  "query": 
-}
-
-###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds?limit=3&offset=0&q=bank
-
+GET http://206.189.133.87:9200/gorilla.jobadds/_mapping
 
 
 
@@ -161,4 +154,62 @@ content-type: application/json
 {
     "size": 10 ,
     "from" : 3
+}
+
+###
+PUT http://206.189.133.87:9200/gorilla.jobadds
+
+
+###
+GET http://206.189.133.87:9200/_cluster/health?pretty
+
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_termvectors/5e3851713c1e351f0cfe0eef
+
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_doc/5e3851713c1e351f0cfe0eef
+###
+
+
+###
+HEAD http://206.189.133.87:9200/gorilla.jobadds/_mapping/company
+
+
+###
+
+DELETE http://206.189.133.87:9200/gorilla.jobadds/_mapping
+content-type: application/json
+  
+{
+      "properties": {
+        "company": {
+          "type" : "text"
+         }
+      }
+}
+
+###
+
+POST http://206.189.133.87:9200/_reindex
+content-type: application/json
+
+{
+  "source": {
+    "index": "gorilla.jobadds"
+  },
+  "dest": {
+    "index": "gorilla.jobadds_new"
+  }
+}
+
+###
+
+POST http://206.189.133.87:9200/_analyze
+content-type: application/json
+
+{
+  "analyzer": "standard",
+  "text": "The 2 QUICK Brown-Foxes jumped over the lazy dog's bone."
 }

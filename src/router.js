@@ -1,4 +1,5 @@
 import express from 'express'
+import requestId from 'express-request-id'
 import auth_controller from './controllers/auth_controller'
 import seeker_controller from './controllers/seeker_controller'
 import register_controller from './controllers/register_controller'
@@ -67,6 +68,7 @@ const routes = [
     }
 ]
 
+router.use('/', requestId())
 router.use('/', logFilter)
 
 const authFilter = passport.authenticate('jwt', { session: false })
