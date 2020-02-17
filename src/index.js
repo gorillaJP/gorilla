@@ -48,10 +48,10 @@ app.use('/health', (req, res) => { res.send({ status: "OK" }) }) //directing to 
 
 //app.use( '/api', router )
 if (process.env.NODE_ENV === 'production') {
-    //https.createServer(options, app).listen(443)
-    http.createServer(app).listen(443)
-    http.globalAgent.keepAlive = true;
-    //https.globalAgent.keepAlive = true;
+    https.createServer(options, app).listen(443)
+    //http.createServer(app).listen(443)
+    //http.globalAgent.keepAlive = true;
+    https.globalAgent.keepAlive = true;
 
     console.log('HTTPS Server listening on %s:%s', 'HOST', 443)
 }
