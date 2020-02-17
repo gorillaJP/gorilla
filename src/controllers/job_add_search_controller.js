@@ -1,5 +1,5 @@
 import HttpStatus from 'http-status-codes'
-
+import logger from '../util/logger'
 import JobAdd from '../models/JobAdd'
 import { success, error } from '../util/constants'
 
@@ -9,10 +9,14 @@ const maxNumberOfResults = 50//ceil at 50 records
 */
 const getJobsPaginated = (req, res) => {
 
+    const correlationId = res.getHeaders()['x-request-id']
+
     let offset = req.query.offset && req.query.offset != '' ? Math.max(req.query.offset, 0) : 0
     let limit = req.query.limit && req.query.limit != '' ? Math.min(maxNumberOfResults, req.query.limit) : maxNumberOfResults
+    logger.info('OUT' + 'getJobsPaginated' + ' ' + correlationId)
 
     JobAdd.esSearch(buildQuery(req.query.q, limit, offset), (err, results) => {
+        logger.info('OUT-IN' + 'getJobsPaginated' + ' ' + correlationId)
         if (results) {
             res.status(200).send(success(formatResposne(results, limit, offset)))
             return
