@@ -10,13 +10,16 @@ const maxNumberOfResults = 50//ceil at 50 records
 const getJobsPaginated = (req, res) => {
 
     const correlationId = res.getHeaders()['x-request-id']
+    const startHrTime = process.hrtime();
 
     let offset = req.query.offset && req.query.offset != '' ? Math.max(req.query.offset, 0) : 0
     let limit = req.query.limit && req.query.limit != '' ? Math.min(maxNumberOfResults, req.query.limit) : maxNumberOfResults
-    logger.info('OUT' + 'getJobsPaginated' + ' ' + correlationId)
+    logger.info('OUT' + ' getJobsPaginated' + ' ' + correlationId)
 
     JobAdd.esSearch(buildQuery(req.query.q, limit, offset), (err, results) => {
-        logger.info('OUT-IN' + 'getJobsPaginated' + ' ' + correlationId)
+        const elapsedHrTime = process.hrtime(startHrTime);
+        const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
+        logger.info('OUT-IN' + ' getJobsPaginated' + ' ' + correlationId + ' ' + elapsedTimeInMs)
         if (results) {
             res.status(200).send(success(formatResposne(results, limit, offset)))
             return
