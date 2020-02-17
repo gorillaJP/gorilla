@@ -6,6 +6,7 @@ import router from './router'
 import bodyParser from 'body-parser'
 import auth from './filters/auth'
 import favicon from 'serve-favicon'
+import compression from 'compression'
 
 const fs = require('fs');
 var http = require('http');
@@ -23,6 +24,7 @@ const options = {
 //create instance
 const app = express();
 app.use(cors())
+app.use(compression());
 
 
 //enable gzip for prod env
