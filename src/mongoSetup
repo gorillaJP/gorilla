@@ -1,0 +1,20 @@
+
+-- MONGO CREATE USERS
+
+db.createUser( { user: "root", pwd: "defaultPasword1", roles: [ "userAdminAnyDatabase" , "readWriteAnyDatabase", "dbAdminAnyDatabase", "clusterAdmin"] } )
+
+
+db.grantRolesToUser("appadmin",[{ role: "clusterAdmin", db: "gorilla" }] );
+db.grantRolesToUser("appadmin",[{ role: "clusterAdmin", db: "testmodels" }] );
+
+
+db.createUser({user: "oplogUser ", pwd: "PASSWORD", roles: [{role: "read", db: "gorila"}]})
+db.createUser({ user: "oplogUser", pwd: "PASSWORD", roles: [{role: "read", db: "gorilla"}] } )
+
+
+
+db.createUser( { user: "root", pwd: "defaultPasword1", roles: [ {role:"read", db : "gorilla"} ] } )
+
+
+db.createUser( { user: "root", pwd: "defaultPasword1", roles: [ "userAdminAnyDatabase" , "readWriteAnyDatabase", "dbAdminAnyDatabase", "clusterAdmin"] } )
+db.createUser({ user: "oplogUser", pwd: "PASSWORD", roles: [{role: "read", db: "admin"}] } )

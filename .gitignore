@@ -8,3 +8,4 @@ target/*
 npm-debug*
 package-lock.json
 .idea/*
+*.log
