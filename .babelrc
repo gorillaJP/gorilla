@@ -24,5 +24,11 @@
         ],
         "@babel/plugin-proposal-class-properties",
         "@babel/plugin-syntax-dynamic-import"
-    ]
+    ],
+    "env": {
+        "debug": {
+            "sourceMaps": "inline",
+            "retainLines": true
+        }
+    }
 }
