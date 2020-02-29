@@ -1,4 +1,5 @@
 import HttpStatus from 'http-status-codes'
+import esb from 'elastic-builder'
 import logger from '../util/logger'
 import JobAdd from '../models/JobAdd'
 import { success, error } from '../util/constants'
@@ -8,7 +9,6 @@ const maxNumberOfResults = 50//ceil at 50 records
 /*** search from elastic search
 */
 const getJobsPaginated = (req, res) => {
-
     const correlationId = res.getHeaders()['x-request-id']
     const startHrTime = process.hrtime();
 
@@ -16,10 +16,10 @@ const getJobsPaginated = (req, res) => {
     let limit = req.query.limit && req.query.limit != '' ? Math.min(maxNumberOfResults, req.query.limit) : maxNumberOfResults
     logger.info('OUT' + ' getJobsPaginated' + ' ' + correlationId)
 
-    JobAdd.esSearch(buildQuery(req.query.q, limit, offset), (err, results) => {
+    JobAdd.esSearch(buildQuery(req.body, limit, offset), (err, results) => {
         const elapsedHrTime = process.hrtime(startHrTime);
         const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
-        logger.info('OUT-IN' + ' getJobsPaginated' + ' ' + correlationId + ' ' + elapsedTimeInMs)
+        logger.info('OUT-IN' + ' getJobsPaginatedd' + ' ' + correlationId + ' ' + elapsedTimeInMs)
         if (results) {
             res.status(200).send(success(formatResposne(results, limit, offset)))
             return
@@ -28,24 +28,40 @@ const getJobsPaginated = (req, res) => {
     })
 }
 
-const buildQuery = (q, limit, offset) => {
+const buildQuery = (qObj, limit, offset) => {
 
-    var query = {
-        "size": limit,
-        "from": offset,
-    }
+    var multiMatchFields = ["company", "title", "description"] //taken to multimatch field
 
-    if (q && q != '') {
-        query.query = {
-            "multi_match": {
-                "query": q,
-                "fields": ["company", "title", "description", "skill"]
+    var filterTerms = ["location", "type"] //taken to multimatch field
+
+    //multi match, for fuzy search
+    var boolQuery = esb.boolQuery().must(esb.multiMatchQuery(multiMatchFields, qObj.q))
+
+    //exact matches
+    for (var key in qObj) {
+        if (filterTerms.includes(key)) {
+            if (Array.isArray(qObj[key])) { //for multi match for the same field
+
+                //should match at least one of values from list
+                var boolQ = esb.boolQuery()
+                qObj[key].forEach(val => {
+                    boolQ.should(esb.termQuery(key, val))
+                    boolQuery.filter(boolQ)
+                })
+            }
+            else {
+                //since value match
+                boolQuery.filter(esb.termQuery(key, qObj[key]))
             }
         }
     }
-    return query
-}
 
+    const esbq = esb.requestBodySearch().query(boolQuery).size(limit).from(offset)
+
+    logger.info(esb.prettyPrint(esbq))
+
+    return esbq
+}
 
 
 const formatResposne = (data, limit, offset) => {

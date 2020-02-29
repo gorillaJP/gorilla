@@ -1,17 +1,11 @@
 //backed by REST Client 
+// ----------------------------------- ATTENTION : KEEP THE FILE CLEAN ---------------
 
 ###
 GET {{proto}}://{{host}}:{{port}}/health
 
 ###
-
-GET https://www.google.com/complete/search?q=sin&cp=3&client=psy-ab&xssi=t&gs_ri=gws-wiz&hl=en-SG&authuser=0&psi=axNJXoOCG43dz7sP95ebwAU.1581847404079&ei=axNJXoOCG43dz7sP95ebwAU
-content-type: application/json
-
-
-
-###
-POST {{proto}}://{{host}}:{{port}}/api/login HTTP/1.1
+POST {{proto}}://{{host}}:{{port}}/api/login
 content-type: application/json
 
 {
@@ -20,15 +14,14 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobaddspaginated?q=java&company=dialog&offset=7
+GET {{proto}}://{{host}}:8080/api/jobadds
+content-type: application/json
 
-
-###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=xikata
-
-
-###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds?skills=.net
+{
+ "q" : "java",
+ "location": ["colombo"],
+ "type": "permanent"
+}
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
@@ -51,14 +44,13 @@ GET {{proto}}://{{host}}:{{port}}/api/meta/allcities?q=co HTTP/1.1
 GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=so HTTP/1.1
 
 
+GET http://159.89.161.233/api/meta/allsectors?q=ba
+
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=&company=
- 
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=bank
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
-
-
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
@@ -86,26 +78,7 @@ content-type: application/json
 }
 
 
-GET https://localhost:3000/health
-
-###
-GET http://localhost:8080/api/estest
-
-
-###
-POST http://localhost:8080/api/estest
-
-
-
-###
-GET {{proto}}://{{host}}:{{port}}/api/esjobaddspaginated?q=java&company=dialog&offset=7
-
-
-
-###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds?limit=3&offset=0&q=java
-
-############### DIRECT ElasticSearch
+############### DIRECT ElasticSearch ########################
 
 ###
 GET http://206.189.133.87:9200
@@ -127,17 +100,37 @@ content-type: application/json
 
 {
   "query": { 
-    "bool": { 
-      "must": [
-        { "match": { "title":   "DEVELOPR"        }},
-        { "match": { "company":   "MIT"        }}
-      ],
-      "filter": [ 
-      ]
-    }
+     "multi_match": {
+        "query": "bank",
+        "fields": ["company", "title", "description", "type"]
+     }
+  }
+}
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/_search
+content-type: application/json
+{
+  "query": { 
+  "bool" : {
+    "must": [ 
+      {"multi_match" : {
+        "query" : "java",
+        "fields": ["company", "title", "description"]
+        }
+      }
+    ],
+     "filter" : {
+         "term": {"type": "permanent"}  
+     }
+  }
   }
 }
 
+####
+     "multi_match": {
+        "query": "bank",
+        "fields": ["company", "title", "description"]
+     },
 
 ###
 GET http://206.189.133.87:9200/gorilla.jobadds
@@ -213,3 +206,7 @@ content-type: application/json
   "analyzer": "standard",
   "text": "The 2 QUICK Brown-Foxes jumped over the lazy dog's bone."
 }
+
+####
+
+GET http://localhost:8080/actuator/health
