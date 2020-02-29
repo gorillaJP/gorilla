@@ -1,0 +1,31 @@
+{
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "version": "v1"
+        },
+        "local": {
+            "host": "localhost",
+            "proto": "http",
+            "port": "8080"
+        },
+        "localProd": {
+            "host": "localhost",
+            "proto": "http",
+            "port": "443"
+        },
+        "production": {
+            "host": "159.89.161.233",
+            "proto": "http",
+            "port": "443"
+        }
+    },
+    "saveAndRunExt": {
+        "commands": [
+            {
+                "match": "\\.js$",
+                "isShellCommand": false,
+                "cmd": "workbench.action.debug.restart"
+            }
+        ]
+    }
+}
