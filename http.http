@@ -14,14 +14,9 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:8080/api/jobadds
+GET {{proto}}://{{host}}:8080/api/jobadds?q=java&location=kandy&location=colombo&type=contract
 content-type: application/json
 
-{
- "q" : "java",
- "location": ["colombo"],
- "type": "permanent"
-}
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1

@@ -8,6 +8,7 @@ const maxNumberOfResults = 50//ceil at 50 records
 
 /*** search from elastic search
 */
+
 const getJobsPaginated = (req, res) => {
     const correlationId = res.getHeaders()['x-request-id']
     const startHrTime = process.hrtime();
@@ -16,7 +17,7 @@ const getJobsPaginated = (req, res) => {
     let limit = req.query.limit && req.query.limit != '' ? Math.min(maxNumberOfResults, req.query.limit) : maxNumberOfResults
     logger.info('OUT' + ' getJobsPaginated' + ' ' + correlationId)
 
-    JobAdd.esSearch(buildQuery(req.body, limit, offset), (err, results) => {
+    JobAdd.esSearch(buildQuery(req.query, limit, offset), (err, results) => {
         const elapsedHrTime = process.hrtime(startHrTime);
         const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
         logger.info('OUT-IN' + ' getJobsPaginatedd' + ' ' + correlationId + ' ' + elapsedTimeInMs)
@@ -35,7 +36,11 @@ const buildQuery = (qObj, limit, offset) => {
     var filterTerms = ["location", "type"] //taken to multimatch field
 
     //multi match, for fuzy search
-    var boolQuery = esb.boolQuery().must(esb.multiMatchQuery(multiMatchFields, qObj.q))
+    var boolQuery = esb.boolQuery()
+
+    if (qObj.q && qObj.q != '') {
+        boolQuery.must(esb.multiMatchQuery(multiMatchFields, qObj.q))
+    }
 
     //exact matches
     for (var key in qObj) {
@@ -57,8 +62,6 @@ const buildQuery = (qObj, limit, offset) => {
     }
 
     const esbq = esb.requestBodySearch().query(boolQuery).size(limit).from(offset)
-
-    logger.info(esb.prettyPrint(esbq))
 
     return esbq
 }
