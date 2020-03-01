@@ -50,11 +50,13 @@ const buildQuery = (qObj, limit, offset) => {
                 //should match at least one of values from list
                 var boolQ = esb.boolQuery()
                 qObj[key].forEach(val => {
-                    boolQ.should(esb.termQuery(key, val))
-                    boolQuery.filter(boolQ)
+                    if (val && val != '') {
+                        boolQ.should(esb.termQuery(key, val))
+                        boolQuery.filter(boolQ)
+                    }
                 })
             }
-            else {
+            else if (qObj[key] && qObj[key] != '') {
                 //since value match
                 boolQuery.filter(esb.termQuery(key, qObj[key]))
             }
