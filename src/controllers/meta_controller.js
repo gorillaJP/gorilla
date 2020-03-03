@@ -55,6 +55,9 @@ const getCollection = name => {
   if (name === "metaposteddates") {
     return MetaRoles;
   }
+  if (name === "metajobtypes") {
+    return MetaRoles;
+  }
 };
 
 export default { getMeta };
