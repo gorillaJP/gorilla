@@ -30,10 +30,9 @@ content-type: application/json
  "experiance" : "3 years ",
  "skills" : [ "Angular" , ".Net"] 
 }
-###
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/meta/allcities?q=co HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/meta/allmetacities?q=
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=so HTTP/1.1

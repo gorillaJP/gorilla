@@ -37,16 +37,22 @@ const getSearchRegEx = query => {
  */
 const getCollection = name => {
   console.log(name);
-  if (name === "allmetacities") {
+  if (name === "metacities") {
     return MetaCities;
   }
-  if (name === "allmetasectors") {
+  if (name === "metasectors") {
     return MetaSectors;
   }
-  if (name === "allmetasalaries") {
+  if (name === "metasalaries") {
     return MetaSalaries;
   }
-  if (name === "allmetaroles") {
+  if (name === "metaroles") {
+    return MetaRoles;
+  }
+  if (name === "metaexperiences") {
+    return MetaRoles;
+  }
+  if (name === "metaposteddates") {
     return MetaRoles;
   }
 };
