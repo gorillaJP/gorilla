@@ -32,11 +32,12 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/meta/allmetacities?q=
+GET {{proto}}://{{host}}:{{port}}/api/meta/metacities?q=
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/meta/allsectors?q=so HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/meta/metasectors?q=so HTTP/1.1
 
+###
 
 GET http://159.89.161.233/api/meta/allsectors?q=ba
 
