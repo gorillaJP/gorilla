@@ -37,7 +37,6 @@ const getSearchRegEx = query => {
  * Get the collection to be searched as per the property
  */
 const getCollection = name => {
-  console.log(name);
   if (name === "metacities") {
     return MetaCities;
   }
@@ -54,7 +53,7 @@ const getCollection = name => {
     return MetaExperience;
   }
   if (name === "metaposteddates") {
-    return MetaDat;
+    return MetaJobPosteTess;
   }
   if (name === "metajobtypes") {
     return MetaRoles;
