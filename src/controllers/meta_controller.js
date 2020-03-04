@@ -2,6 +2,8 @@ import Meta from "../models/Meta";
 import MetaCities from "../models/Meta_cities";
 import MetaSectors from "../models/Meta_sector";
 import MetaSalaries from "../models/MetaSlary";
+import MetaExperience from "../models/MetaExperience";
+import MetaJobPosteTess from "../models/metaposteddates";
 import MetaRoles from "../models/MetaRole";
 import { success, error } from "../util/constants";
 
@@ -50,10 +52,10 @@ const getCollection = name => {
     return MetaRoles;
   }
   if (name === "metaexperiences") {
-    return MetaRoles;
+    return MetaExperience;
   }
   if (name === "metaposteddates") {
-    return MetaRoles;
+    return MetaDat;
   }
   if (name === "metajobtypes") {
     return MetaRoles;

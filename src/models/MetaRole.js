@@ -10,6 +10,6 @@ var metaData = {
 
 var metarole = new mongoose.Schema(metaData);
 
-var Meta_Role = mongoose.model("metarole", metarole);
+var Meta_Role = mongoose.model("metaroles", metarole);
 
 export default Meta_Role;

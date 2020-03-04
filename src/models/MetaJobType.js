@@ -10,6 +10,6 @@ var metaData = {
 
 var metaJobType = new mongoose.Schema(metaData);
 
-var Meta_JobType = mongoose.model("metarole", metaJobType);
+var Meta_JobType = mongoose.model("metajobtypes", metaJobType);
 
 export default Meta_JobType;
