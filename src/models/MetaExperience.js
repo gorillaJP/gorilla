@@ -5,6 +5,9 @@ var metaData = {
     type: String,
     index: true,
     unique: true
+  },
+  order: {
+    type: String
   }
 };
 

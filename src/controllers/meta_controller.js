@@ -4,6 +4,8 @@ import MetaSalaries from "../models/MetaSlary";
 import MetaExperience from "../models/MetaExperience";
 import MetaJobPosteTess from "../models/MetaJobPosteDate";
 import MetaRoles from "../models/MetaRole";
+import logger from "../util/logger";
+import HttpStatus from "http-status-codes";
 import { success, error } from "../util/constants";
 
 const getMeta = (req, res) => {
@@ -12,14 +14,14 @@ const getMeta = (req, res) => {
   let regEx = getSearchRegEx(req.query.q);
 
   getCollection(property)
-    .distinct("name", { name: regEx })
+    .find({ name: regEx }, { _id: false })
     .exec()
     .then(data => {
-      res.status(200).send(success(data));
+      res.status(HttpStatus.OK).send(success(data));
     })
-    .catch(err => {
-      console.log(err);
-      res.status(HttpStatus.BAD_REQUEST).send(error());
+    .catch(e => {
+      logger.error(e);
+      res.status(HttpStatus.BAD_REQUEST).send(console.error());
     });
 };
 

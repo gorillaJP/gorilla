@@ -28,6 +28,11 @@
       },
       {
         "match": "\\.js$",
+        "isShellCommand": true,
+        "cmd": "killall -9 node"
+      },
+      {
+        "match": "\\.js$",
         "isShellCommand": false,
         "cmd": "workbench.action.debug.restart"
       }
