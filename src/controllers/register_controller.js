@@ -22,8 +22,6 @@ const registerSeeker = (req, res) => {
 
 }
 
-
-
 const isValueTaken = (req, res) => {
 
     AuthUser.countDocuments({ [req.params.prop]: req.params.value }).exec().then(data => {

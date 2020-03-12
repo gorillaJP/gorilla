@@ -26,7 +26,6 @@ const app = express();
 app.use(cors())
 app.use(compression());
 
-
 //enable gzip for prod env
 
 console.log('process.env.NODE_ENV : ' + process.env.NODE_ENV)

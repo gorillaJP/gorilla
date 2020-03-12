@@ -4,14 +4,9 @@
     "outDir": "tsbuild",
     "rootDir": "src",
     "module": "es6",
-    "target": "es6"
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true
   },
-  "exclude": [
-    "node_modules",
-    "tsbuild",
-    "build",
-    "info",
-    "dist",
-    "webpack.config.js"
-  ]
+  "exclude": ["tsbuild", "build", "info", "dist", "webpack.config.js"]
 }

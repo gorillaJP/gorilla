@@ -3,20 +3,17 @@ const resp = {
     'payload': {}
 }
 
-
 function SuccessResponse() {
     this.status = 'ok'
     this.payload = {}
 }
 SuccessResponse.prototype = resp
 
-
 function ErrorResponse() {
     this.status = 'error'
     this.payload = {}
 }
 SuccessResponse.prototype = resp
-
 
 const success = ( data ) => {
     let resp = new SuccessResponse()

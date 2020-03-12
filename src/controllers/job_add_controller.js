@@ -119,7 +119,6 @@ const formWildQuery = (q) => {
 
 }
 
-
 /***
  * registers a job with the system
  * the expiry date is expected to be null or milliseconds
