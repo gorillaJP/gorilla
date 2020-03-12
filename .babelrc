@@ -1,3 +1,4 @@
+/*
 {
     "retainLines": true,
     "presets": [
@@ -31,4 +32,9 @@
             "retainLines": true
         }
     }
+}
+*/
+
+{
+  "presets": ["@babel/preset-env"]
 }

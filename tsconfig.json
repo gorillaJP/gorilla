@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "tsbuild",
+    "rootDir": "src",
+    "module": "es6",
+    "target": "es6"
+  },
+  "exclude": [
+    "node_modules",
+    "tsbuild",
+    "build",
+    "info",
+    "dist",
+    "webpack.config.js"
+  ]
+}

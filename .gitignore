@@ -1,5 +1,6 @@
 node_modules/*
 build/*
+tsbuild/*
 Db.db
 src/server/public/*
 src/server/backend.js 

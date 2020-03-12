@@ -18,7 +18,8 @@
       "proto": "http",
       "port": "443"
     }
-  },
+  }
+  /*
   "saveAndRunExt": {
     "commands": [
       {
@@ -38,4 +39,5 @@
       }
     ]
   }
+  */
 }

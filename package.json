@@ -4,7 +4,8 @@
   "description": "gorilla",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=localhost nodemon --exec babel-node  src/index.js",
+    "dev": "rm -rf ./dist/ && rm -rf ./tsbuild/ && tsc && cross-env NODE_ENV=localhost nodemon --exec babel-node tsbuild/index.js",
+    "devjs": "cross-env NODE_ENV=localhost nodemon --exec babel-node src/index.js",
     "debug": "cross-env NODE_ENV=localhost nodemon --inspect=9229 --exec babel-node  src/index.js",
     "prodBuild": "babel -d ./build ./src -s",
     "prod": "cross-env NODE_ENV=production node ./build/index.js"
