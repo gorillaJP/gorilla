@@ -34,9 +34,6 @@ content-type: application/json
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/metaposteddates?q=
 
-
-
-
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/metacities?q=
 
