@@ -1,40 +1,32 @@
-/*
 {
-    "retainLines": true,
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "modules": false,
-                "targets": {
-                    "browsers": [
-                        "last 2 versions"
-                    ]
-                }
-            }
-        ],
-        "@babel/preset-react"
-    ],
-    "plugins": [
-        [
-            "import",
-            {
-                "libraryName": "antd",
-                "style": true
-            }
-        ],
-        "@babel/plugin-proposal-class-properties",
-        "@babel/plugin-syntax-dynamic-import"
-    ],
-    "env": {
-        "debug": {
-            "sourceMaps": "inline",
-            "retainLines": true
+  "retainLines": true,
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 2 versions"]
         }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
+      }
+    ],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import"
+  ],
+  "env": {
+    "debug": {
+      "sourceMaps": "inline",
+      "retainLines": true
     }
-}
-*/
-
-{
-  "presets": ["@babel/preset-env"]
+  }
 }
