@@ -9,7 +9,7 @@
     "tsrun": "cross-env NODE_ENV=localhost nodemon --exec babel-node tsbuild/index.js",
     "devjs": "cross-env NODE_ENV=localhost nodemon --exec babel-node src/index.js",
     "debug": "cross-env NODE_ENV=localhost nodemon --inspect=9229 --exec babel-node  src/index.js",
-    "prodBuild": "babel -d ./build ./src -s",
+    "prodBuild": "tsc && babel -d ./build ./tsbuild -s",
     "prod": "cross-env NODE_ENV=production node ./build/index.js"
   },
   "repository": {
