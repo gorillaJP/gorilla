@@ -6,13 +6,15 @@ WORKDIR /app
 
 ADD package.json /app
 
+ADD tsconfig.json /app
+
 ADD src  /app/src
 
 ADD config/${env}.json  /app/config/${env}.json
 
 RUN npm install
 
-RUN npm install -g typescript
+#RUN npm install -g typescript
 
 RUN npm run prodBuild 
 
