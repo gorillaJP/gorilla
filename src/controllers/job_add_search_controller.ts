@@ -1,4 +1,5 @@
 import * as HttpStatus from "http-status-codes";
+import _ from "lodash";
 import * as esb from "elastic-builder";
 import logger from "../util/logger";
 import JobAdd from "../models/JobAdd";
@@ -43,20 +44,26 @@ const getJobsPaginated = (req, res) => {
 };
 
 const buildQuery = (qObj, limit, offset) => {
-  const multiMatchFields = ["company", "title", "description"]; // taken to multimatch field
+  const fuzzySearchFields: string[] = ["company", "title", "description"]; // taken to multimatch field
 
-  const filterTerms = ["location", "type"]; // taken to multimatch field
+  const exactMatchFilters: string[] = ["location", "type"]; // taken to multimatch field
+
+  const rangeFilters = {
+    salarymax: "gte",
+    experiencemin: "lte",
+    posteddate: "lte"
+  }; // taken to multimatch field
 
   // multi match, for fuzy search
   const boolQuery = esb.boolQuery();
 
   if (qObj.q && qObj.q != "") {
-    boolQuery.must(esb.multiMatchQuery(multiMatchFields, qObj.q));
+    boolQuery.must(esb.multiMatchQuery(fuzzySearchFields, qObj.q));
   }
 
   // exact matches
   for (const key in qObj) {
-    if (filterTerms.includes(key)) {
+    if (exactMatchFilters.includes(key)) {
       if (Array.isArray(qObj[key])) {
         // for multi match for the same field
 
@@ -71,6 +78,18 @@ const buildQuery = (qObj, limit, offset) => {
       } else if (qObj[key] && qObj[key] != "") {
         // since value match
         boolQuery.filter(esb.termQuery(key, qObj[key]));
+      }
+      //check if query key matches with any of rangeFilter labels
+    } else if (
+      rangeFilters.hasOwnProperty(key) &&
+      qObj[key] &&
+      !isNaN(qObj[key])
+    ) {
+      console.log(qObj[key]);
+      if (rangeFilters[key] === "gte") {
+        boolQuery.filter(esb.rangeQuery(key).gte(qObj[key]));
+      } else if (rangeFilters[key] === "lte") {
+        boolQuery.filter(esb.rangeQuery(key).lte(qObj[key]));
       }
     }
   }

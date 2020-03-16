@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "dev": "cross-env NODE_ENV=localhost nodemon --watch src --exec \"rm -rf ./tsbuild/ && tsc && babel-node tsbuild/index.js\"",
+    "dev": "cross-env NODE_ENV=localhost nodemon --watch src -e js,ts --exec \"rm -rf ./tsbuild/ && tsc && babel-node tsbuild/index.js\"",
     "tsrun": "cross-env NODE_ENV=localhost nodemon --exec babel-node tsbuild/index.js",
     "devjs": "cross-env NODE_ENV=localhost nodemon --exec babel-node src/index.js",
     "debug": "cross-env NODE_ENV=localhost nodemon --inspect=9229 --exec babel-node  src/index.js",
@@ -33,6 +33,7 @@
     "express-request-id": "^1.4.1",
     "http-status-codes": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "mongoosastic": "^4.5.1",
     "mongoose": "^5.8.11",
     "mongoose-unique-validator": "^2.0.3",
