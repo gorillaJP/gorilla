@@ -12,7 +12,7 @@ ADD config/${env}.json  /app/config/${env}.json
 
 RUN npm install
 
-RUN RUN npm install -g typescript
+RUN npm install -g typescript
 
 RUN npm run prodBuild 
 
