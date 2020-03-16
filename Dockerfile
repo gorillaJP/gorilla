@@ -8,6 +8,8 @@ ADD package.json /app
 
 ADD tsconfig.json /app
 
+ADD .babelrc /app
+
 ADD src  /app/src
 
 ADD config/${env}.json  /app/config/${env}.json
