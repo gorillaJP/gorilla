@@ -48,11 +48,12 @@ const buildQuery = (qObj, limit, offset) => {
 
   const exactMatchFilters: string[] = ["location", "type"]; // taken to multimatch field
 
+  // taken to multimatch field
   const rangeFilters = {
     salarymax: "gte",
     experiencemin: "lte",
-    posteddate: "lte"
-  }; // taken to multimatch field
+    createdat: "gte"
+  };
 
   // multi match, for fuzy search
   const boolQuery = esb.boolQuery();
@@ -70,12 +71,12 @@ const buildQuery = (qObj, limit, offset) => {
         // should match at least one of values from list
         const boolQ = esb.boolQuery();
         qObj[key].forEach(val => {
-          if (val && val != "") {
+          if (val && val != "" && val != "any") {
             boolQ.should(esb.termQuery(key, val));
             boolQuery.filter(boolQ);
           }
         });
-      } else if (qObj[key] && qObj[key] != "") {
+      } else if (qObj[key] && qObj[key] != "" && qObj[key] != "any") {
         // since value match
         boolQuery.filter(esb.termQuery(key, qObj[key]));
       }
@@ -85,11 +86,16 @@ const buildQuery = (qObj, limit, offset) => {
       qObj[key] &&
       !isNaN(qObj[key])
     ) {
-      console.log(qObj[key]);
-      if (rangeFilters[key] === "gte") {
-        boolQuery.filter(esb.rangeQuery(key).gte(qObj[key]));
-      } else if (rangeFilters[key] === "lte") {
-        boolQuery.filter(esb.rangeQuery(key).lte(qObj[key]));
+      if (key === "createdat") {
+        //createdat is a date field => special treatment is needed
+        const dayGap = qObj[key];
+        boolQuery.filter(esb.rangeQuery(key).gte("now-" + dayGap + "d/d"));
+      } else {
+        if (rangeFilters[key] === "gte") {
+          boolQuery.filter(esb.rangeQuery(key).gte(qObj[key]));
+        } else if (rangeFilters[key] === "lte") {
+          boolQuery.filter(esb.rangeQuery(key).lte(qObj[key]));
+        }
       }
     }
   }

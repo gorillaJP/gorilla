@@ -62,7 +62,9 @@ var jobAdd = {
   }
 };
 
-var jobAddSchema = new mongoose.Schema(jobAdd, { timestamps: true }); //sets createdAt and updatedAt
+var jobAddSchema = new mongoose.Schema(jobAdd, {
+  timestamps: { createdAt: "createdat", updatedAt: "updatedat" }
+});
 
 jobAddSchema.plugin(mongoosastic, {
   indexAutomatically: false, // the application does not write the record to ES. sycn happen at the back end
