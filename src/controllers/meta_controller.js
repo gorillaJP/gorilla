@@ -4,6 +4,7 @@ import MetaSalaries from "../models/MetaSlary";
 import MetaExperience from "../models/MetaExperience";
 import MetaJobPosteTess from "../models/MetaJobPosteDate";
 import MetaRoles from "../models/MetaRole";
+import MetaJobType from "../models/MetaJobType";
 import logger from "../util/logger";
 import HttpStatus from "http-status-codes";
 import { success, error } from "../util/constants";
@@ -58,7 +59,7 @@ const getCollection = name => {
     return MetaJobPosteTess;
   }
   if (name === "metajobtypes") {
-    return MetaRoles;
+    return MetaJobType;
   }
 };
 

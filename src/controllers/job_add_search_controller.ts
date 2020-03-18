@@ -46,7 +46,7 @@ const getJobsPaginated = (req, res) => {
 const buildQuery = (qObj, limit, offset) => {
   const fuzzySearchFields: string[] = ["company", "title", "description"]; // taken to multimatch field
 
-  const exactMatchFilters: string[] = ["location", "type"]; // taken to multimatch field
+  const exactMatchFilters: string[] = ["location", "type", "jobtype"]; // taken to multimatch field
 
   // taken to multimatch field
   const rangeFilters = {
