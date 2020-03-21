@@ -4,6 +4,7 @@ import auth_controller from "./controllers/auth_controller";
 import seeker_controller from "./controllers/seeker_controller";
 import register_controller from "./controllers/register_controller";
 import meta_controller from "./controllers/meta_controller";
+import autocomplete_controller from "./controllers/autocomplete_controller";
 import passport from "passport";
 import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
@@ -65,6 +66,12 @@ const routes = [
     auth: false,
     path: "/jobaddspaginated",
     controller: job_add_controller.getJobsPaginatedOld
+  },
+  {
+    method: "get",
+    auth: false,
+    path: "/autocomplete",
+    controller: autocomplete_controller.autoComplete
   }
 ];
 

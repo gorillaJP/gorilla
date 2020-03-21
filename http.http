@@ -41,14 +41,13 @@ GET {{proto}}://{{host}}:{{port}}/api/meta/metacities?q=
 GET {{proto}}://{{host}}:{{port}}/api/meta/metasectors?q=so HTTP/1.1
 
 ###
-
-GET http://159.89.161.233/api/meta/allsectors?q=ba
-
-###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=bank
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/autocomplete
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
@@ -205,6 +204,161 @@ content-type: application/json
   "text": "The 2 QUICK Brown-Foxes jumped over the lazy dog's bone."
 }
 
-####
+###
+PUT http://206.189.133.87:9200/gorilla.autocomplete
+content-type: application/json
 
-GET http://localhost:8080/actuator/health
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "filter": {},
+        "analyzer": {
+          "keyword_analyzer": {
+            "filter": [
+              "lowercase",
+              "asciifolding",
+              "trim"
+            ],
+            "char_filter": [],
+            "type": "custom",
+            "tokenizer": "keyword"
+          },
+          "edge_ngram_analyzer": {
+            "filter": [
+              "lowercase"
+            ],
+            "tokenizer": "edge_ngram_tokenizer"
+          },
+          "edge_ngram_search_analyzer": {
+            "tokenizer": "lowercase"
+          }
+        },
+        "tokenizer": {
+          "edge_ngram_tokenizer": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 20,
+            "token_chars": [
+              "letter"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+      "properties": {
+        "name": {
+          "type": "text",
+          "fields": {
+            "keywordstring": {
+              "type": "text",
+              "analyzer": "keyword_analyzer"
+            },
+            "edgengram": {
+              "type": "text",
+              "analyzer": "edge_ngram_analyzer",
+              "search_analyzer": "edge_ngram_search_analyzer"
+            },
+            "completion": {
+              "type": "completion"
+            }
+          },
+          "analyzer": "standard"
+        }
+      }
+  }
+}
+
+###
+POST http://206.189.133.87:9200/gorilla.search/_doc/_create
+content-type: application/json
+
+{
+  "text": "Iron Man"
+}
+
+###
+POST http://206.189.133.87:9200/gorilla.search/_doc
+content-type: application/json
+
+{"name" : "Iron Man"}
+###
+
+
+
+
+
+###
+GET http://206.189.133.87:9200/gorilla.search/_search
+content-type: application/json
+
+
+
+### prefix search
+### match only at th biginning of sentense, 
+### No need to alter exising index. can be directly apply.( so  no memory foot print)
+### not optimized for large datasts
+### this is because => ES checks for the matches only at search time. No insert time heavy lifting
+#duplicates are not filtered out. To avoid this can aggrigrate results and then filter at the server side
+
+GET http://206.189.133.87:9200/gorilla.jobsearch/_search
+content-type: application/json
+
+{
+  "query": {
+    "prefix": {
+      "name.keywordstring": "a"
+    }
+  }
+}
+
+
+### N grams approach ( this is an improvemnt on prfix search)
+### diffrent analyzers at index and search time
+### query time -> analyzer with n grams. this first split the sentense by the spaces, comma etc
+### then form n-grams tokanizer =>  at the biginning of each word
+### search time -> standard analyzer
+### can match words at the middle of sentense
+### fast in search,  but slow in insert
+
+GET http://206.189.133.87:9200/gorilla.autocomplete/_search
+content-type: application/json
+
+{
+    "query": {
+        "match": {
+            "name.edgengram": {
+                "query": "app",
+                "fuzziness": 1
+            }
+        }
+    }
+}
+
+### Completion suggester
+### ES use A inmemory data strucure called finite state transfer ( FST) is used by this
+### ES store FST per segmnet level => which is horizontally scalable
+### mathcing always starts at the bigging of sentense
+### sorting is supported only through weights 
+
+
+GET http://206.189.133.87:9200/gorilla.jobsearch/_search
+content-type: application/json
+
+{
+    "suggest": {
+        "movie-suggest" : {
+            "prefix" : "test",
+            "completion" : {
+                "field" : "name.completion",
+                "fuzzy": {
+                   "fuzziness": 1
+                 }
+            }
+        }
+    }
+}
+
+###
