@@ -1,0 +1,130 @@
+
+###changing types of an index tyeps are not accepted once created
+### Create new index. user PUT method. ( there is no POST method)
+###
+### Create index -> can specify
+###        1) Settings
+###        2) Mappings
+###        3) Aliases
+### 
+###  Mappings             => defines how a documnet looks like, fields, stored and indexed
+###     a. field names
+###     b. data types # text, keyword, date, long, double, boolean or ip....
+###     c. Mapping parameters
+###     
+###  Settings (optional) 
+###     a. number of shards 
+###     b. number of replicas
+###     
+###   same field can be index different ways ( this is mentioned with the type
+###   1) as keyword => type - for sorting and aggrigations
+###   2) as text => text type - for full text search
+###   3) standard analyzer
+###   4) french analyzer  
+###   5) English analyzer etc 
+###     
+###     
+###     
+###     
+GET http://206.189.133.87:9200/gorilla.jobadds
+content-type: application/json
+
+###
+
+POST http://206.189.133.87:9200/_analyze
+content-type: application/json
+
+{
+  "tokenizer": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 20,
+            "token_chars": [
+              "letter"
+            ]
+   },
+  "text": "Dimuthu Darshana Senanayaka"
+}
+
+
+###
+PUT http://206.189.133.87:9200/gorilla.autocomplete
+content-type: application/json
+
+{
+  "mappings": {
+      "properties": {
+        "name": {
+          "type": "text",
+          "fields": {
+            "keywordstring": {
+              "type": "text",
+              "analyzer": "keyword_analyzer"
+            },
+            "edgengram": {
+              "type": "text",
+              "analyzer": "edge_ngram_analyzer",
+              "search_analyzer": "edge_ngram_search_analyzer"
+            },
+            "completion": {
+              "type": "completion"
+            }
+          },
+          "analyzer": "standard"
+        }
+      }
+  },
+  "settings": {
+    "index": {
+      "max_ngram_diff" : 20, 
+      "analysis": {
+        "filter": {},
+        "analyzer": {
+          "keyword_analyzer": {
+            "filter": [
+              "lowercase",
+              "asciifolding",
+              "trim"
+            ],
+            "char_filter": [],
+            "type": "custom",
+            "tokenizer": "keyword"
+          },
+          "edge_ngram_analyzer": {
+            "filter": [
+              "lowercase"
+            ],
+            "tokenizer": "edge_ngram_tokenizer"
+          },
+          "edge_ngram_search_analyzer": {
+            "tokenizer": "lowercase"
+          }
+        },
+        "tokenizer": {
+          "edge_ngram_tokenizer": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 20,
+            "token_chars": [
+              "letter"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+
+### check term vectors
+GET http://206.189.133.87:9200/gorilla.autocomplete/_termvectors/5e726b121c2a98cd2d7225f1
+content-type: application/json
+
+{
+  "fields" : ["name.edgengram"],
+  "offsets" : true,
+  "payloads" : true,
+  "positions" : true,
+  "term_statistics" : true,
+  "field_statistics" : true
+}

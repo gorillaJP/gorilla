@@ -330,7 +330,7 @@ content-type: application/json
     "query": {
         "match": {
             "name.edgengram": {
-                "query": "app",
+                "query": "soft",
                 "fuzziness": 1
             }
         }
@@ -362,3 +362,32 @@ content-type: application/json
 }
 
 ###
+
+###
+GET http://206.189.133.87:9200/gorilla.autocomplete/_search
+
+###
+GET http://206.189.133.87:9200/gorilla.autocomplete/
+
+###
+GET http://206.189.133.87:9200/gorilla.jobadds/
+
+
+###
+GET http://206.189.133.87:9200/gorilla.autocomplete/_mapping
+
+
+
+### Add a new field to an existing mapping
+PUT /my-index/_mapping
+{
+  "properties": {
+    "employee-id": {
+      "type": "keyword",
+      "index": false
+    }
+  }
+}
+
+##view  the mappings of a field
+GET /my-index/_mapping/field/employee-id

@@ -1,0 +1,208 @@
+### AUTO COMPLTE
+PUT http://206.189.133.87:9200/gorilla.autocomplete
+content-type: application/json
+
+{
+  "mappings": {
+      "properties": {
+        "name": {
+          "type": "text",
+          "fields": {
+            "edgengram": {
+              "type": "text",
+              "analyzer": "edge_ngram_analyzer"
+            }
+          }
+        }
+      }
+  },
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "edge_ngram_analyzer": {
+            "filter": [
+              "lowercase"
+            ],
+            "tokenizer": "edge_ngram_tokenizer"
+          }
+        },
+        "tokenizer": {
+          "edge_ngram_tokenizer": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 20,
+            "token_chars": [
+              "letter"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+### JOB ADDS - can be optimized
+PUT http://206.189.133.87:9200/gorilla.jobadds
+content-type: application/json
+
+{
+    "mappings": {
+      "properties": {
+        "__v": {
+          "type": "long"
+        },
+        "bonus": {
+          "type": "long"
+        },
+        "bonusType": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "company": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "createdat": {
+          "type": "date"
+        },
+        "description": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "experiencemax": {
+          "type": "float"
+        },
+        "experiencemin": {
+          "type": "float"
+        },
+        "expireDate": {
+          "type": "date"
+        },
+        "industry": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "level": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "location": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "notifyEmail": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "overview": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "redirectURL": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "salaryMin": {
+          "type": "long"
+        },
+        "salarymax": {
+          "type": "long"
+        },
+        "skills": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "title": {
+          "type": "text",
+              "analyzer" : "edge_ngram_analyzer"
+        },
+        "type": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "updatedat": {
+          "type": "date"
+        }
+      }
+    },
+    "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "edge_ngram_analyzer": {
+            "filter": [
+              "lowercase"
+            ],
+            "tokenizer": "edge_ngram_tokenizer"
+          }
+        },
+        "tokenizer": {
+          "edge_ngram_tokenizer": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 20,
+            "token_chars": [
+              "letter"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
