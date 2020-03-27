@@ -77,13 +77,7 @@ content-type: application/json
           "type": "date"
         },
         "description": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
-            }
-          }
+          "enabled": false
         },
         "experiencemax": {
           "type": "float"
@@ -132,12 +126,7 @@ content-type: application/json
         },
         "overview": {
           "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
-            }
-          }
+          "analyzer" : "edge_ngram_analyzer"
         },
         "redirectURL": {
           "type": "text",
@@ -165,7 +154,7 @@ content-type: application/json
         },
         "title": {
           "type": "text",
-              "analyzer" : "edge_ngram_analyzer"
+          "analyzer" : "edge_ngram_analyzer"
         },
         "type": {
           "type": "text",
