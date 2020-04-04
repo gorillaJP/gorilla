@@ -106,13 +106,16 @@ const buildQuery = (qObj, limit, offset) => {
     .size(limit)
     .from(offset);
 
-  logger.info(esbq);
+  logger.info(JSON.stringify(esbq));
 
   return esbq;
 };
 
 const formatResposne = (data, limit, offset) => {
-  logger.debug(data);
+  logger.log("---------");
+  logger.log(JSON.stringify(data));
+  logger.log(limit);
+  logger.log(offset);
   const res = data.body.hits.hits.map(u => {
     u._source._id = u._id;
     return u._source;
