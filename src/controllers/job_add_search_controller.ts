@@ -27,6 +27,11 @@ const getJobsPaginated = (req, res) => {
   JobAdd.esSearch(buildQuery(req.query, limit, offset), (err, results) => {
     const elapsedHrTime = process.hrtime(startHrTime);
     const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
+
+    if (err) {
+      JSON.stringify("Error", err);
+    }
+
     logger.info(
       "OUT-IN" +
         " getJobsPaginatedd" +
@@ -36,6 +41,7 @@ const getJobsPaginated = (req, res) => {
         elapsedTimeInMs
     );
     if (results) {
+      logger.info("aasfa", JSON.stringify(results));
       res.status(200).send(success(formatResposne(results, limit, offset)));
       return;
     }
