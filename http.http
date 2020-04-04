@@ -50,7 +50,42 @@ GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
 GET {{proto}}://{{host}}:{{port}}/api/autocomplete
 
 ###
-POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/employerprofile/ HTTP/1.1
+content-type: application/json
+
+{
+  "firstname": "Dimuthu",
+  "lastname": "Senanayaka",
+  "email": "dim912@gmail.com",
+  "phonenumber": 849444744,
+  "password": 23423423840,
+  "companyid": null,
+  "company": {
+        "name"  : "Singer Sri Lanka"
+  } 
+}
+###
+POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1
+content-type: application/json
+{
+  "firstname": "Dimuthu",
+  "lastname": "Senanayaka",
+  "email": "dim912@gmail.com66",
+  "phonenumber": 849444744,
+  "password": 23423423840,
+  "companyid": null,
+  "company": {
+    "name" : "company 66"
+  } 
+}
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/company?q= HTTP/1.1
+content-type: application/json
+
+###
+
+POST {{proto}}://{{host}}:{{port}}/api/HTTP/1.1
 content-type: application/json
 
 {
@@ -73,7 +108,6 @@ content-type: application/json
  "redirectURL" : "carrers@gorilla.lk",
  "skills" : [ "account handling" , "front desk", "banking", "account"] 
 }
-
 
 ############### DIRECT ElasticSearch ########################
 

@@ -1,6 +1,8 @@
 import express from "express";
 import requestId from "express-request-id";
 import auth_controller from "./controllers/auth_controller";
+import company_profile_controller from "./controllers/company_profile_controller";
+import employer_profile_controller from "./controllers/employer_profile_controller";
 import seeker_controller from "./controllers/seeker_controller";
 import register_controller from "./controllers/register_controller";
 import meta_controller from "./controllers/meta_controller";
@@ -72,6 +74,18 @@ const routes = [
     auth: false,
     path: "/autocomplete",
     controller: autocomplete_controller.autoComplete
+  },
+  {
+    method: "post",
+    auth: false,
+    path: "/employerprofile",
+    controller: employer_profile_controller.registerEmployer
+  },
+  {
+    method: "get",
+    auth: false,
+    path: "/company",
+    controller: company_profile_controller.getCompanyList
   }
 ];
 
