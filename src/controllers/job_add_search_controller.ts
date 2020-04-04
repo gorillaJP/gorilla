@@ -110,6 +110,7 @@ const buildQuery = (qObj, limit, offset) => {
 };
 
 const formatResposne = (data, limit, offset) => {
+  logger.debug(data);
   const res = data.body.hits.hits.map(u => {
     u._source._id = u._id;
     return u._source;

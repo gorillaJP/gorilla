@@ -1,6 +1,6 @@
 import winston from "winston";
 const logger = winston.createLogger({
-  level: "info",
+  level: "debug",
   format: winston.format.simple(),
   //defaultMeta: { service: 'service' },
   transports: [
@@ -15,6 +15,10 @@ const logger = winston.createLogger({
     new winston.transports.File({
       filename: "./log/application.log",
       level: "info"
+    }),
+    new winston.transports.File({
+      filename: "./log/debug.log",
+      level: "debug"
     })
   ]
 });
