@@ -106,6 +106,8 @@ const buildQuery = (qObj, limit, offset) => {
     .size(limit)
     .from(offset);
 
+  logger.info(esbq);
+
   return esbq;
 };
 
