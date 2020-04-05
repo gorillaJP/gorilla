@@ -118,10 +118,6 @@ const buildQuery = (qObj, limit, offset) => {
 };
 
 const formatResposne = (data, limit, offset) => {
-  logger.log("---------");
-  logger.log(JSON.stringify(data));
-  logger.log(limit);
-  logger.log(offset);
   const res = data.body.hits.hits.map(u => {
     u._source._id = u._id;
     return u._source;

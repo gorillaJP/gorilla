@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import esClient from "../util/esClient";
-import mongoosastic from "mongoosastic";
 
 var autocomplte = {
   name: {
@@ -12,11 +11,15 @@ var autoComplteSchema = new mongoose.Schema(autocomplte, {
   timestamps: { createdAt: "createdat", updatedAt: "updatedat" }
 });
 
-autoComplteSchema.plugin(mongoosastic, {
-  indexAutomatically: false, // the application does not write the record to ES. sycn happen at the back end
-  esClient: esClient,
-  index: "gorilla.autocomplete",
-  type: "_doc"
+autoComplteSchema.static("esSearch", function(query, cb) {
+  esClient.search(
+    {
+      index: "gorilla.autocomplete",
+      type: "_doc",
+      body: query
+    },
+    cb
+  );
 });
 
 var AutoCompltes = mongoose.model("autocomplete", autoComplteSchema);

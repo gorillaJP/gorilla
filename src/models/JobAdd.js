@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import esClient from "../util/esClient";
-import mongoosastic from "mongoosastic";
 
 var jobAdd = {
   company: {
@@ -66,11 +65,15 @@ var jobAddSchema = new mongoose.Schema(jobAdd, {
   timestamps: { createdAt: "createdat", updatedAt: "updatedat" }
 });
 
-jobAddSchema.plugin(mongoosastic, {
-  indexAutomatically: false, // the application does not write the record to ES. sycn happen at the back end
-  esClient: esClient,
-  index: "gorilla.jobadds",
-  type: "_doc"
+jobAddSchema.static("esSearch", function(query, cb) {
+  esClient.search(
+    {
+      index: "gorilla.jobadds",
+      type: "_doc",
+      body: query
+    },
+    cb
+  );
 });
 
 var Jobs = mongoose.model("jobadd", jobAddSchema);
