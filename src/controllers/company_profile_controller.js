@@ -16,7 +16,7 @@ const getCompanyList = (req, res) => {
   let regEx = getSearchRegEx(req.query.q);
   console.log(regEx);
 
-  CompanyProfile.find({ name: regEx })
+  CompanyProfile.find({ name: regEx }, { name: 1, id: 1 })
     .exec()
     .then(data => {
       res.status(HttpStatus.OK).send(success(data));

@@ -50,32 +50,22 @@ GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
 GET {{proto}}://{{host}}:{{port}}/api/autocomplete
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/employerprofile/ HTTP/1.1
+POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1
 content-type: application/json
 
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "dim912@gmail.com",
+  "email": "dim912@gmail.com70",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "company": {
-        "name"  : "Singer Sri Lanka"
-  } 
-}
-###
-POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1
-content-type: application/json
-{
-  "firstname": "Dimuthu",
-  "lastname": "Senanayaka",
-  "email": "dim912@gmail.com66",
-  "phonenumber": 849444744,
-  "password": 23423423840,
-  "companyid": null,
-  "company": {
-    "name" : "company 66"
+    "name" : "company 70",
+    "logo": "logo",
+    "email" : "companyemail@company.com",
+    "phonenumber" : "77 234 234 5",
+    "description" : "Company Desctiption"
   } 
 }
 
