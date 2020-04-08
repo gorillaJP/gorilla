@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import router from "./router";
 import bodyParser from "body-parser";
-import auth from "./filters/auth";
+import "./filters/auth";
 import favicon from "serve-favicon";
 import compression from "compression";
 require("./initresources");
@@ -19,7 +19,7 @@ const hscert = fs.readFileSync("./src/keys/server.cert", "utf8");
 
 const options = {
   key: hskey,
-  cert: hscert
+  cert: hscert,
 };
 
 //create instance
@@ -31,7 +31,7 @@ app.use(compression());
 
 console.log("process.env.NODE_ENV : " + process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
-  app.get("*.js", function(req, res, next) {
+  app.get("*.js", function (req, res, next) {
     req.url = req.url + ".gz";
     res.set("Content-Encoding", "gzip");
     res.set("Content-Type", "text/javascript");
