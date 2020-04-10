@@ -1,8 +1,9 @@
 import EmployerProfile from "../models/EmployerProfile";
 import CompanyProfile from "../models/CompanyProfile";
 import { success, error } from "../util/constants";
-import HttpStatus from "http-status-codes";
+import * as HttpStatus from "http-status-codes";
 import mongoose from "mongoose";
+import { Email, emailSend, EmailTemeplate } from "../util/emailer";
 
 /**
  * Save the Employee and company
@@ -65,6 +66,7 @@ const registerEmployer = (req, res) => {
             delete employer._doc.password;
             session.commitTransaction();
             res.status(HttpStatus.OK).send(success(employer));
+            sendEmail(employer);
           })
           //Ex : If employer email is already registered
           .catch((err) => {
@@ -78,6 +80,15 @@ const registerEmployer = (req, res) => {
         console.log(err);
       }); //Id promise is failed. handled at the top
   });
+};
+
+let sendEmail = (employer): void => {
+  const email: Email = {
+    to: employer.email,
+    template: EmailTemeplate.SIGNUP_EMPLOYER,
+    data: employer,
+  };
+  emailSend(email);
 };
 
 export default { registerEmployer };

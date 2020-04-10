@@ -68,14 +68,14 @@ content-type: application/json
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "dim912@gmail.com101",
+  "email": "gorillajobslk@gmail.com",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "company": {
-    "name" : "company 101",
+    "name" : "company 107",
     "logo": "logo",
-    "email" : "companyemail@company.com101",
+    "email" : "companyemail@company.com107",
     "phonenumber" : "77 234 234 5",
     "description" : "Company Desctiption"
   } 
