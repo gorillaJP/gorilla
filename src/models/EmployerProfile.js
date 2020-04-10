@@ -2,26 +2,28 @@ import mongoose from "mongoose";
 import normalize from "normalize-mongoose";
 var uniqueValidator = require("mongoose-unique-validator");
 
-var Employer = {
+var EmployerFields = {
   firstname: String,
   lastname: String,
   email: {
     type: String,
     index: true,
-    unique: true
+    unique: true,
   },
   phonenumber: String,
   password: String,
   companyname: String,
   company: {
-    id: String
-  }
+    id: String,
+  },
 };
 
-var employerProfileSchema = new mongoose.Schema(Employer, { autoCreate: true });
+var employerProfileSchema = new mongoose.Schema(EmployerFields, {
+  autoCreate: true,
+});
 
 employerProfileSchema.plugin(uniqueValidator, {
-  message: "Error, expected {PATH} to be unique."
+  message: "{PATH} | {VALUE}  | {TYPE}",
 });
 
 employerProfileSchema.plugin(normalize); //replace _id with id and remove v

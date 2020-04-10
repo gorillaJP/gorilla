@@ -3,6 +3,7 @@ import requestId from "express-request-id";
 import auth_controller from "./controllers/auth_controller";
 import company_profile_controller from "./controllers/company_profile_controller";
 import employer_profile_controller from "./controllers/employer_profile_controller";
+import candidate_profile_controller from "./controllers/candidate_profile_controller";
 import seeker_controller from "./controllers/seeker_controller";
 import register_controller from "./controllers/register_controller";
 import meta_controller from "./controllers/meta_controller";
@@ -19,74 +20,74 @@ const routes = [
     method: "post",
     auth: false,
     path: "/login",
-    controller: auth_controller.login
+    controller: auth_controller.login,
   },
   {
     method: "get",
     path: "/seeker/:id",
     auth: false,
-    controller: seeker_controller.getSeeker
+    controller: seeker_controller.getSeeker,
   },
   {
     method: "get",
     auth: false,
     path: "/exist/seeker/:prop/:value",
-    controller: register_controller.isValueTaken
+    controller: register_controller.isValueTaken,
   },
   {
     method: "post",
     auth: true,
     path: "/seeker",
-    controller: seeker_controller.addSeeker
-  },
-  {
-    method: "post",
-    auth: false,
-    path: "/register",
-    controller: register_controller.registerSeeker
+    controller: seeker_controller.addSeeker,
   },
   {
     method: "get",
     auth: false,
     path: "/meta/:property",
-    controller: meta_controller.getMeta
+    controller: meta_controller.getMeta,
   },
   {
     method: "post",
     auth: false,
     path: "/jobadds",
-    controller: job_add_controller.postJobs
+    controller: job_add_controller.postJobs,
   },
   {
     method: "get",
     auth: false,
     path: "/jobadds",
-    controller: job_add_search_controller.getJobsPaginated
+    controller: job_add_search_controller.getJobsPaginated,
   },
   {
     method: "get",
     auth: false,
     path: "/jobaddspaginated",
-    controller: job_add_controller.getJobsPaginatedOld
+    controller: job_add_controller.getJobsPaginatedOld,
   },
   {
     method: "get",
     auth: false,
     path: "/autocomplete",
-    controller: autocomplete_controller.autoComplete
+    controller: autocomplete_controller.autoComplete,
   },
   {
     method: "post",
     auth: false,
     path: "/employerprofile",
-    controller: employer_profile_controller.registerEmployer
+    controller: employer_profile_controller.registerEmployer,
   },
   {
     method: "get",
     auth: false,
     path: "/company",
-    controller: company_profile_controller.getCompanyList
-  }
+    controller: company_profile_controller.getCompanyList,
+  },
+  {
+    method: "post",
+    auth: false,
+    path: "/candidateprofile",
+    controller: candidate_profile_controller.registerCandidate,
+  },
 ];
 
 router.use("/", requestId());
@@ -95,7 +96,7 @@ router.use("/", logFilter);
 const authFilter = passport.authenticate("jwt", { session: false });
 
 /*** loading all routes */
-routes.forEach(route => {
+routes.forEach((route) => {
   console.log("adding a rout to ", route.method, route.path);
 
   if (route.auth) {

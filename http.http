@@ -50,20 +50,32 @@ GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
 GET {{proto}}://{{host}}:{{port}}/api/autocomplete
 
 ###
+POST {{proto}}://{{host}}:{{port}}/api/candidateprofile
+content-type: application/json
+
+{
+  "firstname": "Dimuthu",
+  "lastname": "Senanayaka",
+  "email": "dim912@gmail.com72",
+  "password": 23423423840
+}
+
+
+###
 POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1
 content-type: application/json
 
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "dim912@gmail.com70",
+  "email": "dim912@gmail.com101",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "company": {
-    "name" : "company 70",
+    "name" : "company 101",
     "logo": "logo",
-    "email" : "companyemail@company.com",
+    "email" : "companyemail@company.com101",
     "phonenumber" : "77 234 234 5",
     "description" : "Company Desctiption"
   } 
