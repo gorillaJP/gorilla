@@ -11,4 +11,9 @@ const mailerConf = {
   from: "gorillajobslk@gmail.com", // generated ethereal password
 };
 
-export { mongo, mailerConf };
+const app = {
+  rootUrl: "http://localhost:8080/",
+  verifyEmailRedirect: "http://localhost:3000/",
+};
+
+export { mongo, mailerConf, app };

@@ -11,11 +11,11 @@ const login =
       if (err || !user) {
         return res.status(204).json({
           message: info ? info.message : "Login failed",
-          user: user
+          user: user,
         });
       }
 
-      req.login(user, { session: false }, err => {
+      req.login(user, { session: false }, (err) => {
         if (err) {
           res.send(err);
         }

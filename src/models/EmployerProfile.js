@@ -10,7 +10,13 @@ var EmployerFields = {
     index: true,
     unique: true,
   },
+  emailverified: {
+    default: false,
+  },
   phonenumber: String,
+  phonenumberverified: {
+    default: false,
+  },
   password: String,
   companyname: String,
   company: {

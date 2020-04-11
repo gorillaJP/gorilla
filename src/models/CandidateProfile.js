@@ -15,7 +15,22 @@ var CandidateProfileFields = {
     unique: true,
     required: true,
   },
-  password: String,
+  emailverified: {
+    default: false,
+  },
+  emailverifysecret: {
+    type: String,
+    select: false,
+  },
+  phonenumber: String,
+  phonenumberverified: {
+    default: false,
+  },
+  phonenumberverifysecret: {
+    type: String,
+    select: false,
+  },
+  password: { type: String, select: false },
 };
 
 var CandidateSchema = new mongoose.Schema(CandidateProfileFields, {

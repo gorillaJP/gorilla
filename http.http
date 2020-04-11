@@ -1,16 +1,40 @@
 //backed by REST Client 
 // ----------------------------------- ATTENTION : KEEP THE FILE CLEAN ---------------
 
-###
+### Check if the app is up
 GET {{proto}}://{{host}}:{{port}}/health
+
+### Check non protected API
+GET {{proto}}://{{host}}:{{port}}/api/hello
+
+### Check protected API
+GET {{proto}}://{{host}}:{{port}}/api/hellosecure
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55Ijp7ImlkIjoiNWU5MGFhM2I1OGU3MjI3NmFiOTE1NGQ4In0sImZpcnN0bmFtZSI6IkRpbXV0aHUiLCJsYXN0bmFtZSI6IlNlbmFuYXlha2EiLCJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJwaG9uZW51bWJlciI6Ijg0OTQ0NDc0NCIsImRvbWFpbiI6ImVtcGxveWVyIiwiaWQiOiI1ZTkwYWEzYjU4ZTcyMjc2YWI5MTU0ZDciLCJpYXQiOjE1ODY2MTcxNDl9.5y5oX-9s-gLDHRUup3v3uguc2OvX6BtIkSzY5siuZGk 
+content-type: application/json
+
+{
+ "name" : "dimu1"
+}
+
+
+### Authntication
+POST {{proto}}://{{host}}:{{port}}/api/login
+content-type: application/json
+
+{
+"email" : "dim912@gmail.com",
+"password" : "23423423840",
+"domain" : "employer"
+}
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/login
 content-type: application/json
 
 {
-"username" : "dimu",
-"password" : "dimu"
+"email" : "dim912@gmail.com",
+"password" : "dim912@gmail.com",
+"domain" : "candidate"
 }
 
 ###
@@ -56,8 +80,8 @@ content-type: application/json
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "dim912@gmail.com72",
-  "password": 23423423840
+  "email": "dim912@gmail.com",
+  "password": "dim912@gmail.com"
 }
 
 

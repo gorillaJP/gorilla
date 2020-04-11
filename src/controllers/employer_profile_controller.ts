@@ -26,8 +26,6 @@ const registerEmployer = (req, res) => {
         })
         //Ex : duplicate company name
         .catch((err) => {
-          console.log(typeof err);
-          console.log(err.constructor.name);
           session.abortTransaction();
           res
             .status(HttpStatus.BAD_REQUEST)
