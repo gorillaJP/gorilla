@@ -17,7 +17,7 @@ const appDev = {
 };
 
 const appProd = {
-  rootUrl: "http://159.89.161.233:8080/",
+  rootUrl: "http://159.89.161.233:443/",
   verifyEmailRedirect: "http://159.89.161.233:3000/",
 };
 
