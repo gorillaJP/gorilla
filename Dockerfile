@@ -12,6 +12,8 @@ ADD .babelrc /app
 
 ADD src  /app/src
 
+ADD emails /app/emails
+
 ADD config/${env}.json  /app/config/${env}.json
 
 RUN npm install
