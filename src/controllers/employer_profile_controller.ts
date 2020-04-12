@@ -4,6 +4,7 @@ import { success, error } from "../util/constants";
 import * as HttpStatus from "http-status-codes";
 import mongoose from "mongoose";
 import { Email, emailSend, EmailTemeplate } from "../util/emailer";
+import { mongooseErrorToRes } from "../models/MongoUtil";
 
 /**
  * Save the Employee and company
@@ -29,29 +30,12 @@ const registerEmployer = (req, res) => {
           session.abortTransaction();
           res
             .status(HttpStatus.BAD_REQUEST)
-            .send(error(getErrorPayload("Company", err)));
-          throw err;
+            .send(error(mongooseErrorToRes("company", err)));
+          throw err; //this is because transaction should be rolled back (below)
         });
     } else {
       companyIdPromise = Promise.resolve(req.body.company);
     }
-
-    const getErrorPayload = (initLabel, err) => {
-      if (err && err.errors && err.name == "ValidationError") {
-        const errorInfo = err.errors[Object.keys(err.errors)[0]];
-        if (errorInfo.kind == "unique") {
-          return (
-            initLabel +
-            " " +
-            errorInfo.path +
-            " `" +
-            errorInfo.value +
-            "` is not available"
-          );
-        }
-      }
-      return initLabel;
-    };
 
     //now save the employer profile
     companyIdPromise
@@ -71,7 +55,7 @@ const registerEmployer = (req, res) => {
             session.abortTransaction();
             res
               .status(HttpStatus.BAD_REQUEST)
-              .send(error(getErrorPayload("", err)));
+              .send(error(mongooseErrorToRes("", err)));
           });
       })
       .catch((err) => {

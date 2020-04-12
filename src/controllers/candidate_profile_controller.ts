@@ -5,6 +5,7 @@ import { Email, emailSend, EmailTemeplate } from "../util/emailer";
 import logger from "../util/logger";
 import randomstring from "randomstring";
 import { app } from "../config";
+import { mongooseErrorToRes } from "../models/MongoUtil";
 
 const registerCandidate = (req, res) => {
   const candidateProfile = new CandidateProfile(req.body);
@@ -26,7 +27,9 @@ const registerCandidate = (req, res) => {
     })
     .catch((err) => {
       logger.error(err);
-      res.status(HttpStatus.BAD_REQUEST).send(error());
+      res
+        .status(HttpStatus.BAD_REQUEST)
+        .send(error(mongooseErrorToRes("", err)));
     });
 };
 

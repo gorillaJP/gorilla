@@ -80,7 +80,7 @@ content-type: application/json
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "dim912@gmail.com",
+  "email": "dim912@gmail.com01",
   "password": "dim912@gmail.com"
 }
 
@@ -92,18 +92,19 @@ content-type: application/json
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "gorillajobslk@gmail.com",
+  "email": "gorillajobslk111@gmail.com",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "company": {
-    "name" : "company 107",
+    "name" : "company 112",
     "logo": "logo",
-    "email" : "companyemail@company.com107",
+    "email" : "companyemail@company.com112",
     "phonenumber" : "77 234 234 5",
     "description" : "Company Desctiption"
   } 
 }
+
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/company?q= HTTP/1.1
