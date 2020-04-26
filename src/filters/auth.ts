@@ -8,6 +8,7 @@ const passportJWT = require("passport-jwt");
 import AuthUser from "../models/AuthUser";
 import Employer from "../models/EmployerProfile";
 import Candidate from "../models/CandidateProfile";
+var GoogleStrategy = require("passport-google-oauth2").Strategy;
 
 const ExtractJWT = passportJWT.ExtractJwt;
 
@@ -26,6 +27,21 @@ enum Domain {
 //COMPANY HR,
 //HR Head Etc
 enum Role {}
+
+//it comes to this method when done is called from the Google stratergy(above)
+passport.serializeUser(function (user, done) {
+  done(null, user.id); //first parameter is the error`. this id goes to the cookie
+});
+
+/*
+//get the user back from userid
+passport.deserializeUser(function (id, done) {
+  console.log("HERE 2");
+  console.log("fun fun funton 2");
+  //find user in mongodb
+  done(null, { name: "hahaa" });
+});
+*/
 
 passport.use(
   new LocalStrategy(
@@ -74,6 +90,24 @@ passport.use(
     },
     (jwtPayload, cb) => {
       return cb(null, jwtPayload); //here the decoded jwt token is appended to the request)(req.user). and subsequent filters can access it
+    }
+  )
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID:
+        "716051861983-r02npcv49qrt8salc57kbechej8tmoln.apps.googleusercontent.com",
+      clientSecret: "4aYCYyoxRxXv2jrdiGtySvpx",
+      callbackURL: "http://localhost:8080/api/auth/google/callback",
+      passReqToCallback: true,
+    },
+    function (request, accessToken, refreshToken, profile, done) {
+      //      User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      //return done(err, user);
+      return done(null, profile);
+      //      });
     }
   )
 );

@@ -1,6 +1,7 @@
 import mongoConnection from "./util/mongoClient";
 import "./util/emailer";
 import logger from "./util/logger";
+import "./filters/auth";
 
 //connecting to mongo db
 mongoConnection

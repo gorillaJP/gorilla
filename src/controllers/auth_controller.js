@@ -22,11 +22,41 @@ const login =
         delete user.password;
         delete user.username;
 
-        const token = jwt.sign(user, "your_jwt_secret");
+        const token = jwt.sign(user, "your_jwt_secret"); //this sign is just to ensure the content has not been chnage. but it dows not do any encription
 
         return res.json({ token, user });
       });
     })(req, res, next);
   });
 
-export default { login };
+//passport.authenticate("google",  { here in the first passport.authnticate => the request will  go to google to get the token
+/*
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/plus.login",
+      ,
+      "https://www.googleapis.com/auth/plus.profile.emails.read",
+    ],
+  })
+);
+*/
+const authGoogle = passport.authenticate("google", {
+  /*
+  scope: [
+    "https://www.googleapis.com/auth/plus.login",
+    ,
+    "https://www.googleapis.com/auth/plus.profile.emails.read",
+  ],
+  */
+  scope: ["profile", "email"],
+});
+
+//passport.authenticate("google",  here, the token is already in scope => so app will go to google to get the profile information
+const authGoogleCallBack = passport.authenticate("google", {
+  successRedirect: "/api/auth/google/success",
+  failureRedirect: "/api/auth/google/failure",
+});
+
+export default { login, authGoogle, authGoogleCallBack };

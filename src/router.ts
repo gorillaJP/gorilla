@@ -1,4 +1,5 @@
 import express from "express";
+const jwt = require("jsonwebtoken");
 import requestId from "express-request-id";
 import auth_controller from "./controllers/auth_controller";
 import company_profile_controller from "./controllers/company_profile_controller";
@@ -110,7 +111,44 @@ const routes = [
     path: "/verifycandidateemail",
     controller: candidate_profile_controller.verifyEmail,
   },
+  {
+    method: "get",
+    auth: false,
+    path: "/auth/google",
+    controller: auth_controller.authGoogle,
+  },
+  /*
+  {
+    method: "get",
+    auth: false,
+    path: "/auth/google/callback",
+    controller: auth_controller.authGoogleCallBack,
+  },
+  */
+  {
+    method: "get",
+    auth: false,
+    path: "/auth/google/success",
+    controller: (req, res) => {
+      res.send("SUCCESS LAA");
+    },
+  },
 ];
+
+//This is an special route
+router.get(
+  "/auth/google/callback",
+  //passport.authenticate("google", { failureRedirect: "/login" }),
+  passport.authenticate("google", undefined),
+  (req, res) => {
+    return res
+      .status(200)
+      .cookie("jwt", jwt.sign(req.user, "your_jwt_secret"), {
+        httpOnly: true,
+      })
+      .redirect("/redirectToPageWhichReadsFromCookieAndWriteToStore");
+  }
+);
 
 router.use("/", requestId());
 router.use("/", logFilter);

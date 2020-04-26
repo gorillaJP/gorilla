@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import "./filters/auth";
 import favicon from "serve-favicon";
 import compression from "compression";
+import passport from "passport";
 require("./initresources");
 
 const fs = require("fs");
@@ -26,6 +27,19 @@ const options = {
 const app = express();
 app.use(cors());
 app.use(compression());
+
+/*
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: ["asfwoeuroweurowrpweipuriquwqerqwereruwoeir"],
+    name: "session",
+  })
+);
+*/
+
+app.use(passport.initialize());
+//app.use(passport.session());
 
 //enable gzip for prod env
 
