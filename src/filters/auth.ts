@@ -101,7 +101,7 @@ passport.use(
       clientID:
         "716051861983-r02npcv49qrt8salc57kbechej8tmoln.apps.googleusercontent.com",
       clientSecret: "4aYCYyoxRxXv2jrdiGtySvpx",
-      callbackURL: app.rootUrl + "/api/auth/google/callback",
+      callbackURL: app.rootUrl + "api/auth/google/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
