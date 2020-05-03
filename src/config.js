@@ -1,3 +1,5 @@
+//https://www.dynu.com/  . DNSs are configured here
+
 const mongo = {
   url: "mongodb://appadmin:appadmingorilla@206.189.133.87:27017/gorilla",
 };
@@ -22,7 +24,8 @@ const appDev = {
 const appProd = {
   rootUrl: "http://159.89.161.233:443/",
   uiAppURL: "http://159.89.161.233:3000/",
-  verifyEmailRedirect: "http://159.89.161.233:3000?login=initial",
+  //verifyEmailRedirect: "http://159.89.161.233:3000?login=initial",
+  verifyEmailRedirect: "http://gorillalk.giize.com:3000?login=initial",
 };
 
 let app;
