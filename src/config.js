@@ -27,11 +27,10 @@ const appProd = {
 
 let app;
 
-if (
-  process.env.NODE_ENV === "development" ||
-  process.env.NODE_ENV === "localhost"
-) {
+if (process.env.NODE_ENV === "localhost") {
   app = appDev;
+} else if (process.env.NODE_ENV === "production") {
+  app = appProd;
 } else if (process.env.NODE_ENV === "production") {
   app = appProd;
 }
