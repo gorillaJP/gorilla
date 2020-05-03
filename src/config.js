@@ -29,7 +29,7 @@ let app;
 
 if (process.env.NODE_ENV === "localhost") {
   app = appDev;
-} else if (process.env.NODE_ENV === "production") {
+} else if (process.env.NODE_ENV === "development") {
   app = appProd;
 } else if (process.env.NODE_ENV === "production") {
   app = appProd;
