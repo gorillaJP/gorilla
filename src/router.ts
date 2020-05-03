@@ -15,6 +15,7 @@ import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
 import job_add_search_controller from "./controllers/job_add_search_controller";
 import { Domain, Role } from "./filters/auth";
+import { app, uiLoginRedirect } from "./config";
 
 const router = express.Router();
 
@@ -135,7 +136,7 @@ const routes = [
   },
 ];
 
-//This is an special route
+//This is an special route. with the redirect from google, route to front end URL with jwt as a qury param
 router.get(
   "/auth/google/callback",
   //passport.authenticate("google", { failureRedirect: "/login" }),
@@ -143,10 +144,12 @@ router.get(
   (req, res) => {
     return res
       .status(200)
-      .cookie("jwt", jwt.sign(req.user, "your_jwt_secret"), {
-        httpOnly: true,
-      })
-      .redirect("/redirectToPageWhichReadsFromCookieAndWriteToStore");
+      .redirect(
+        app.uiAppURL +
+          uiLoginRedirect +
+          "?jwt=" +
+          jwt.sign(req.user, "your_jwt_secret")
+      );
   }
 );
 
