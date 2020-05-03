@@ -22,8 +22,8 @@ const appDev = {
 };
 
 const appProd = {
-  rootUrl: "http://gorillalk.giize.com:443/",
-  uiAppURL: "http://159.89.161.233:3000",
+  rootUrl: "http://gorillalk.giize.com:443/", //this is beause IPs are not accepted by google redirect URL
+  uiAppURL: "http://159.89.161.233:3000/",
   verifyEmailRedirect: "http://159.89.161.233:3000?login=initial",
 };
 
