@@ -92,14 +92,14 @@ content-type: application/json
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "gorillajobslk111@gmail.com",
+  "email": "gorillajobslk113@gmail.com",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "company": {
-    "name" : "company 112",
+    "name" : "company 113",
     "logo": "logo",
-    "email" : "companyemail@company.com112",
+    "email" : "companyemail@company.com113",
     "phonenumber" : "77 234 234 5",
     "description" : "Company Desctiption"
   } 
@@ -449,6 +449,3 @@ PUT /my-index/_mapping
     }
   }
 }
-
-##view  the mappings of a field
-GET /my-index/_mapping/field/employee-id
