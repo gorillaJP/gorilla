@@ -142,14 +142,12 @@ router.get(
   //passport.authenticate("google", { failureRedirect: "/login" }),
   passport.authenticate("google", undefined),
   (req, res) => {
-    return res
-      .status(200)
-      .redirect(
-        app.uiAppURL +
-          uiLoginRedirect +
-          "?jwt=" +
-          jwt.sign(req.user, "your_jwt_secret")
-      );
+    return res.redirect(
+      app.uiAppURL +
+        uiLoginRedirect +
+        "?jwt=" +
+        jwt.sign(req.user, "your_jwt_secret")
+    );
   }
 );
 
