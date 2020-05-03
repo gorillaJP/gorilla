@@ -14,6 +14,7 @@ const ExtractJWT = passportJWT.ExtractJwt;
 
 const LocalStrategy = require("passport-local").Strategy;
 const JWTStrategy = passportJWT.Strategy;
+import { app } from "../config";
 
 // authentication configuration file
 // this is used at the time of sign in
@@ -100,7 +101,7 @@ passport.use(
       clientID:
         "716051861983-r02npcv49qrt8salc57kbechej8tmoln.apps.googleusercontent.com",
       clientSecret: "4aYCYyoxRxXv2jrdiGtySvpx",
-      callbackURL: "http://localhost:8080/api/auth/google/callback",
+      callbackURL: app.rootUrl + "/api/auth/google/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
