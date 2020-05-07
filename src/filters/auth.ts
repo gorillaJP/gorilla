@@ -15,6 +15,8 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
 const JWTStrategy = passportJWT.Strategy;
 import { app } from "../config";
+import { create } from "domain";
+import logger from "../util/logger";
 
 // authentication configuration file
 // this is used at the time of sign in
@@ -104,11 +106,24 @@ passport.use(
       callbackURL: app.rootUrl + "api/auth/google/callback",
       passReqToCallback: true,
     },
-    function (request, accessToken, refreshToken, profile, done) {
-      //      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //return done(err, user);
-      return done(null, profile);
-      //      });
+    (request, accessToken, refreshToken, profile, done) => {
+      const candidate = {
+        firstname: profile.given_name,
+        lastname: profile.family_name,
+        email: profile.email,
+        createdthrough: "google",
+      };
+      Candidate.findOrCreate(
+        //Create the object in mongo if it is not already available
+        { email: profile.email },
+        candidate,
+        (err, user, created) => {
+          if (err) {
+            logger.err(err);
+          }
+          return done(null, user.toJSON());
+        }
+      );
     }
   )
 );

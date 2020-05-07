@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import normalize from "normalize-mongoose";
 var uniqueValidator = require("mongoose-unique-validator");
+var findOrCreate = require("mongoose-findorcreate");
 
 /**
  * identifier is email address
@@ -31,6 +32,10 @@ var CandidateProfileFields = {
     select: false,
   },
   password: { type: String, select: false },
+  createdthrough: {
+    type: String,
+    select: false,
+  },
 };
 
 var CandidateSchema = new mongoose.Schema(CandidateProfileFields, {
@@ -40,6 +45,8 @@ var CandidateSchema = new mongoose.Schema(CandidateProfileFields, {
 CandidateSchema.plugin(uniqueValidator, {
   message: "Error, expected {PATH} to be unique.",
 });
+
+CandidateSchema.plugin(findOrCreate);
 
 CandidateSchema.plugin(normalize); //replace _id with id and remove v
 
