@@ -10,6 +10,7 @@ import seeker_controller from "./controllers/seeker_controller";
 import register_controller from "./controllers/register_controller";
 import meta_controller from "./controllers/meta_controller";
 import autocomplete_controller from "./controllers/autocomplete_controller";
+import fileupload_controller from "./controllers/filupload_controller";
 import passport from "passport";
 import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
@@ -118,14 +119,12 @@ const routes = [
     path: "/auth/google",
     controller: auth_controller.authGoogle,
   },
-  /*
   {
-    method: "get",
+    method: "post",
     auth: false,
-    path: "/auth/google/callback",
-    controller: auth_controller.authGoogleCallBack,
+    path: "/file",
+    controller: fileupload_controller.fileUpload,
   },
-  */
   {
     method: "get",
     auth: false,

@@ -33,7 +33,7 @@ content-type: application/json
 
 {
 "email" : "dim912@gmail.com",
-"password" : "dim912@gmail.com",
+"password" : "12345d",
 "domain" : "candidate"
 }
 
@@ -110,6 +110,7 @@ content-type: application/json
 GET {{proto}}://{{host}}:{{port}}/api/company?q= HTTP/1.1
 content-type: application/json
 
+POST http://example.com/api/upload
 ###
 
 POST {{proto}}://{{host}}:{{port}}/api/HTTP/1.1
@@ -135,6 +136,19 @@ content-type: application/json
  "redirectURL" : "carrers@gorilla.lk",
  "skills" : [ "account handling" , "front desk", "banking", "account"] 
 }
+
+### 
+
+POST {{proto}}://{{host}}:{{port}}/api/file
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.png"
+Content-Type: image/png
+
+< ./download.jpeg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
 
 ############### DIRECT ElasticSearch ########################
 

@@ -114,7 +114,7 @@ passport.use(
         createdthrough: "google",
       };
       Candidate.findOrCreate(
-        //Create the object in mongo if it is not already available
+        // seach the db by email address. Create the object in mongo if it is not already available
         { email: profile.email },
         candidate,
         (err, user, created) => {
