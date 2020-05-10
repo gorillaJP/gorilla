@@ -79,26 +79,3 @@ if (process.env.NODE_ENV === "production") {
   http.globalAgent.keepAlive = true;
   console.log("HTTPS Server listening on %s:%s", "HOST", 8080);
 }
-
-http
-  .createServer(function (req, res) {
-    if (req.url == "/fileupload") {
-      var form = new formidable.IncomingForm({
-        uploadDir: "/users/dimuthusenanayaka/workspace/gorilla/public/files",
-      });
-      form.parse(req, function (err, fields, files) {
-        res.write("File uploaded");
-        res.end();
-      });
-    } else {
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.write(
-        '<form action="fileupload" method="post" enctype="multipart/form-data">'
-      );
-      res.write('<input type="file" name="filetoupload"><br>');
-      res.write('<input type="submit">');
-      res.write("</form>");
-      return res.end();
-    }
-  })
-  .listen(8081);
