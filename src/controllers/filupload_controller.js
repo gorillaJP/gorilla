@@ -29,7 +29,6 @@ const fileUpload = (req, res) => {
       res.send(new Error("file upload failed"));
     } else if (files && files.file) {
       files.file.path = files.file.path.split("/").pop(); //get only the file name
-      console.log(files.file);
       res.send(
         success({
           file: files.file.path,

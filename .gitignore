@@ -2,6 +2,7 @@ node_modules/*
 build/*
 tsbuild/*
 public/files/**
+!public/files/readme.txt
 Db.db
 src/server/public/*
 src/server/backend.js 
@@ -11,3 +12,5 @@ npm-debug*
 package-lock.json
 .idea/*
 *.log
+
+
