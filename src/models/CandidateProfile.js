@@ -36,6 +36,9 @@ var CandidateProfileFields = {
     type: String,
     select: false,
   },
+  homephonenumber: String,
+  birthdate: Date,
+  address: String,
 };
 
 var CandidateSchema = new mongoose.Schema(CandidateProfileFields, {

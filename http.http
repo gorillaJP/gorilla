@@ -32,9 +32,9 @@ POST {{proto}}://{{host}}:{{port}}/api/login
 content-type: application/json
 
 {
-"email" : "dim912@gmail.com",
-"password" : "12345d",
-"domain" : "candidate"
+  "email": "dim912@gmail.com",
+  "password": "dim912@gmail.com",
+  "domain" : "candidate"
 }
 
 ###
@@ -73,17 +73,68 @@ GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
 ###
 GET {{proto}}://{{host}}:{{port}}/api/autocomplete
 
-###
-POST {{proto}}://{{host}}:{{port}}/api/candidateprofile
+### candidate profile
+POST {{proto}}://{{host}}:{{port}}/api/candidate/profile
 content-type: application/json
 
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "dim912@gmail.com06",
+  "email": "dim912@gmail.com",
   "password": "dim912@gmail.com"
 }
+###  start education
+GET {{proto}}://{{host}}:{{port}}/api/candidate/education/dim912@gmail.com
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
+
+###  candidate educaton (Support Upsert)
+### if the key is not presnet in body =>  take it as a post , othewise take it as a put
+POST {{proto}}://{{host}}:{{port}}/api/candidate/education
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
+
+{
+  "order": 2, 
+  "qualification": "Advanced Level laXYMK",
+  "institite": "Kaluthara Maha vidyalayaYaTU",
+  "marks": "2A 5C 1B R",
+  "details": "Was a prefect in the scoollX",
+  "deleted": false
+}
+
+###
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5ebf5cdee53b83190389dae2
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
+
+###  end education
+
+### candidate experience
+
+GET {{proto}}://{{host}}:{{port}}/api/candidate/experience/dim912@gmail.com
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
+
+###
+POST {{proto}}://{{host}}:{{port}}/api/candidate/experience
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
+
+{
+  "order": 3, 
+  "jobtitle": "Senior Software Engineer",
+  "organization": "Virtusa Sri Lanka",
+  "location":  "Colombo",
+  "details": "worked as a software professional. for a product for a europian client",
+  "deleted" : false
+}
+###
+
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5ebf5cf3e53b83190389dae3
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1
@@ -92,14 +143,14 @@ content-type: application/json
 {
   "firstname": "Dimuthu",
   "lastname": "Senanayaka",
-  "email": "gorillajobslk113@gmail.com",
+  "email": "gorillajobslk114@gmail.com",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "company": {
-    "name" : "company 113",
+    "name" : "company 114",
     "logo": "logo",
-    "email" : "companyemail@company.com113",
+    "email" : "companyemail@company.com114",
     "phonenumber" : "77 234 234 5",
     "description" : "Company Desctiption"
   } 
@@ -148,6 +199,10 @@ Content-Type: image/png
 
 < ./download.jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### read file
+
+GET {{proto}}://{{host}}:{{port}}/upload_dcb77c30a0d0775e083dc708748cd43d1.png
 
 
 ############### DIRECT ElasticSearch ########################

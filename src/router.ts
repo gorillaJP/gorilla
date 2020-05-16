@@ -104,8 +104,51 @@ const routes = [
   {
     method: "post",
     auth: false,
-    path: "/candidateprofile",
-    controller: candidate_profile_controller.registerCandidate,
+    path: "/candidate/profile",
+    domain: Domain.CANDIDATE,
+    controller: candidate_profile_controller.createCandidate,
+  },
+  {
+    method: "get",
+    auth: true,
+    path: "/candidate/education/:email",
+    domain: Domain.CANDIDATE,
+    controller: candidate_profile_controller.getCandidateEducation,
+  },
+  {
+    method: "post",
+    auth: true,
+    path: "/candidate/education",
+    domain: Domain.CANDIDATE,
+    controller: candidate_profile_controller.createCandidateEducation,
+  },
+  {
+    method: "delete",
+    auth: true,
+    path: "/candidate/education/:id",
+    domain: Domain.CANDIDATE,
+    controller: candidate_profile_controller.deleteCandidateEducation,
+  },
+  {
+    method: "get",
+    auth: true,
+    path: "/candidate/experience/:email",
+    domain: Domain.CANDIDATE,
+    controller: candidate_profile_controller.getCandidateExperience,
+  },
+  {
+    method: "post",
+    auth: true,
+    path: "/candidate/experience",
+    domain: Domain.CANDIDATE,
+    controller: candidate_profile_controller.createCandidateExperience,
+  },
+  {
+    method: "delete",
+    auth: true,
+    path: "/candidate/experience/:id",
+    domain: Domain.CANDIDATE,
+    controller: candidate_profile_controller.deleteCandidateExperience,
   },
   {
     method: "get",
@@ -212,7 +255,16 @@ routes.forEach((route) => {
 
   if (route.auth) {
     //JWT extraction
-    router[route.method](route.path, authFilter); //middleware to check the JWT token and, decode JWT stratergy
+    router[route.method](route.path, authFilter); //middleware to check the JWT token and, decode JWT stratergy. this filter append req.user from decoded jwt
+
+    //the email in the request body is not trusted => becaue of that => replace it with what is found from JWT token
+    router[route.method](route.path, (req, res, next) => {
+      req.body.email = req.user.email; //
+      console.log("^^^");
+      console.log(req.body);
+      console.log("^^^");
+      next();
+    }); //middleware to check the JWT token and, decode JWT stratergy
 
     //verify the domain
     router[route.method](
@@ -223,7 +275,7 @@ routes.forEach((route) => {
     //verify method
     router[route.method](
       route.path,
-      getRoleVerificationFilter(route.roles), //check if the the token is issued for a use in corrrect domain (employer or candidate)
+      getRoleVerificationFilter(route.roles), //check if the the loggin user has the reqired dole ( authorizention)
       route.controller
     );
   }
