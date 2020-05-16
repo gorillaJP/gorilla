@@ -1,0 +1,163 @@
+###
+DELETE http://206.189.133.87:9200/gorilla.jobadds
+content-type: application/json
+
+###
+PUT http://206.189.133.87:9200/gorilla.jobadds
+content-type: application/json
+
+{
+    "settings": {
+      "index": {
+        "number_of_shards": "1",
+        "analysis": {
+          "analyzer": {
+            "edge_ngram_analyzer": {
+              "filter": [
+                "lowercase"
+              ],
+              "tokenizer": "edge_ngram_tokenizer"
+            }
+          },
+          "tokenizer": {
+            "edge_ngram_tokenizer": {
+              "token_chars": [
+                "letter"
+              ],
+              "min_gram": "2",
+              "type": "edge_ngram",
+              "max_gram": "20"
+            }
+          }
+        },
+        "number_of_replicas": "1"
+      }
+    },
+    "mappings": {
+      "properties": {
+        "__v": {
+          "type": "long"
+        },
+        "bonus": {
+          "type": "long"
+        },
+        "bonusType": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "company": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          },
+          "fielddata": true
+        },
+        "createdat": {
+          "type": "date"
+        },
+        "description": {
+          "type": "object",
+          "enabled": false
+        },
+        "experiencemax": {
+          "type": "float"
+        },
+        "experiencemin": {
+          "type": "float"
+        },
+        "expireDate": {
+          "type": "date"
+        },
+        "industry": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "level": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "location": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "notifyEmail": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "overview": {
+          "type": "text",
+          "analyzer": "edge_ngram_analyzer"
+        },
+        "redirectURL": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "salaryMin": {
+          "type": "long"
+        },
+        "salarymax": {
+          "type": "long"
+        },
+        "skills": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "title": {
+          "type": "text",
+          "analyzer": "edge_ngram_analyzer"
+        },
+        "type": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "updatedat": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}
+
