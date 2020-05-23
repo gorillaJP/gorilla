@@ -11,6 +11,7 @@ import register_controller from "./controllers/register_controller";
 import meta_controller from "./controllers/meta_controller";
 import autocomplete_controller from "./controllers/autocomplete_controller";
 import fileupload_controller from "./controllers/filupload_controller";
+import matrix_controller from "./controllers/matrixe_controller";
 import passport from "passport";
 import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
@@ -100,6 +101,12 @@ const routes = [
     auth: false,
     path: "/company",
     controller: company_profile_controller.getCompanyList,
+  },
+  {
+    method: "get",
+    auth: false,
+    path: "/matrix/tophiringcompanies",
+    controller: matrix_controller.topHieringCompanies,
   },
   {
     method: "post",

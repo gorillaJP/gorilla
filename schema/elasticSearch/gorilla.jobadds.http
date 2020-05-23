@@ -2,6 +2,7 @@
 DELETE http://206.189.133.87:9200/gorilla.jobadds
 content-type: application/json
 
+
 ###
 PUT http://206.189.133.87:9200/gorilla.jobadds
 content-type: application/json
@@ -11,13 +12,29 @@ content-type: application/json
       "index": {
         "number_of_shards": "1",
         "analysis": {
+          "filter": {
+					  "full_string_filter": {
+						  "type": "pattern_capture",
+					  	"preserve_original": false,
+						  "patterns": [
+							  "(^\\w+\/\\w+)"
+					  	]
+					}
+				 },
           "analyzer": {
             "edge_ngram_analyzer": {
               "filter": [
                 "lowercase"
               ],
               "tokenizer": "edge_ngram_tokenizer"
-            }
+            },
+            "full_string_analyzer": {
+					   	"tokenizer": "keyword",
+						  "filter": [
+						  	"full_string_filter",
+							  "lowercase"
+						  ]
+				  	}
           },
           "tokenizer": {
             "edge_ngram_tokenizer": {
@@ -56,9 +73,13 @@ content-type: application/json
             "keyword": {
               "type": "keyword",
               "ignore_above": 256
-            }
-          },
-          "fielddata": true
+            },
+           "full_string": {
+					   	"type": "text",
+						   "analyzer": "full_string_analyzer",
+               "fielddata": true
+					 }
+          }
         },
         "createdat": {
           "type": "date"

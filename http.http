@@ -205,6 +205,10 @@ Content-Type: image/png
 GET {{proto}}://{{host}}:{{port}}/upload_dcb77c30a0d0775e083dc708748cd43d1.png
 
 
+### Matrix
+
+GET {{proto}}://{{host}}:{{port}}/api/matrix/tophiringcompanies
+
 ############### DIRECT ElasticSearch ########################
 
 ###
@@ -219,7 +223,77 @@ DELETE http://206.189.133.87:9200/gorilla.jobadds
 
 
 ###
-GET http://206.189.133.87:9200/gorilla.jobadds/_search
+GET http://206.189.133.87:9200/gorilla.jobadds/_settings
+content-type: application/json
+
+
+###
+POST http://206.189.133.87:9200/gorilla.jobadds/_search/search_type=count
+content-type: application/json
+
+{
+   "aggs": {
+             "TestAgrigation": {
+                  "terms": {
+                          "field": "company",
+                          "size": 10
+                     }
+             }
+     }
+}
+
+###
+POST http://206.189.133.87:9200/gorilla.jobadds/_search/search_type=count
+content-type: application/json
+
+{
+    "aggs" : {
+        "avg_grade" : { "avg" : { "field" : "company" } }
+    }
+}
+
+
+
+
+
+### modify schema to enalbe fielddata for an field
+POST http://206.189.133.87:9200/gorilla.jobadds/_mapping
+content-type: application/json
+
+{
+  "properties": {
+    "company": { 
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+
+
+
+
+###
+PUT http://206.189.133.87:9200/gorilla.jobadds
+content-type: application/json
+
+{
+  "mappings": {
+    "properties": {
+      "company": { 
+        "type": "text",
+        "fields": {
+          "keyword": { 
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
 
 ###
 GET http://206.189.133.87:9200/gorilla.jobadds/_search
