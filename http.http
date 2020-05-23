@@ -232,19 +232,37 @@ content-type: application/json
 
 
 ###
-POST http://206.189.133.87:9200/gorilla.jobadds/_search/search_type=count
+POST http://206.189.133.87:9200/gorilla.jobadds/_search?size=0
 content-type: application/json
-
+  
 {
-   "aggs": {
-             "TestAgrigation": {
-                  "terms": {
-                          "field": "company",
-                          "size": 10
-                     }
-             }
-     }
+      "aggs": {
+        "company": {
+          "terms": {
+            "field": "company.full_string",
+            "size": 1000
+        },
+        "aggs": {
+                "companyId": {
+                    "top_hits": {
+                      "sort": [
+                            {
+                                "createdat": {
+                                    "order": "desc"
+                                }
+                            }
+                        ],
+                        "_source": {
+                            "includes": [  "companyid" ]
+                        },
+                       "size" : 1
+                    }
+                }
+            }
+      }
+  }
 }
+
 
 ###
 POST http://206.189.133.87:9200/gorilla.jobadds/_search/search_type=count

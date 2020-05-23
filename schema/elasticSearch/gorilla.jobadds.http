@@ -1,4 +1,4 @@
-###
+##
 DELETE http://206.189.133.87:9200/gorilla.jobadds
 content-type: application/json
 
@@ -80,6 +80,9 @@ content-type: application/json
                "fielddata": true
 					 }
           }
+        },
+        "companyid": {
+          "type": "text"
         },
         "createdat": {
           "type": "date"
