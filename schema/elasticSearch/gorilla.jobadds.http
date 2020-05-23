@@ -103,7 +103,12 @@ content-type: application/json
             "keyword": {
               "type": "keyword",
               "ignore_above": 256
-            }
+            },
+            "full_string": {
+					   	"type": "text",
+						   "analyzer": "full_string_analyzer",
+               "fielddata": true
+					  }
           }
         },
         "level": {

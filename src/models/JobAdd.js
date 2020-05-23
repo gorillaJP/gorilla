@@ -3,74 +3,78 @@ import esClient from "../util/esClient";
 
 var jobAdd = {
   company: {
-    type: String
+    type: String,
   },
   title: {
-    type: String
+    type: String,
   },
   overview: {
-    type: String
+    type: String,
   },
   description: {
-    type: String
+    type: String,
   },
   location: {
-    type: String
+    type: String,
   },
   experiencemin: {
-    type: Number
+    type: Number,
   },
   experiencemax: {
-    type: Number
+    type: Number,
   },
   type: {
     //Perm / Contract / Parttimee
-    type: String
+    type: String,
   },
   level: {
     //Fresher, experiance mid level, Senior level
-    type: String
+    type: String,
   },
   industry: {
-    type: String
+    type: String,
   },
   salaryMin: {
-    type: Number
+    type: Number,
   },
   salarymax: {
-    type: Number
+    type: Number,
   },
   bonus: {
-    type: Number
+    type: Number,
   },
   bonusType: {
     //per year, per quater, per month
-    type: String
+    type: String,
   },
   expireDate: {
-    type: Date
+    type: Date,
   },
   notifyEmail: {
-    type: String
+    type: String,
   },
   redirectURL: {
-    type: String
+    type: String,
   },
   skills: {
-    type: Array
-  }
+    type: Array,
+  },
+  isfeatured: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 var jobAddSchema = new mongoose.Schema(jobAdd, {
-  timestamps: { createdAt: "createdat", updatedAt: "updatedat" }
+  timestamps: { createdAt: "createdat", updatedAt: "updatedat" },
 });
 
-jobAddSchema.static("esSearch", function(query, cb) {
+jobAddSchema.static("esSearch", function (query, cb) {
   esClient.search(
     {
       index: "gorilla.jobadds",
       type: "_doc",
-      body: query
+      body: query,
     },
     cb
   );

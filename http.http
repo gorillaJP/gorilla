@@ -71,6 +71,9 @@ GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=bank
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
 
 ###
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?isfeatured=true
+
+###
 GET {{proto}}://{{host}}:{{port}}/api/autocomplete
 
 ### candidate profile
@@ -201,13 +204,14 @@ Content-Type: image/png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ### read file
-
-GET {{proto}}://{{host}}:{{port}}/upload_dcb77c30a0d0775e083dc708748cd43d1.png
-
+GET {{proto}}://{{host}}:{{port}}/upload_b0f787bad5741def29dab10868f514111.png
 
 ### Matrix
 
 GET {{proto}}://{{host}}:{{port}}/api/matrix/tophiringcompanies
+### Matrix
+
+GET {{proto}}://{{host}}:{{port}}/api/matrix/industry
 
 ############### DIRECT ElasticSearch ########################
 

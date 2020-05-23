@@ -41,7 +41,6 @@ const getJobsPaginated = (req, res) => {
         elapsedTimeInMs
     );
     if (results) {
-      logger.info("aasfa", JSON.stringify(results));
       res.status(200).send(success(formatResposne(results, limit, offset)));
       return;
     }
@@ -52,13 +51,18 @@ const getJobsPaginated = (req, res) => {
 const buildQuery = (qObj, limit, offset) => {
   const fuzzySearchFields: string[] = ["company", "title", "overview"]; // taken to multimatch field
 
-  const exactMatchFilters: string[] = ["location", "type", "jobtype"]; // taken to multimatch field
+  const exactMatchFilters: string[] = [
+    "location",
+    "type",
+    "jobtype",
+    "isfeatured",
+  ]; // taken to multimatch field
 
   // taken to multimatch field
   const rangeFilters = {
     salarymax: "gte",
     experiencemin: "lte",
-    createdat: "gte"
+    createdat: "gte",
   };
 
   // multi match, for fuzy search
@@ -76,7 +80,7 @@ const buildQuery = (qObj, limit, offset) => {
 
         // should match at least one of values from list
         const boolQ = esb.boolQuery();
-        qObj[key].forEach(val => {
+        qObj[key].forEach((val) => {
           if (val && val != "" && val != "any") {
             boolQ.should(esb.termQuery(key, val));
             boolQuery.filter(boolQ);
@@ -117,8 +121,10 @@ const buildQuery = (qObj, limit, offset) => {
   return esbq;
 };
 
+//featured jobs
+
 const formatResposne = (data, limit, offset) => {
-  const res = data.body.hits.hits.map(u => {
+  const res = data.body.hits.hits.map((u) => {
     u._source._id = u._id;
     return u._source;
   });
@@ -127,9 +133,9 @@ const formatResposne = (data, limit, offset) => {
     meta: {
       total: data.body.hits.total.value,
       limit,
-      offset
+      offset,
     },
-    data: res
+    data: res,
   };
 };
 

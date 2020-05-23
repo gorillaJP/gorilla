@@ -109,6 +109,12 @@ const routes = [
     controller: matrix_controller.topHieringCompanies,
   },
   {
+    method: "get",
+    auth: false,
+    path: "/matrix/industry",
+    controller: matrix_controller.industry,
+  },
+  {
     method: "post",
     auth: false,
     path: "/candidate/profile",

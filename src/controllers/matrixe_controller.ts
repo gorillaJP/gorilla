@@ -39,4 +39,35 @@ const topHieringCompanies = (req, res) => {
   );
 };
 
-export default { topHieringCompanies };
+//jobs by industry
+const industry = (req, res) => {
+  JobAdd.esSearch(
+    {
+      aggs: {
+        company: {
+          terms: {
+            field: "industry.full_string",
+            size: 10,
+          },
+        },
+      },
+    },
+    (err, data) => {
+      if (
+        !err &&
+        data &&
+        data.body &&
+        data.body.aggregations &&
+        data.body.aggregations.company
+      ) {
+        res
+          .status(HttpStatus.OK)
+          .send(success(data.body.aggregations.company.buckets));
+      } else {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
+      }
+    }
+  );
+};
+
+export default { topHieringCompanies, industry };
