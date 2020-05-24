@@ -5,6 +5,9 @@ var jobAdd = {
   company: {
     type: String,
   },
+  companyid: {
+    type: String,
+  },
   title: {
     type: String,
   },

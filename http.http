@@ -42,18 +42,6 @@ GET {{proto}}://{{host}}:8080/api/jobadds?q=java&location=kandy&location=colombo
 content-type: application/json
 
 
-###
-POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
-content-type: application/json
-
-{
- "company" : "MIT Sri Lanka",
- "description" : "Job Description\nTo do Application Development\nExperience in Java programming language . Will use SQL (mysql, oracle, etc. ) , Angular js, spring, Hibernate, etc.\nWill handle technical development concepts, latest software tools and technologies, strong database concepts and designing techniques\n\nJob Requirement:\nAble to do development, modification, enhancement and support\nAt least 2 year experience working on Java\/J2EE environments and related technologies.\nInterested applicants may send in their detailed resumes, with subject title: 105 \u2013 Java, CV written in MS Word for immediate processing:\nWe regret that only shortlisted candidates will be notified.\nIT Consultancy & Services Pte Ltd\nVisit our website: www.itcspl.com\nEA License No.: 92C5311",
- "title" : "Senior Java Developr",
- "location" : "Colombo",
- "experiance" : "3 years ",
- "skills" : [ "Angular" , ".Net"] 
-}
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/metaposteddates?q=
@@ -139,25 +127,60 @@ DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5ebf5cf3e53b831903
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
-###
+
+
+### Upload company photo
+
+POST {{proto}}://{{host}}:{{port}}/api/file
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.png"
+Content-Type: image/png
+
+< test_photo_store/wso2.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### read file
+GET {{proto}}://{{host}}:{{port}}/upload_ef070c2602dae1adfe247c5568ac418d1.png
+
+### Create Company 
 POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1
 content-type: application/json
 
 {
-  "firstname": "Dimuthu",
-  "lastname": "Senanayaka",
-  "email": "gorillajobslk114@gmail.com",
+  "firstname": "wso1",
+  "lastname": "wson2",
+  "email": "wso2@gmail.com",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "company": {
-    "name" : "company 114",
-    "logo": "logo",
-    "email" : "companyemail@company.com114",
+    "name" : "wso2",
+    "logo": "upload_ef070c2602dae1adfe247c5568ac418d1.png",
+    "email" : "unilever@company.com",
     "phonenumber" : "77 234 234 5",
     "description" : "Company Desctiption"
   } 
 }
+
+###
+POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
+content-type: application/json
+
+{
+ "company" : "wso2",
+ "companyid" : "5eca6e91b7845a0f0a154bc8",
+ "description" : "Job Description\nTo do Application Development\nExperience in Java programming language . Will use SQL (mysql, oracle, etc. ) , Angular js, spring, Hibernate, etc.\nWill handle technical development concepts, latest software tools and technologies, strong database concepts and designing techniques\n\nJob Requirement:\nAble to do development, modification, enhancement and support\nAt least 2 year experience working on Java\/J2EE environments and related technologies.\nInterested applicants may send in their detailed resumes, with subject title: 105 \u2013 Java, CV written in MS Word for immediate processing:\nWe regret that only shortlisted candidates will be notified.\nIT Consultancy & Services Pte Ltd\nVisit our website: www.itcspl.com\nEA License No.: 92C5311",
+ "title" : "Senior Java Developr",
+ "location" : "Colombo",
+ "experiance" : "3 years ",
+ "skills" : [ "Angular" , ".Net"] 
+}
+
+### Matrix
+GET {{proto}}://{{host}}:{{port}}/api/matrix/tophiringcompanies
+
 
 
 ###
@@ -203,12 +226,6 @@ Content-Type: image/png
 < ./download.jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
-### read file
-GET {{proto}}://{{host}}:{{port}}/upload_b0f787bad5741def29dab10868f514111.png
-
-### Matrix
-
-GET {{proto}}://{{host}}:{{port}}/api/matrix/tophiringcompanies
 ### Matrix
 
 GET {{proto}}://{{host}}:{{port}}/api/matrix/industry
