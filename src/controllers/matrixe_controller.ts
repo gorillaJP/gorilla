@@ -2,7 +2,6 @@ import logger from "../util/logger";
 import JobAdd from "../models/JobAdd";
 import { success, error } from "../util/constants";
 import * as HttpStatus from "http-status-codes";
-import * as esb from "elastic-builder";
 import memcache from "../util/memCache";
 
 const topHieringCompanies = (req, res) => {
@@ -50,7 +49,6 @@ const topHieringCompanies = (req, res) => {
       ) {
         //format response
         data.body.aggregations.company.buckets.forEach((jobAdd) => {
-          console.log(jobAdd.companyid);
           jobAdd.companyid = jobAdd.companyid.hits.hits[0]._source.companyid; //get companyId from bucket level aggregation
           jobAdd.count = jobAdd.doc_count;
           delete jobAdd.doc_count;

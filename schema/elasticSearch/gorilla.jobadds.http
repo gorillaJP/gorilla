@@ -100,6 +100,20 @@ content-type: application/json
         "expireDate": {
           "type": "date"
         },
+        "category": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "full_string": {
+					   	"type": "text",
+						   "analyzer": "full_string_analyzer",
+               "fielddata": true
+					  }
+          }
+        },
         "industry": {
           "type": "text",
           "fields": {
