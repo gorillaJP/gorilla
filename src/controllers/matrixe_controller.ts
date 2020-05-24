@@ -106,5 +106,35 @@ const industry = (req, res) => {
     }
   );
 };
+const category = (req, res) => {
+  JobAdd.esSearch(
+    {
+      aggs: {
+        company: {
+          terms: {
+            field: "industry.category",
+            size: 10,
+          },
+        },
+      },
+    },
+    (err, data) => {
+      if (
+        !err &&
+        data &&
+        data.body &&
+        data.body.aggregations &&
+        data.body.aggregations.company
+      ) {
+        res
+          .status(HttpStatus.OK)
+          .send(success(data.body.aggregations.company.buckets));
+      } else {
+        logger.err(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
+      }
+    }
+  );
+};
 
-export default { topHieringCompanies, industry };
+export default { topHieringCompanies, industry, category };

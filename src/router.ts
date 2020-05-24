@@ -115,6 +115,12 @@ const routes = [
     controller: matrix_controller.industry,
   },
   {
+    method: "get",
+    auth: false,
+    path: "/matrix/category",
+    controller: matrix_controller.category,
+  },
+  {
     method: "post",
     auth: false,
     path: "/candidate/profile",
