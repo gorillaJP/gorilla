@@ -19,6 +19,9 @@ ADD config/${env}.json  /app/config/${env}.json
 #to store static files
 RUN  mkdir -p /app/public/files 
 
+#temp for testing
+ADD public/files /app/public/files 
+
 RUN npm install
 
 #RUN npm install -g typescript

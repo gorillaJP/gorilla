@@ -1,7 +1,6 @@
 node_modules/*
 build/*
 tsbuild/*
-public/files/**
 !public/files/readme.txt
 Db.db
 src/server/public/*
