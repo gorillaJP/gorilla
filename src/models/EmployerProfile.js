@@ -19,8 +19,9 @@ var EmployerFields = {
   },
   password: String,
   companyname: String,
-  company: {
-    id: String,
+  companies: {
+    type: Array,
+    default: [],
   },
 };
 

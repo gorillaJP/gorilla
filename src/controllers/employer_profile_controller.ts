@@ -18,9 +18,13 @@ const registerEmployer = (req, res) => {
     const employerProfile = new EmployerProfile(req.body);
     var companyIdPromise;
     //if the company is new => add it first
-    if (!employerProfile.company.id) {
+    if (
+      !employerProfile.companies ||
+      employerProfile.companies.length == 0 ||
+      !employerProfile.companies[0].id
+    ) {
       //if the company is not yet registered => register it first
-      companyIdPromise = new CompanyProfile(req.body.company)
+      companyIdPromise = new CompanyProfile(req.body.companies[0])
         .save({ session })
         .then((company) => {
           return company;
@@ -34,17 +38,17 @@ const registerEmployer = (req, res) => {
           throw err; //this is because transaction should be rolled back (below)
         });
     } else {
-      companyIdPromise = Promise.resolve(req.body.company);
+      companyIdPromise = Promise.resolve(req.body.companies[0]);
     }
 
     //now save the employer profile
     companyIdPromise
       .then((company) => {
-        employerProfile.company.id = company.id;
+        employerProfile.companies = [{ id: company.id }];
         employerProfile
           .save({ session })
           .then((employer) => {
-            employer._doc.company = company;
+            employer._doc.companies[0] = company;
             delete employer._doc.password;
             session.commitTransaction();
             res.status(HttpStatus.OK).send(success(employer));
