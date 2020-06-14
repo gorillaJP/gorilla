@@ -37,6 +37,9 @@ var jobAdd = {
   industry: {
     type: String,
   },
+  category: {
+    type: String,
+  },
   salaryMin: {
     type: Number,
   },
