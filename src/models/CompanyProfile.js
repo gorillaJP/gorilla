@@ -5,20 +5,21 @@ import normalize from "normalize-mongoose";
 var CompanyProfile = {
   name: {
     type: String,
-    unique: true
+    unique: true,
   },
+  industry: String,
   logo: String,
   email: String,
   phonenumber: String,
-  description: String
+  description: String,
 };
 
 var CompanyProfileSchema = new mongoose.Schema(CompanyProfile, {
-  autoCreate: true
+  autoCreate: true,
 });
 
 CompanyProfileSchema.plugin(uniqueValidator, {
-  message: "Error, expected {PATH} to be unique."
+  message: "Error, expected {PATH} to be unique.",
 });
 
 CompanyProfileSchema.plugin(normalize); //replace _id with id and remove v
