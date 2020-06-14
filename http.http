@@ -157,7 +157,12 @@ Content-Type: image/png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ### read file
-GET {{proto}}://{{host}}:{{port}}/upload_ef070c2602dae1adfe247c5568ac418d1.png
+GET {{proto}}://{{host}}:{{port}}/upload_5b3c0531f00a7c54fa7bd9b6bb65a5a81.png
+
+
+###
+
+GET {{proto}}://{{host}}:{{port}}/default_company.png
 
 ### Create Company 
 POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1

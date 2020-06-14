@@ -70,7 +70,7 @@ const topHieringCompanies = (req, res) => {
 const bindImages = (data, cacheKey) => {
   data.forEach((element) => {
     const company = memcache.get(cacheKey + element.companyid); //get company from  memcache
-    element.logo = company ? company.logo : null;
+    element.logo = company ? company.logo : "default_company.png";
   });
   return data;
 };
