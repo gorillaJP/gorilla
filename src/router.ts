@@ -44,6 +44,15 @@ const routes = [
   },
   {
     method: "get",
+    auth: true,
+    path: "/loginwithtoken",
+    controller: auth_controller.loginWithToken,
+    description:
+      "once the token is know, this API return user object and token, same way how they are return just after login",
+    domain: Domain.CANDIDATE,
+  },
+  {
+    method: "get",
     path: "/seeker/:id",
     auth: false,
     controller: seeker_controller.getSeeker,

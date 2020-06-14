@@ -13,18 +13,18 @@ const mailerConf = {
   from: "gorillajobslk@gmail.com", // generated ethereal password
 };
 
-const uiLoginRedirect = "redirectToPageWhichReadsFromCookieAndWriteToStore";
+const uiLoginRedirect = "signinoauth2";
 
 const appDev = {
   rootUrl: "http://localhost:8080/",
   uiAppURL: "http://localhost:3000/",
-  verifyEmailRedirect: "http://localhost:3000?login=initial",
+  verifyEmailRedirect: "http://localhost:3000/signin?login=initial",
 };
 
 const appProd = {
   rootUrl: "http://gorillalk.giize.com:443/", //this is beause IPs are not accepted by google redirect URL
   uiAppURL: "http://159.89.161.233:3000/",
-  verifyEmailRedirect: "http://159.89.161.233:3000?login=initial",
+  verifyEmailRedirect: "http://159.89.161.233:3000/signin?login=initial",
 };
 
 let app;

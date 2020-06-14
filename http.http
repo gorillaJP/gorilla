@@ -16,6 +16,11 @@ content-type: application/json
  "name" : "dimu1"
 }
 
+### Check protected API
+GET {{proto}}://{{host}}:{{port}}/api/loginwithtoken
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+content-type: application/json
+
 
 ### Authntication
 POST {{proto}}://{{host}}:{{port}}/api/login
@@ -26,6 +31,16 @@ content-type: application/json
 "password" : "23423423840",
 "domain" : "employer"
 }
+
+
+
+
+
+
+### login from google
+GET {{proto}}://{{host}}:{{port}}/api/auth/google
+###
+
 
 ###
 POST {{proto}}://{{host}}:{{port}}/api/login

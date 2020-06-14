@@ -1,4 +1,6 @@
 const express = require("express");
+import HttpStatus from "http-status-codes";
+
 const router = express.Router();
 
 const jwt = require("jsonwebtoken");
@@ -59,4 +61,19 @@ const authGoogleCallBack = passport.authenticate("google", {
   failureRedirect: "/api/auth/google/failure",
 });
 
-export default { login, authGoogle, authGoogleCallBack };
+const loginWithToken = (req, res) => {
+  //validate the request to see if the JWT token is proper
+
+  console.log(req.headers.authorization);
+  if (!req.headers.authorization || req.headers.authorization.split(" ") < 2) {
+    res.send(HttpStatus.BAD_REQUEST);
+    return;
+  }
+
+  res.json({
+    token: req.headers.authorization.split(" ")[1],
+    user: req.user,
+  }); //here the req.user is set by the auth filter ( read from the token itself)
+};
+
+export default { login, authGoogle, authGoogleCallBack, loginWithToken };
