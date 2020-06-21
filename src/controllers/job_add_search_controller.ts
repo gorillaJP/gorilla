@@ -114,7 +114,8 @@ const buildQuery = (qObj, limit, offset) => {
     .requestBodySearch()
     .query(boolQuery)
     .size(limit)
-    .from(offset);
+    .from(offset)
+    .sorts([esb.sort("_score"), esb.sort("isfeatured").order("desc")]); //features jobs shuold come at the top of the resutls
 
   logger.info(JSON.stringify(esbq));
 

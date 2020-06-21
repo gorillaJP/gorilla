@@ -74,7 +74,7 @@ GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=bank
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?company=
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/jobadds?isfeatured=true
+GET {{proto}}://{{host}}:{{port}}/api/jobadds
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/autocomplete
@@ -169,15 +169,15 @@ POST {{proto}}://{{host}}:{{port}}/api/employerprofile HTTP/1.1
 content-type: application/json
 
 {
-  "firstname": "sampath20",
-  "lastname": "sampath 3",
-  "email": "sampath20@gmail.com",
+  "firstname": "sampath21",
+  "lastname": "sampath 21",
+  "email": "sampath21@gmail.com",
   "phonenumber": 849444744,
   "password": 23423423840,
   "companyid": null,
   "companies": [
     {
-      "name" : "sampath bank20",
+      "name" : "sampath bank21",
       "industry" : "Banking2",
       "logo": "upload_ef070c2602dae1adfe247c5568ac418d1.png",
       "email" : "unilever@company.com",
