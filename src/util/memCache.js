@@ -8,7 +8,7 @@ const memcache = new NodeCache();
 
 setInterval(() => {
   companyProfile
-    .find({}, { id: 1, logo: 1 })
+    .find({}, { id: 1, logo: 1, name: 1 })
     .exec()
     .then((companies) => {
       console.log("loading companies to cache");

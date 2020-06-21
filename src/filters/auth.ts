@@ -17,6 +17,8 @@ const JWTStrategy = passportJWT.Strategy;
 import { app } from "../config";
 import { create } from "domain";
 import logger from "../util/logger";
+import memCache from "../util/logger";
+import memcache from "../util/memCache";
 
 // authentication configuration file
 // this is used at the time of sign in
@@ -65,6 +67,11 @@ passport.use(
 
       return ProfileDomain.findOne({ email, password })
         .then((user) => {
+          if (req.body.domain == Domain.EMPLOYER) {
+            user = procesEmployerProfile(user);
+          } else {
+            //Nothing special is needed
+          }
           if (!user) {
             return cb(null, false, {
               message: "Incorrect email or password.",
@@ -84,6 +91,17 @@ passport.use(
     }
   )
 );
+
+const procesEmployerProfile = (user) => {
+  if (user.companies) {
+    user.companies.forEach((company) => {
+      console.log(memcache.get("company" + company.id));
+      const fromCache = memcache.get("company" + company.id);
+      company.name = fromCache.name;
+    });
+  }
+  return user;
+};
 
 passport.use(
   new JWTStrategy(
