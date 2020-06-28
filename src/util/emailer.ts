@@ -25,7 +25,6 @@ const emailTemplateEngine = new EmailTemplateEngine({
 
 //returns a promise
 const emailSend = (email: Email) => {
-  /*
   emailTemplateEngine
     .send({
       template: email.template,
@@ -36,7 +35,6 @@ const emailSend = (email: Email) => {
     })
     .then((res) => logger.info("email sent messageId:" + res.messageId))
     .catch((err) => logger.error(err));
-    */
 };
 
 type Email = {

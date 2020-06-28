@@ -138,6 +138,8 @@ passport.use(
         (err, user, created) => {
           if (err) {
             logger.err(err);
+          } else {
+            user._doc.domain = "candidate";
           }
           return done(null, user.toJSON());
         }
