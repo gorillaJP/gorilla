@@ -149,7 +149,7 @@ const verifyEmail = (req, res) => {
     { emailverifysecret: req.query.v },
     { emailverified: true }
   ).then((candidate) => {
-    res.redirect(app.verifyEmailRedirect);
+    res.redirect(app.verifyEmailRedirect + "&domain=candidate");
   });
 };
 
