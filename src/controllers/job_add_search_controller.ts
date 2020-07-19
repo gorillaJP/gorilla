@@ -40,7 +40,13 @@ const getJobsPaginated = (req, res) => {
         " " +
         elapsedTimeInMs
     );
-    if (results) {
+    if (
+      //check if the response from mongo is proper
+      results &&
+      results.body &&
+      results.body.hits &&
+      results.body.hits.hits
+    ) {
       res.status(200).send(success(formatResposne(results, limit, offset)));
       return;
     }
