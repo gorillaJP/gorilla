@@ -17,7 +17,13 @@ const autoComplete = (req, res) => {
         " " +
         elapsedTimeInMs
     );
-    if (results) {
+    if (
+      //check if the response from mongo is proper
+      results &&
+      results.body &&
+      results.body.hits &&
+      results.body.hits.hits
+    ) {
       res.send(success(formatResposne(results)));
     } else {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
@@ -26,27 +32,27 @@ const autoComplete = (req, res) => {
 };
 
 /**ngram search with fuzyness */
-const buildQuery = q => {
+const buildQuery = (q) => {
   const esq = {
     query: {
       match: {
         "name.edgengram": {
           query: q,
-          fuzziness: 1
-        }
-      }
-    }
+          fuzziness: 1,
+        },
+      },
+    },
   };
   return esq;
 };
 
-const formatResposne = data => {
-  const res = data.body.hits.hits.map(u => {
+const formatResposne = (data) => {
+  const res = data.body.hits.hits.map((u) => {
     return u._source;
   });
 
   return {
-    data: res
+    data: res,
   };
 };
 
