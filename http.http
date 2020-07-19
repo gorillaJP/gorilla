@@ -34,9 +34,6 @@ content-type: application/json
 
 
 
-
-
-
 ### login from google
 GET {{proto}}://{{host}}:{{port}}/api/auth/google
 ###
@@ -99,10 +96,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 ### if the key is not presnet in body =>  take it as a post , othewise take it as a put
 POST {{proto}}://{{host}}:{{port}}/api/candidate/education
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 {
-  "order": 2, 
+  "order": 0, 
   "qualification": "Advanced Level laXYMK",
   "institite": "Kaluthara Maha vidyalayaYaTU",
   "marks": "2A 5C 1B R",
@@ -111,10 +108,53 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 }
 
 ###
-DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5ebf5cdee53b83190389dae2
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f147552ec7c711d249960c8
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
+
+### candidate skills 
+POST {{proto}}://{{host}}:{{port}}/api/candidate/skill
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+[
+  "java",
+  "nodejs",
+  "sql",
+  "react"
+]
+
+### candidate language
+POST {{proto}}://{{host}}:{{port}}/api/candidate/language
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+[
+  "english",
+  "sinhala"
+]
+
+### candidate language
+POST {{proto}}://{{host}}:{{port}}/api/candidate/resume
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+{
+ "label" : "QA CV",
+ "file" : "mycv1.cv"
+}
+
+
+###
+POST {{proto}}://{{host}}:{{port}}/api/login
+content-type: application/json
+
+{
+  "email": "dim912@gmail.com",
+  "password": "dim912@gmail.com",
+  "domain" : "candidate"
+}
 ###  end education
 
 ### candidate experience
@@ -139,6 +179,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 ###
 
 DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5ebf5cf3e53b83190389dae3
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
+
+###
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/resume/5f148aceea1726296a13f427
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 

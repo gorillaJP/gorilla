@@ -136,6 +136,7 @@ const routes = [
     domain: Domain.CANDIDATE,
     controller: candidate_profile_controller.createCandidate,
   },
+  /*
   {
     method: "get",
     auth: true,
@@ -143,20 +144,22 @@ const routes = [
     domain: Domain.CANDIDATE,
     controller: candidate_profile_controller.getCandidateEducation,
   },
+  */
   {
     method: "post",
     auth: true,
-    path: "/candidate/education",
+    path: "/candidate/:property",
     domain: Domain.CANDIDATE,
-    controller: candidate_profile_controller.createCandidateEducation,
+    controller: candidate_profile_controller.createOnProfile,
   },
   {
     method: "delete",
     auth: true,
-    path: "/candidate/education/:id",
+    path: "/candidate/:property/:id",
     domain: Domain.CANDIDATE,
-    controller: candidate_profile_controller.deleteCandidateEducation,
+    controller: candidate_profile_controller.deleteOnProfile,
   },
+  /*
   {
     method: "get",
     auth: true,
@@ -178,6 +181,7 @@ const routes = [
     domain: Domain.CANDIDATE,
     controller: candidate_profile_controller.deleteCandidateExperience,
   },
+  */
   {
     method: "get",
     auth: false,

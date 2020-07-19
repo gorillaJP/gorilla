@@ -7,7 +7,16 @@ var findOrCreate = require("mongoose-findorcreate");
  * identifier is email address
  *
  */
+
 var CandidateProfileFields = {
+  completeness: {
+    type: String,
+    default: "60%",
+  },
+  nextAction: {
+    type: String,
+    default: "Add skills",
+  },
   firstname: String,
   lastname: String,
   email: {
@@ -39,6 +48,38 @@ var CandidateProfileFields = {
   homephonenumber: String,
   birthdate: Date,
   address: String,
+  education: [
+    {
+      order: Number,
+      qualification: String,
+      institite: String,
+      startdate: Date,
+      enddate: Date,
+      marks: String,
+      details: String,
+      deleted: Boolean,
+    },
+  ],
+  experience: [
+    {
+      order: Number, //for UI
+      jobtitle: String,
+      organization: String,
+      location: String,
+      startDate: Date,
+      endDate: Date,
+      details: String,
+      deleted: Boolean,
+    },
+  ],
+  resumes: [
+    {
+      label: String,
+      file: String,
+    },
+  ],
+  skills: [String],
+  languages: [String],
 };
 
 var CandidateSchema = new mongoose.Schema(CandidateProfileFields, {

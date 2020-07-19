@@ -13,6 +13,7 @@ import CandidateEducation from "../models/CandidateEducation";
 
 //------- PROFILE  ------------
 
+//create a fresh profile
 const createCandidate = (req, res) => {
   const candidateProfile = new CandidateProfile(req.body);
 
@@ -41,7 +42,8 @@ const createCandidate = (req, res) => {
 
 /// ------------------------- EDUCATION
 
-//read
+//depricated
+/*
 const getCandidateEducation = (req, res) => {
   CandidateEducation.find({ email: req.params.email, deleted: false })
     .sort({ order: 1 })
@@ -53,48 +55,66 @@ const getCandidateEducation = (req, res) => {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(success());
     });
 };
+*/
 
-//use for create/update
-const createCandidateEducation = (req, res) => {
-  const options = {
-    upsert: true, //insert if not exist
-    new: true, //return the updated docuemnt
-  };
-  const key = req.body.id ? req.body.id : mongoose.Types.ObjectId(); //if the id is null set it. otherwise it will be inserted as null to db
-  CandiateEducation.findOneAndUpdate(
-    { _id: key, email: req.params.email },
-    req.body,
-    options,
-    (err, result) => {
-      if (err) {
-        res.status(HttpStatus.BAD_REQUEST);
-      } else {
-        res.status(HttpStatus.OK).send(success(result));
+//create update on candidate profile
+const createOnProfile = (req, res) => {
+  CandidateProfile.findOne({ email: req.body.email })
+    .then((candidateDB) => {
+      if (req.params.property == "education") {
+        candidateDB.educations.push(req.body);
+      } else if (req.params.property == "experience") {
+        candidateDB.experiences.push(req.body);
+      } else if (req.params.property == "resume") {
+        candidateDB.resumes.push(req.body);
+      } else if (req.params.property == "skills") {
+        candidateDB.skill = req.body;
+      } else if (req.params.property == "languages") {
+        candidateDB.language = req.body;
       }
-    }
-  );
+      candidateDB
+        .save()
+        .then((candidateSaved) => {
+          res.status(HttpStatus.OK).send(success(candidateSaved));
+        })
+        .catch((err) => {
+          logger.error(err);
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        });
+    })
+    .catch((err) => {
+      logger.error(err);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    });
 };
 
-//delete
-const deleteCandidateEducation = (req, res) => {
-  CandidateEducation.findByIdAndUpdate(
-    { _id: req.params.id, email: req.params.email },
-    { deleted: true },
-    (err, resutl) => {
-      console.log(err);
-
-      if (err) {
-        res.status(HttpStatus.BAD_REQUEST).send();
-      } else {
-        res.status(HttpStatus.OK).send();
-      }
+//delete  On candidate Profle
+const deleteOnProfile = (req, res) => {
+  CandidateProfile.findOne({ email: req.body.email }).then((candidateDB) => {
+    if (req.params.property == "education") {
+      candidateDB.educations.pull(req.params.id);
+    } else if (req.params.property == "experience") {
+      candidateDB.experiences.pull(req.params.id);
+    } else if (req.params.property == "resume") {
+      candidateDB.resumes.pull(req.params.id);
     }
-  );
+    candidateDB
+      .save()
+      .then((candidateSaved) => {
+        res.status(HttpStatus.OK).send(success(candidateSaved));
+      })
+      .catch((err) => {
+        logger.error(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+      });
+  });
 };
 
 // ----------------------------- END EDUCATION
 
 // ----------------------------- START EXPERIENCE
+//depricated
+/*
 const getCandidateExperience = (req, res) => {
   CandidateExperience.find({ email: req.params.email, deleted: false })
     .sort({ order: 1 })
@@ -106,8 +126,10 @@ const getCandidateExperience = (req, res) => {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(success());
     });
 };
+*/
 
 //use for create/update
+/*
 const createCandidateExperience = (req, res) => {
   const options = {
     upsert: true, //insert if not exist
@@ -141,6 +163,46 @@ const deleteCandidateExperience = (req, res) => {
     }
   );
 };
+*/
+
+//create update experience
+/*
+const createCandidateExperience = (req, res) => {
+  CandidateProfile.findOne({ email: req.body.email })
+    .then((candidateDB) => {
+      candidateDB.experience.push(req.body);
+      candidateDB
+        .save()
+        .then((candidateSaved) => {
+          res.status(HttpStatus.OK).send(success(candidateSaved));
+        })
+        .catch((err) => {
+          logger.error(err);
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        });
+    })
+    .catch((err) => {
+      logger.error(err);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    });
+};
+
+//delete experience
+const deleteCandidateExperience = (req, res) => {
+  CandidateProfile.findOne({ email: req.body.email }).then((candidateDB) => {
+    candidateDB.experience.pull(req.params.id);
+    candidateDB
+      .save()
+      .then((candidateSaved) => {
+        res.status(HttpStatus.OK).send(success(candidateSaved));
+      })
+      .catch((err) => {
+        logger.error(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+      });
+  });
+};
+*/
 
 //--------------------------------- END EXPERIENCE
 
@@ -163,11 +225,13 @@ let sendSignUpCandidateEmail = (candidate): void => {
 };
 export default {
   createCandidate,
-  getCandidateEducation,
-  createCandidateEducation,
-  deleteCandidateEducation,
+  //  getCandidateEducation,
+  createOnProfile,
+  deleteOnProfile,
+  /*
   getCandidateExperience,
   createCandidateExperience,
   deleteCandidateExperience,
+  */
   verifyEmail,
 };
