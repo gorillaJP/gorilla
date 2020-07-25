@@ -102,7 +102,7 @@ const industry = (req, res) => {
           .status(HttpStatus.OK)
           .send(success(data.body.aggregations.company.buckets));
       } else {
-        logger.err(err);
+        logger.error(err);
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
       }
     }
