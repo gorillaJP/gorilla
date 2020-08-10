@@ -66,6 +66,7 @@ const createOnProfile = (req, res) => {
   CandidateProfile.findOne({ email: req.body.email })
     .then((candidateDB) => {
       candidateDB = populatedUpdatedProfile(
+        //updated nested objects
         req.body,
         req.params.property,
         candidateDB
@@ -90,25 +91,45 @@ const createOnProfile = (req, res) => {
 };
 
 const populatedUpdatedProfile = (newData, property, candidateDB) => {
-  console.log(newData);
   //education
   if (property == "education") {
-    if (newData._id) {
-      candidateDB.educations = candidateDB.educations.filter(
-        (edu) => edu._id != newData._id
-      );
+    var _ids = [];
+    if (Array.isArray(newData)) {
+      _ids = newData.filter((nw) => nw._id).map((nw) => nw._id);
+      console.log(_ids);
+      candidateDB.educations = candidateDB.educations.filter((edu) => {
+        return !_ids.includes(String(edu._id));
+      });
+      candidateDB.educations = candidateDB.educations.concat(newData);
+    } else if (newData._id) {
+      candidateDB.educations = candidateDB.educations.filter((edu) => {
+        return edu._id != newData._id;
+      });
+      candidateDB.educations.push(newData);
+    } else {
+      candidateDB.educations.push(newData);
     }
-    candidateDB.educations.push(newData);
+
     //experience
   } else if (property == "experience") {
-    if (newData._id) {
-      candidateDB.experiences = candidateDB.experiences.filter(
-        (edu) => edu._id != newData._id
-      );
+    var _ids = [];
+    if (Array.isArray(newData)) {
+      _ids = newData.filter((nw) => nw._id).map((nw) => nw._id);
+      candidateDB.experiences = candidateDB.experiences.filter((edu) => {
+        return !_ids.includes(String(edu._id));
+      });
+      candidateDB.experiences = candidateDB.experiences.concat(newData);
+    } else if (newData._id) {
+      candidateDB.experiences = candidateDB.experiences.filter((edu) => {
+        return edu._id != newData._id;
+      });
+      candidateDB.experiences.push(newData);
+    } else {
+      candidateDB.experiences.push(newData);
     }
-    candidateDB.experiences.push(newData);
-    //resume
-  } else if (property == "resume") {
+
+    //resumes
+  } else if (property == "resumes") {
     if (newData._id) {
       candidateDB.resumes = candidateDB.resumes.filter(
         (edu) => edu._id != newData._id

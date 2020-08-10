@@ -99,9 +99,8 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 {
-  "_id": "5f3181e12962c5218fe2587c",
-  "order": 7, 
-  "qualification": "Advanced Level laXYMKM Helloasdfasdixx ine 1ias",
+  "order": 20, 
+  "qualification": "Advanced Level laXYMKM Helloasdfasdixx ine 1ias sssxx",
   "institite": "Kaluthara Maha vidyalayaYaTU",
   "marks": "2A 5C 1B R 1",
   "details": "Was a prefect in the scoollX",
@@ -109,7 +108,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 }
 
 ###
-DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f3181905f5aac20b34516fe
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f318a72ff094d2c15c9278d
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
@@ -135,7 +134,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 ]
 
 ### candidate language
-POST {{proto}}://{{host}}:{{port}}/api/candidate/resume
+POST {{proto}}://{{host}}:{{port}}/api/candidate/resumes
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
@@ -168,14 +167,14 @@ POST {{proto}}://{{host}}:{{port}}/api/candidate/experience
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
-{
-  "order": 3, 
+[{
+  "order": 4, 
   "jobtitle": "Senior Software Engineer",
   "organization": "Virtusa Sri Lanka",
   "location":  "Colombo",
   "details": "worked as a software professional. for a product for a europian client",
   "deleted" : false
-}
+}]
 ###
 
 DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5ebf5cf3e53b83190389dae3
