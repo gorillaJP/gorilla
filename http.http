@@ -99,40 +99,39 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 {
-  "order": 0, 
-  "qualification": "Advanced Level laXYMK",
+  "_id": "5f3181e12962c5218fe2587c",
+  "order": 7, 
+  "qualification": "Advanced Level laXYMKM Helloasdfasdixx ine 1ias",
   "institite": "Kaluthara Maha vidyalayaYaTU",
-  "marks": "2A 5C 1B R",
+  "marks": "2A 5C 1B R 1",
   "details": "Was a prefect in the scoollX",
   "deleted": false
 }
 
 ###
-DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f147552ec7c711d249960c8
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f3181905f5aac20b34516fe
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
 
 ### candidate skills 
-POST {{proto}}://{{host}}:{{port}}/api/candidate/skill
+POST {{proto}}://{{host}}:{{port}}/api/candidate/skills
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 [
   "java",
-  "nodejs",
-  "sql",
-  "react"
+  "sql"
 ]
 
 ### candidate language
-POST {{proto}}://{{host}}:{{port}}/api/candidate/language
+POST {{proto}}://{{host}}:{{port}}/api/candidate/languages
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 [
   "english",
-  "sinhala"
+  "tamil"
 ]
 
 ### candidate language
@@ -141,8 +140,9 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 {
- "label" : "QA CV",
- "file" : "mycv1.cv"
+"_id": "5f3178b2b2672c1a8dbeeec2",
+ "label" : "QA CV 35",
+ "file" : "mycv1.cv 32"
 }
 
 

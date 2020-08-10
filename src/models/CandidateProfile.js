@@ -48,7 +48,7 @@ var CandidateProfileFields = {
   homephonenumber: String,
   birthdate: Date,
   address: String,
-  education: [
+  educations: [
     {
       order: Number,
       qualification: String,
@@ -60,7 +60,7 @@ var CandidateProfileFields = {
       deleted: Boolean,
     },
   ],
-  experience: [
+  experiences: [
     {
       order: Number, //for UI
       jobtitle: String,

@@ -10,6 +10,8 @@ import randomstring from "randomstring";
 import { app } from "../config";
 import { mongooseErrorToRes } from "../models/MongoUtil";
 import CandidateEducation from "../models/CandidateEducation";
+import Candidate from "../models/CandidateProfile";
+import { EDQUOT } from "constants";
 
 //------- PROFILE  ------------
 
@@ -59,21 +61,20 @@ const getCandidateEducation = (req, res) => {
 
 //create update on candidate profile
 const createOnProfile = (req, res) => {
+  console.log(req.body._id);
+
   CandidateProfile.findOne({ email: req.body.email })
     .then((candidateDB) => {
-      if (req.params.property == "education") {
-        candidateDB.educations.push(req.body);
-      } else if (req.params.property == "experience") {
-        candidateDB.experiences.push(req.body);
-      } else if (req.params.property == "resume") {
-        candidateDB.resumes.push(req.body);
-      } else if (req.params.property == "skills") {
-        candidateDB.skill = req.body;
-      } else if (req.params.property == "languages") {
-        candidateDB.language = req.body;
-      }
-      candidateDB
-        .save()
+      candidateDB = populatedUpdatedProfile(
+        req.body,
+        req.params.property,
+        candidateDB
+      );
+      CandidateProfile.findOneAndUpdate(
+        { email: req.body.email },
+        candidateDB,
+        { upsert: true, new: true }
+      )
         .then((candidateSaved) => {
           res.status(HttpStatus.OK).send(success(candidateSaved));
         })
@@ -86,6 +87,41 @@ const createOnProfile = (req, res) => {
       logger.error(err);
       res.status(HttpStatus.INTERNAL_SERVER_ERROR);
     });
+};
+
+const populatedUpdatedProfile = (newData, property, candidateDB) => {
+  console.log(newData);
+  //education
+  if (property == "education") {
+    if (newData._id) {
+      candidateDB.educations = candidateDB.educations.filter(
+        (edu) => edu._id != newData._id
+      );
+    }
+    candidateDB.educations.push(newData);
+    //experience
+  } else if (property == "experience") {
+    if (newData._id) {
+      candidateDB.experiences = candidateDB.experiences.filter(
+        (edu) => edu._id != newData._id
+      );
+    }
+    candidateDB.experiences.push(newData);
+    //resume
+  } else if (property == "resume") {
+    if (newData._id) {
+      candidateDB.resumes = candidateDB.resumes.filter(
+        (edu) => edu._id != newData._id
+      );
+    }
+    candidateDB.resumes.push(newData);
+    //skills
+  } else if (property == "skills") {
+    candidateDB.skills = newData;
+  } else if (property == "languages") {
+    candidateDB.languages = newData;
+  }
+  return candidateDB;
 };
 
 //delete  On candidate Profle
