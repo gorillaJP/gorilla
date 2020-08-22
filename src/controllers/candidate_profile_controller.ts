@@ -15,6 +15,21 @@ import { EDQUOT } from "constants";
 
 //------- PROFILE  ------------
 
+//read candidate profile
+const candidateprofile = (req, res) => {
+  //validate the request to see if the JWT token is proper
+  if (!req.headers.authorization || req.headers.authorization.split(" ") < 2) {
+    res.send(HttpStatus.BAD_REQUEST);
+    return;
+  }
+
+  CandidateProfile.findOne({ email: req.body.email }).then((candidateDB) => {
+    res.json({
+      user: candidateDB,
+    }); //here the req.user is set by the auth filter ( read from the token itself)
+  });
+};
+
 //create a fresh profile
 const createCandidate = (req, res) => {
   const candidateProfile = new CandidateProfile(req.body);
@@ -291,4 +306,5 @@ export default {
   deleteCandidateExperience,
   */
   verifyEmail,
+  candidateprofile,
 };

@@ -1,4 +1,5 @@
 const express = require("express");
+import CandidateProfile from "../models/CandidateProfile";
 import HttpStatus from "http-status-codes";
 
 const router = express.Router();
@@ -70,10 +71,12 @@ const loginWithToken = (req, res) => {
     return;
   }
 
-  res.json({
-    token: req.headers.authorization.split(" ")[1],
-    user: req.user,
-  }); //here the req.user is set by the auth filter ( read from the token itself)
+  CandidateProfile.findOne({ email: req.body.email }).then((candidateDB) => {
+    res.json({
+      token: req.headers.authorization.split(" ")[1],
+      user: candidateDB,
+    }); //here the req.user is set by the auth filter ( read from the token itself)
+  });
 };
 
 export default { login, authGoogle, authGoogleCallBack, loginWithToken };
