@@ -17,8 +17,8 @@ var CandidateProfileFields = {
     type: String,
     default: "Add skills",
   },
-  firstname: String,
-  lastname: String,
+  firstName: String,
+  lastName: String,
   email: {
     type: String,
     index: true,

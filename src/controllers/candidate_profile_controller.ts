@@ -106,8 +106,14 @@ const createOnProfile = (req, res) => {
 };
 
 const populatedUpdatedProfile = (newData, property, candidateDB) => {
+  //direct property update
+  if ("firstname" == property.toLowerCase()) {
+    candidateDB.firstName = newData.firstName;
+  } else if ("lastname" == property.toLowerCase()) {
+    candidateDB.lastName = newData.lastName;
+  }
   //education
-  if (property == "education") {
+  else if (property == "education") {
     var _ids = [];
     if (Array.isArray(newData)) {
       _ids = newData.filter((nw) => nw._id).map((nw) => nw._id);
