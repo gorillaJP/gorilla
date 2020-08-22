@@ -45,7 +45,7 @@ const routes = [
   {
     method: "get",
     auth: true,
-    path: "/profile",
+    path: "/candidate/profile",
     controller: candidate_profile_controller.candidateprofile,
     domain: Domain.CANDIDATE,
   },
