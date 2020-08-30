@@ -1,11 +1,12 @@
-version: '3'
+version: "3"
 services:
   service:
-    build: 
-     context: .
-     args:
-      env: 'production'
+    build:
+      context: .
+      args:
+        env: "production"
     ports:
-      - "443:443"
+      - "444:444"
     volumes:
       - /apps/logs/service:/app/log:rw
+      - /apps/certs/gorilla.lk:/apps/certs/gorilla.lk:ro
