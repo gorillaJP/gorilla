@@ -14,9 +14,9 @@
       "port": "443"
     },
     "production": {
-      "host": "159.89.161.233",
-      "proto": "http",
-      "port": "443"
+      "host": "gorilla.lk",
+      "proto": "https",
+      "port": "444"
     }
   }
   /*

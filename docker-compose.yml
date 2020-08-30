@@ -10,3 +10,4 @@ services:
     volumes:
       - /apps/logs/service:/app/log:rw
       - /apps/certs/gorilla.lk:/apps/certs/gorilla.lk:ro
+      - /apps/images/gorilla.lk:/apps/images/gorilla.lk:rw

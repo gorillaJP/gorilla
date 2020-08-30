@@ -6,7 +6,7 @@ import { getMaxListeners } from "cluster";
 
 const fileUpload = (req, res) => {
   //const rootDir = path.resolve(__dirname);
-  const uploadDir = approotPath + "/public/files";
+  const uploadDir = "/apps/images/gorilla.lk";
 
   //initiation formidable ( +validations)
   var form = new formidable.IncomingForm({
