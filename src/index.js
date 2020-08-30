@@ -41,7 +41,7 @@ const options = {
 const app = express();
 app.use(cors());
 app.use(compression());
-app.use(express.static("public/files"));
+app.use(express.static("/apps/images/gorilla.lk"));
 
 /*
 app.use(
