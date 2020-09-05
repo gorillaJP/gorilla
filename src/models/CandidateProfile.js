@@ -52,7 +52,7 @@ var CandidateProfileFields = {
     {
       order: Number,
       qualification: String,
-      institite: String,
+      institute: String,
       startdate: Date,
       enddate: Date,
       marks: String,

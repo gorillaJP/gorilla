@@ -60,6 +60,11 @@ GET {{proto}}://{{host}}:8080/api/jobadds?q=java&location=kandy&location=colombo
 content-type: application/json
 
 
+###
+GET {{proto}}://{{host}}:{{port}}/api/meta/metalanguages?q=S
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/meta/metaskills?q=
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/metaposteddates?q=
@@ -138,7 +143,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 
 [
   "java",
-  "sql"
+  "sql",
+  "react",
+  "nodejs"
 ]
 
 ### candidate language
@@ -148,7 +155,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 
 [
   "english",
-  "tamil"
+  "hindi"
 ]
 
 ### candidate language

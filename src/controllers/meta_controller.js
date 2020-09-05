@@ -1,10 +1,12 @@
 import MetaCities from "../models/Meta_cities";
 import MetaSectors from "../models/Meta_sector";
 import MetaSalaries from "../models/MetaSlary";
-import MetaExperience from "../models/MetaExperience";
+import MetaExperiences from "../models/MetaExperience";
 import MetaJobPosteTess from "../models/MetaJobPosteDate";
 import MetaRoles from "../models/MetaRole";
-import MetaJobType from "../models/MetaJobType";
+import MetaSkills from "../models/MetaSkill";
+import MetaLanguages from "../models/MetaLanguage";
+import MetaJobTypes from "../models/MetaJobType";
 import logger from "../util/logger";
 import HttpStatus from "http-status-codes";
 import { success, error } from "../util/constants";
@@ -17,10 +19,10 @@ const getMeta = (req, res) => {
   getCollection(property)
     .find({ name: regEx }, { _id: false })
     .exec()
-    .then(data => {
+    .then((data) => {
       res.status(HttpStatus.OK).send(success(data));
     })
-    .catch(e => {
+    .catch((e) => {
       logger.error(e);
       res.status(HttpStatus.BAD_REQUEST).send(console.error());
     });
@@ -30,7 +32,7 @@ const getMeta = (req, res) => {
  * Get the RegEx search object as per the query
  * matching anything that has the query string in vlaue
  */
-const getSearchRegEx = query => {
+const getSearchRegEx = (query) => {
   let regExString = ".*" + query + ".*";
 
   return new RegExp(regExString, "i");
@@ -39,7 +41,7 @@ const getSearchRegEx = query => {
 /**
  * Get the collection to be searched as per the property
  */
-const getCollection = name => {
+const getCollection = (name) => {
   if (name === "metacities") {
     return MetaCities;
   }
@@ -53,13 +55,19 @@ const getCollection = name => {
     return MetaRoles;
   }
   if (name === "metaexperiences") {
-    return MetaExperience;
+    return MetaExperiences;
   }
   if (name === "metacreatedatdates") {
     return MetaJobPosteTess;
   }
   if (name === "metajobtypes") {
-    return MetaJobType;
+    return MetaJobTypes;
+  }
+  if (name === "metaskills") {
+    return MetaSkills;
+  }
+  if (name === "metalanguages") {
+    return MetaLanguages;
   }
 };
 
