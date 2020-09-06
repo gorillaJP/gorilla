@@ -61,7 +61,7 @@ content-type: application/json
 
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/meta/metalanguages?q=S
+GET {{proto}}://{{host}}:{{port}}/api/meta/metalanguages?q=
 
 ###
 GET {{proto}}://{{host}}:{{port}}/api/meta/metaskills?q=
@@ -144,8 +144,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 [
   "java",
   "sql",
-  "react",
-  "nodejs"
+  "react"
 ]
 
 ### candidate language
