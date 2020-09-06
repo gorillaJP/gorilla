@@ -12,6 +12,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''whoami
+        ls
 /usr/local/bin/docker-compose up --build -d'''
       }
     }
