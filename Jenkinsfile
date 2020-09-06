@@ -9,12 +9,16 @@ pipeline {
   }
   stages {
 
+
+    stage('Build') {
+      steps {
+
     echo 'branch details' 
     echo env.BRANCH_NAME
     echo env
 
-    stage('Build') {
-      steps {
+
+
         sh '''whoami
 /usr/local/bin/docker-compose up --build -d'''
       }
