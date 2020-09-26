@@ -117,7 +117,6 @@ const populatedUpdatedProfile = (newData, property, candidateDB) => {
     var _ids = [];
     if (Array.isArray(newData)) {
       _ids = newData.filter((nw) => nw._id).map((nw) => nw._id);
-      console.log(_ids);
       candidateDB.educations = candidateDB.educations.filter((edu) => {
         return !_ids.includes(String(edu._id));
       });

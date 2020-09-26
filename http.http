@@ -116,22 +116,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 
 ###  candidate educaton (Support Upsert)
 ### if the key is not presnet in body =>  take it as a post , othewise take it as a put
-POST {{proto}}://{{host}}:{{port}}/api/candidate/firstname
+POST {{proto}}://{{host}}:{{port}}/api/candidate/education
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 {
-  "_id": "5f319157f71d1100199d7038",
-  "order": 24, 
-  "qualification": "new2 Advanced Level laXYMKM Helloasdfasdixx ine 1ias sssxx",
+  "_id": "5f6f1e666d77eb73c93d1bae",
+  "order": 29, 
+  "qualification": "new2 Advanced Level laXYMKM Helloasdfasdixx ine 1ias sssxx1",
   "institite": "Kaluthara Maha vidyalayaYaTU",
-  "marks": "2A 5C 1B R 1",
+  "marks": "4A 5B",
+  "startDate": "2009-11-16" ,
+  "endDate": "2011-01-20" ,
   "details": "Was a prefect in the scoollX",
-  "deleted": false
+  "deleted": true 
 }
 
 ###
-DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f318a72ff094d2c15c9278d
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f318bc2b588c62d7de108b5
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
@@ -182,26 +184,26 @@ content-type: application/json
 
 ### candidate experience
 
-GET {{proto}}://{{host}}:{{port}}/api/candidate/experience/dim912@gmail.com
-content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
-
 ###
 POST {{proto}}://{{host}}:{{port}}/api/candidate/experience
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
 [{
+   "_id": "5f6edea1dcb2a56ddc4a71ff",
   "order": 4, 
-  "jobtitle": "Senior Software Engineer",
-  "organization": "Virtusa Sri Lanka",
+  "jobtitle": "Senior Software Engineer 0929",
+  "organization": "Aepona Sri Lanka",
+  "monthlySalary" : "1030000",
+  "startDate": "2009-11-13" ,
+  "endDate": "2011-01-20" ,
   "location":  "Colombo",
   "details": "worked as a software professional. for a product for a europian client",
   "deleted" : false
 }]
 ###
 
-DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5ebf5cf3e53b83190389dae3
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5f318d6a23b6a22f9552839b
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
