@@ -76,6 +76,10 @@ GET {{proto}}://{{host}}:{{port}}/api/meta/metacities?q=
 GET {{proto}}://{{host}}:{{port}}/api/meta/metasectors?q=so HTTP/1.1
 
 ###
+GET {{proto}}://{{host}}:{{port}}/api/meta/metacurrencies?q= HTTP/1.1
+
+
+###
 GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=bank
 
 ###
@@ -123,17 +127,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 {
   "_id": "5f6f1e666d77eb73c93d1bae",
   "order": 29, 
-  "qualification": "new2 Advanced Level laXYMKM Helloasdfasdixx ine 1ias sssxx1",
+  "qualification": "Ordinary Level",
   "institite": "Kaluthara Maha vidyalayaYaTU",
-  "marks": "4A 5B",
+  "marks": "5A 5B",
   "startDate": "2009-11-16" ,
   "endDate": "2011-01-20" ,
-  "details": "Was a prefect in the scoollX",
-  "deleted": true 
+  "details": "Was a prefect in the scoollX RR",
+  "deleted": false
 }
 
 ###
-DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f318bc2b588c62d7de108b5
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/education/5f6f1d136d77eb73c93d1b9a
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
@@ -189,21 +193,23 @@ POST {{proto}}://{{host}}:{{port}}/api/candidate/experience
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 
-[{
-   "_id": "5f6edea1dcb2a56ddc4a71ff",
-  "order": 4, 
-  "jobtitle": "Senior Software Engineer 0929",
-  "organization": "Aepona Sri Lanka",
-  "monthlySalary" : "1030000",
-  "startDate": "2009-11-13" ,
-  "endDate": "2011-01-20" ,
-  "location":  "Colombo",
-  "details": "worked as a software professional. for a product for a europian client",
-  "deleted" : false
-}]
+[
+   {
+        "_id": "5f6f321f39884e0019e59a56",
+        "jobtitle": "Senior Tech Lead Two",
+        "organization": "Virtusa",
+        "location": "",
+        "details": "Was a tech lead for the entire period",
+        "monthlySalary": 20000,
+        "salaryCurrency": "LKR",
+        "startDate": "2006-05-10T00:00:00.000Z",
+        "endDate": "2020-09-16T12:19:54.751Z",
+        "order": 2
+      } 
+]
 ###
 
-DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5f318d6a23b6a22f9552839b
+DELETE {{proto}}://{{host}}:{{port}}/api/candidate/experience/5f6f310639884e0019e59a26
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1ODkxMzE3NDR9.GSxzrJQF1H3w0WIoYb29FwMBlx7BiUW-2GOix84sR4A 
 

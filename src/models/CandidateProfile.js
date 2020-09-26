@@ -57,7 +57,6 @@ var CandidateProfileFields = {
       startDate: Date,
       endDate: Date,
       details: String,
-      deleted: Boolean,
     },
   ],
   experiences: [
@@ -66,11 +65,11 @@ var CandidateProfileFields = {
       jobtitle: String,
       organization: String,
       monthlySalary: Number,
+      salaryCurrency: String,
       startDate: Date,
       endDate: Date,
       details: String,
       location: String,
-      deleted: Boolean,
     },
   ],
   resumes: [

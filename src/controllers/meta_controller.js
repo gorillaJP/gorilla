@@ -5,6 +5,7 @@ import MetaExperiences from "../models/MetaExperience";
 import MetaJobPosteTess from "../models/MetaJobPosteDate";
 import MetaRoles from "../models/MetaRole";
 import MetaSkills from "../models/MetaSkill";
+import MetaCurrencies from "../models/MetaCurrency";
 import MetaLanguages from "../models/MetaLanguage";
 import MetaJobTypes from "../models/MetaJobType";
 import logger from "../util/logger";
@@ -68,6 +69,9 @@ const getCollection = (name) => {
   }
   if (name === "metalanguages") {
     return MetaLanguages;
+  }
+  if (name === "metacurrencies") {
+    return MetaCurrencies;
   }
 };
 
