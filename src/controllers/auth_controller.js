@@ -23,7 +23,10 @@ const login =
           res.send(err);
         }
 
-        const token = jwt.sign({ email: user.email }, "your_jwt_secret"); //this sign is just to ensure the content has not been chnage. but it dows not do any encription
+        const token = jwt.sign(
+          { email: user.email, domain: user.domain },
+          "your_jwt_secret"
+        ); //this sign is just to ensure the content has not been chnage. but it dows not do any encription
 
         return res.json({ token, user });
       });

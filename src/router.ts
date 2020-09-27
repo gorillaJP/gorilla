@@ -227,7 +227,10 @@ router.get(
       app.uiAppURL +
         uiLoginRedirect +
         "?jwt=" +
-        jwt.sign({ email: req.user.email }, "your_jwt_secret")
+        jwt.sign(
+          { email: req.user.email, domain: req.user.domain },
+          "your_jwt_secret"
+        )
     );
   }
 );
@@ -243,6 +246,7 @@ const getDomainVerificatonFilter = (allowedDomain: Domain) => {
   //return filter functons to verify the input domain
   /** Check if the toekn has the required role to access the url */
   return (req, res, next) => {
+    console.log(req.user);
     //if the domain in JWT payload (req.user.domain) is not the domain of this API => reject
     if (allowedDomain != req.user.domain) {
       res
