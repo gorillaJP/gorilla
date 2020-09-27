@@ -22,10 +22,8 @@ const login =
         if (err) {
           res.send(err);
         }
-        delete user.password;
-        delete user.username;
 
-        const token = jwt.sign(user, "your_jwt_secret"); //this sign is just to ensure the content has not been chnage. but it dows not do any encription
+        const token = jwt.sign({ email: user.email }, "your_jwt_secret"); //this sign is just to ensure the content has not been chnage. but it dows not do any encription
 
         return res.json({ token, user });
       });

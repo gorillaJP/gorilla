@@ -227,7 +227,7 @@ router.get(
       app.uiAppURL +
         uiLoginRedirect +
         "?jwt=" +
-        jwt.sign(req.user, "your_jwt_secret")
+        jwt.sign({ email: req.user.email }, "your_jwt_secret")
     );
   }
 );
