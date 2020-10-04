@@ -72,6 +72,15 @@ var CandidateProfileFields = {
       location: String,
     },
   ],
+  awards: [
+    {
+      order: Number,
+      name: String,
+      organization: String,
+      date: Date,
+      details: String,
+    },
+  ],
   resumes: [
     {
       label: String,

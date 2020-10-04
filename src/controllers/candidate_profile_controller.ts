@@ -57,23 +57,6 @@ const createCandidate = (req, res) => {
     });
 };
 
-/// ------------------------- EDUCATION
-
-//depricated
-/*
-const getCandidateEducation = (req, res) => {
-  CandidateEducation.find({ email: req.params.email, deleted: false })
-    .sort({ order: 1 })
-    .then((data) => {
-      res.status(HttpStatus.OK).send(success(data));
-    })
-    .catch((err) => {
-      logger.err(err);
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(success());
-    });
-};
-*/
-
 //create update on candidate profile
 const createOnProfile = (req, res) => {
   console.log(req.body._id);
@@ -147,7 +130,24 @@ const populatedUpdatedProfile = (newData, property, candidateDB) => {
     } else {
       candidateDB.experiences.push(newData);
     }
-
+  }
+  //awards
+  else if (property == "award") {
+    var _ids = [];
+    if (Array.isArray(newData)) {
+      _ids = newData.filter((nw) => nw._id).map((nw) => nw._id);
+      candidateDB.awards = candidateDB.awards.filter((award) => {
+        return !_ids.includes(String(award._id));
+      });
+      candidateDB.awards = candidateDB.awards.concat(newData);
+    } else if (newData._id) {
+      candidateDB.awards = candidateDB.awards.filter((award) => {
+        return award._id != newData._id;
+      });
+      candidateDB.awards.push(newData);
+    } else {
+      candidateDB.awards.push(newData);
+    }
     //resumes
   } else if (property == "resumes") {
     if (newData._id) {
@@ -174,6 +174,8 @@ const deleteOnProfile = (req, res) => {
       candidateDB.experiences.pull(req.params.id);
     } else if (req.params.property == "resume") {
       candidateDB.resumes.pull(req.params.id);
+    } else if (req.params.property == "award") {
+      candidateDB.awards.pull(req.params.id);
     }
     candidateDB
       .save()
@@ -186,102 +188,6 @@ const deleteOnProfile = (req, res) => {
       });
   });
 };
-
-// ----------------------------- END EDUCATION
-
-// ----------------------------- START EXPERIENCE
-//depricated
-/*
-const getCandidateExperience = (req, res) => {
-  CandidateExperience.find({ email: req.params.email, deleted: false })
-    .sort({ order: 1 })
-    .then((data) => {
-      res.status(HttpStatus.OK).send(success(data));
-    })
-    .catch((err) => {
-      logger.err(err);
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(success());
-    });
-};
-*/
-
-//use for create/update
-/*
-const createCandidateExperience = (req, res) => {
-  const options = {
-    upsert: true, //insert if not exist
-    new: true, //return the updated docuemnt
-  };
-  const key = req.body.id ? req.body.id : mongoose.Types.ObjectId(); //if the id is null set it. otherwise it will be inserted as null to db
-  CandidateExperience.findOneAndUpdate(
-    { _id: key, email: req.params.email },
-    req.body,
-    options,
-    (err, result) => {
-      if (err) {
-        res.status(HttpStatus.BAD_REQUEST);
-      } else {
-        res.status(HttpStatus.OK).send(success(result));
-      }
-    }
-  );
-};
-
-const deleteCandidateExperience = (req, res) => {
-  CandidateExperience.findByIdAndUpdate(
-    { _id: req.params.id, email: req.params.email },
-    { deleted: true },
-    (err, resutl) => {
-      if (err) {
-        res.status(HttpStatus.BAD_REQUEST).send();
-      } else {
-        res.status(HttpStatus.OK).send();
-      }
-    }
-  );
-};
-*/
-
-//create update experience
-/*
-const createCandidateExperience = (req, res) => {
-  CandidateProfile.findOne({ email: req.body.email })
-    .then((candidateDB) => {
-      candidateDB.experience.push(req.body);
-      candidateDB
-        .save()
-        .then((candidateSaved) => {
-          res.status(HttpStatus.OK).send(success(candidateSaved));
-        })
-        .catch((err) => {
-          logger.error(err);
-          res.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        });
-    })
-    .catch((err) => {
-      logger.error(err);
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
-    });
-};
-
-//delete experience
-const deleteCandidateExperience = (req, res) => {
-  CandidateProfile.findOne({ email: req.body.email }).then((candidateDB) => {
-    candidateDB.experience.pull(req.params.id);
-    candidateDB
-      .save()
-      .then((candidateSaved) => {
-        res.status(HttpStatus.OK).send(success(candidateSaved));
-      })
-      .catch((err) => {
-        logger.error(err);
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR);
-      });
-  });
-};
-*/
-
-//--------------------------------- END EXPERIENCE
 
 const verifyEmail = (req, res) => {
   CandidateProfile.findOneAndUpdate(
@@ -302,14 +208,8 @@ let sendSignUpCandidateEmail = (candidate): void => {
 };
 export default {
   createCandidate,
-  //  getCandidateEducation,
   createOnProfile,
   deleteOnProfile,
-  /*
-  getCandidateExperience,
-  createCandidateExperience,
-  deleteCandidateExperience,
-  */
   verifyEmail,
   candidateprofile,
 };
