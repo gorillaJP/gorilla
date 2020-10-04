@@ -45,9 +45,18 @@ var CandidateProfileFields = {
     type: String,
     select: false,
   },
-  homephonenumber: String,
-  birthdate: Date,
-  address: String,
+  //  homephonenumber: String,
+  //  birthdate: Date,
+  //  address: String,
+  personalInfo: {
+    homeTown: String,
+    address: String,
+    contactNumber: String,
+    dateOfBirth: Date,
+    gender: String,
+    martialStatus: String,
+    introduction: String,
+  },
   educations: [
     {
       order: Number,
