@@ -51,7 +51,8 @@ var CandidateProfileFields = {
   personalInfo: {
     homeTown: String,
     address: String,
-    contactNumber: String,
+    mobilePhoneNumber: String,
+    homePhoneNumber: String,
     dateOfBirth: Date,
     gender: String,
     martialStatus: String,

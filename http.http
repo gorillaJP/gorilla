@@ -119,8 +119,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 {
     "homeTown": "Colombo",
     "address": "Thalagaha Akmeemana",
-    "contactNumber": "+76484848489",
-    "dateOfBirth": "2009-11-17" ,
+    "mobilePhoneNumber": "+76484848489",
+    "homePhoneNumber" : "+91 2342342838",
+    "dateOfBirth": "2009-11-27" ,
     "gender": "male",
     "martialStatus": "single",
     "introduction": "Joseph A. Lopez (October 4, 1779 – October 5, 1841) was a Mexican Catholic priest who became a prominent ally of Emperor Agustín de Iturbide. As a priest in Peribán, he tried to arrest the first leader of the Mexican War of Independence, Miguel Hidalgo. Unsuccessful, he fled and became acquainted with Ana María Huarte, the wife of the future emperor of Mexico, Agustín de Iturbide. As a result, he was sent to Madrid to act as Iturbide's attorney and political informant, before returning to Mexico as chaplain and educator of the imperial family.0"
