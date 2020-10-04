@@ -58,6 +58,14 @@ var CandidateProfileFields = {
     martialStatus: String,
     introduction: String,
   },
+  jobPreference: {
+    industry: String,
+    category: String,
+    jobType: String,
+    role: String,
+    preferredLocatin: String,
+    expectedSalary: String,
+  },
   educations: [
     {
       order: Number,

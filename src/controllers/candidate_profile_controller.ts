@@ -96,8 +96,9 @@ const populatedUpdatedProfile = (newData, property, candidateDB) => {
     candidateDB.lastName = newData.lastName;
   } else if ("personalinfo" == property.toLowerCase()) {
     candidateDB.personalInfo = newData;
+  } else if ("jobpreference" == property.toLowerCase()) {
+    candidateDB.jobPreference = newData;
   }
-
   //education
   else if (property == "education") {
     var _ids = [];
