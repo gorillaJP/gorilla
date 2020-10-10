@@ -19,6 +19,7 @@ var CandidateProfileFields = {
   },
   firstName: String,
   lastName: String,
+  profileImage: String,
   email: {
     type: String,
     index: true,
@@ -63,8 +64,9 @@ var CandidateProfileFields = {
     category: String,
     jobType: String,
     role: String,
-    preferredLocatin: String,
+    preferredLocation: String,
     expectedSalary: String,
+    expectedSalaryCurrency: String,
   },
   educations: [
     {

@@ -120,12 +120,14 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 {
-    "industry": "Computer software / IT",
+    "industry": "Computer software IT",
     "category": "Software development",
     "jobType": "contract",
     "role": "java developer",
-    "preferredLocatin": "colombo",
-    "expectedSalary": "450000"
+    "preferredLocation": "colombo",
+    "expectedSalary": "450000",
+    "expectedSalaryCurrency": "LKR",
+
 }
 
 
@@ -144,6 +146,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
     "gender": "male",
     "martialStatus": "single",
     "introduction": "Joseph A. Lopez (October 4, 1779 – October 5, 1841) was a Mexican Catholic priest who became a prominent ally of Emperor Agustín de Iturbide. As a priest in Peribán, he tried to arrest the first leader of the Mexican War of Independence, Miguel Hidalgo. Unsuccessful, he fled and became acquainted with Ana María Huarte, the wife of the future emperor of Mexico, Agustín de Iturbide. As a result, he was sent to Madrid to act as Iturbide's attorney and political informant, before returning to Mexico as chaplain and educator of the imperial family.0"
+}
+
+
+###  candidate educaton (Support Upsert)
+### if the key is not presnet in body =>  take it as a post , othewise take it as a put
+POST {{proto}}://{{host}}:{{port}}/api/candidate/profileimage
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+{
+  "profileImage": "upload_5b3c0531f00a7c54fa7bd9b6bb65a5a81.png"
 }
 
 

@@ -96,6 +96,8 @@ const populatedUpdatedProfile = (newData, property, candidateDB) => {
     candidateDB.lastName = newData.lastName;
   } else if ("personalinfo" == property.toLowerCase()) {
     candidateDB.personalInfo = newData;
+  } else if ("profileimage" == property.toLowerCase()) {
+    candidateDB.profileImage = newData.profileImage;
   } else if ("jobpreference" == property.toLowerCase()) {
     candidateDB.jobPreference = newData;
   }
