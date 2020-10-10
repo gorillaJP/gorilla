@@ -90,10 +90,8 @@ const createOnProfile = (req, res) => {
 
 const populatedUpdatedProfile = (newData, property, candidateDB) => {
   //direct property update
-  if ("firstname" == property.toLowerCase()) {
-    candidateDB.firstName = newData.firstName;
-  } else if ("lastname" == property.toLowerCase()) {
-    candidateDB.lastName = newData.lastName;
+  if ("name" == property.toLowerCase()) {
+    candidateDB.name = newData.name;
   } else if ("personalinfo" == property.toLowerCase()) {
     candidateDB.personalInfo = newData;
   } else if ("profileimage" == property.toLowerCase()) {
