@@ -19,12 +19,14 @@ const appDev = {
   rootUrl: "http://localhost:8080/",
   uiAppURL: "http://localhost:3000/",
   verifyEmailRedirect: "http://localhost:3000/signin?login=initial",
+  uploadDir: "/Users/dimuthusenanayaka/apps/gorilla.lk",
 };
 
 const appProd = {
   rootUrl: "https://gorilla.lk/", //this is beause IPs are not accepted by google redirect URL
   uiAppURL: "https://gorilla.lk/",
   verifyEmailRedirect: "https://gorilla.lk/signin?login=initial",
+  uploadDir: "/apps/images/gorilla.lk",
 };
 
 let app;

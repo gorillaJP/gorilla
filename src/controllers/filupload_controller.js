@@ -3,14 +3,15 @@ import formidable from "formidable";
 import { success, error } from "../util/constants";
 import approotPath from "app-root-path";
 import { getMaxListeners } from "cluster";
+import { app } from "../config";
 
 const fileUpload = (req, res) => {
   //const rootDir = path.resolve(__dirname);
-  const uploadDir = "/apps/images/gorilla.lk";
+  //  const uploadDir = "/apps/images/gorilla.lk";
 
   //initiation formidable ( +validations)
   var form = new formidable.IncomingForm({
-    uploadDir: uploadDir,
+    uploadDir: app.uploadDir,
     //keepExtensions: true,   //here the extension is taken from the request Content-Disposition: form-data; name="image"; filename="1.png"
     maxFileSizeA: 4 * 1024 * 1024,
     maxFieldsSize: 5 * 1024 * 1024,
