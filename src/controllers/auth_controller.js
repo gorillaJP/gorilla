@@ -33,6 +33,11 @@ const login =
     })(req, res, next);
   });
 
+const logout = (req, res) => {
+  console.log("fun fun a");
+  return res.status(200).send();
+};
+
 //passport.authenticate("google",  { here in the first passport.authnticate => the request will  go to google to get the token
 /*
 app.get(
@@ -80,4 +85,10 @@ const loginWithToken = (req, res) => {
   });
 };
 
-export default { login, authGoogle, authGoogleCallBack, loginWithToken };
+export default {
+  login,
+  logout,
+  authGoogle,
+  authGoogleCallBack,
+  loginWithToken,
+};

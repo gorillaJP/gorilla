@@ -18,6 +18,7 @@ import job_add_controller from "./controllers/job_add_controller";
 import job_add_search_controller from "./controllers/job_add_search_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
+import Candidate from "./models/CandidateProfile";
 
 const router = express.Router();
 
@@ -35,6 +36,13 @@ const routes = [
     roles: [],
     path: "/hellosecure",
     controller: hello_controller.helloSecure,
+  },
+  {
+    method: "get",
+    auth: true,
+    domain: [Domain.CANDIDATE, Domain.EMPLOYER],
+    path: "/logout",
+    controller: auth_controller.logout,
   },
   {
     method: "post",
@@ -242,21 +250,25 @@ const authFilter = passport.authenticate("jwt", { session: false }); //call JWT 
 
 //domain is hoisted
 //domain to which API is opend
-const getDomainVerificatonFilter = (allowedDomain: Domain) => {
+const getDomainVerificatonFilter = (allowedDomain) => {
   //return filter functons to verify the input domain
   /** Check if the toekn has the required role to access the url */
   return (req, res, next) => {
-    console.log(req.user);
     //if the domain in JWT payload (req.user.domain) is not the domain of this API => reject
-    if (allowedDomain != req.user.domain) {
+
+    if (
+      (Array.isArray(allowedDomain) &&
+        allowedDomain.includes(req.user.domain)) ||
+      allowedDomain == req.user.domain
+    ) {
+      next();
+    } else {
       res
         .status(401)
         .send(
           "Authorization failure. not allowed to acces this api for domain" +
             req.user.domain
         );
-    } else {
-      next();
     }
   };
 };
