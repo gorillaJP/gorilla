@@ -26,7 +26,7 @@ const appProd = {
   rootUrl: "https://gorilla.lk/", //this is beause IPs are not accepted by google redirect URL
   uiAppURL: "https://gorilla.lk/",
   verifyEmailRedirect: "https://gorilla.lk/signin?login=initial",
-  uploadDir: "/apps/images/gorilla.lk",
+  uploadDir: "/apps/files/gorilla.lk",
 };
 
 let app;
