@@ -1,4 +1,4 @@
-import config from "config";
+import { app as appConf } from "./config";
 import path from "path";
 import formidable from "formidable";
 import express from "express";
@@ -24,7 +24,7 @@ const hscert = fs.readFileSync("./src/keys/server.cert", "utf8");
 const app = express();
 app.use(cors());
 app.use(compression());
-app.use(express.static("/apps/images/gorilla.lk"));
+app.use(express.static(appConf.uploadDir));
 
 /*
 app.use(

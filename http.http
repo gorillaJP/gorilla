@@ -323,6 +323,8 @@ Content-Type: image/png
 ### read file
 GET {{proto}}://{{host}}:{{port}}/upload_5b3c0531f00a7c54fa7bd9b6bb65a5a81.png
 
+### read file
+GET {{proto}}://{{host}}:{{port}}/resume/upload_b5aa14a7bb788ceffe167c730caeda3c1.png
 
 ###
 

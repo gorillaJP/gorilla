@@ -216,6 +216,12 @@ const routes = [
     controller: fileupload_controller.fileUpload,
   },
   {
+    method: "post",
+    auth: false,
+    path: "/file/:category", //catagory can be image/resume
+    controller: fileupload_controller.fileUpload,
+  },
+  {
     method: "get",
     auth: false,
     path: "/auth/google/success",

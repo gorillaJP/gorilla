@@ -4,14 +4,21 @@ import { success, error } from "../util/constants";
 import approotPath from "app-root-path";
 import { getMaxListeners } from "cluster";
 import { app } from "../config";
+import { completionSuggester } from "elastic-builder";
 
 const fileUpload = (req, res) => {
-  //const rootDir = path.resolve(__dirname);
-  //  const uploadDir = "/apps/images/gorilla.lk";
+  const category = req.params.category;
 
-  //initiation formidable ( +validations)
+  //validation for the category
+  if (category) {
+    if (category != "resume" && category != "image") {
+      res.status(400).send();
+      return;
+    }
+  }
+
   var form = new formidable.IncomingForm({
-    uploadDir: app.uploadDir,
+    uploadDir: app.uploadDir + (category ? "/" + category : ""),
     //keepExtensions: true,   //here the extension is taken from the request Content-Disposition: form-data; name="image"; filename="1.png"
     maxFileSizeA: 4 * 1024 * 1024,
     maxFieldsSize: 5 * 1024 * 1024,
@@ -32,7 +39,7 @@ const fileUpload = (req, res) => {
       files.file.path = files.file.path.split("/").pop(); //get only the file name
       res.send(
         success({
-          file: files.file.path,
+          file: (category ? category + "/" : "") + files.file.path,
           label: files.file.name,
         })
       );
@@ -45,39 +52,3 @@ const fileUpload = (req, res) => {
 };
 
 export default { fileUpload };
-
-/**
- form
-    .on('error', function(err) {
-        throw err;
-    })
-
-    .on('field', function(field, value) {
-        //receive form fields here
-    })
-
-    // this is where the renaming happens 
-    .on ('fileBegin', function(name, file){
-      //rename the incoming file to the file's name
-      file.path = form.uploadDir + "/" + file.name;
-})
-
-.on('file', function(field, file) {
-  //On file received
-})
-
-.on('progress', function(bytesReceived, bytesExpected) {
-  //self.emit('progess', bytesReceived, bytesExpected)
-
-  var percent = (bytesReceived / bytesExpected * 100) | 0;
-  process.stdout.write('Uploading: %' + percent + '\r');
-})
-
-.on('end', function() {
-
-
-});
-
-form.parse(req); 
- * 
- */
