@@ -126,8 +126,7 @@ passport.use(
     },
     (request, accessToken, refreshToken, profile, done) => {
       const candidate = {
-        firstname: profile.given_name,
-        lastname: profile.family_name,
+        name: profile.given_name + " " + profile.family_name,
         email: profile.email,
         createdthrough: "google",
       };
