@@ -310,7 +310,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 
 ### Upload company photo
 
-POST {{proto}}://{{host}}:{{port}}/api/file
+POST {{proto}}://{{host}}:{{port}}/api/file/resume
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
