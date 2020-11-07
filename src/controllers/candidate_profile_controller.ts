@@ -92,6 +92,8 @@ const populatedUpdatedProfile = (newData, property, candidateDB) => {
   //direct property update
   if ("name" == property.toLowerCase()) {
     candidateDB.name = newData.name;
+  } else if ("visibletoemployers" == property.toLowerCase()) {
+    candidateDB.visibleToEmployers = newData.visibleToEmployers;
   } else if ("personalinfo" == property.toLowerCase()) {
     candidateDB.personalInfo = newData;
   } else if ("profileimage" == property.toLowerCase()) {

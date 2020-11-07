@@ -25,6 +25,10 @@ var CandidateProfileFields = {
     unique: true,
     required: true,
   },
+  visibleToEmployers: {
+    type: Boolean,
+    default: false,
+  },
   emailverified: {
     default: false,
   },
