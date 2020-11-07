@@ -116,6 +116,7 @@ content-type: application/json
         },
         "industry": {
           "type": "text",
+          "fielddata": true,
           "fields": {
             "keyword": {
               "type": "keyword",
@@ -139,11 +140,17 @@ content-type: application/json
         },
         "location": {
           "type": "text",
+          "fielddata": true,
           "fields": {
             "keyword": {
               "type": "keyword",
               "ignore_above": 256
-            }
+            },
+           "full_string": {
+					   	"type": "text",
+						   "analyzer": "full_string_analyzer",
+               "fielddata": true
+					 }
           }
         },
         "notifyEmail": {

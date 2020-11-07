@@ -446,6 +446,29 @@ GET http://206.189.133.87:9200/gorilla.jobadds/_settings
 content-type: application/json
 
 
+
+###
+POST http://206.189.133.87:9200/gorilla.jobadds/_search?size=0
+content-type: application/json
+
+{
+   "size":0,
+   "aggs":{
+      "location":{
+         "terms":{
+            "field":"location"
+         },
+         "aggs":{
+            "industry":{
+               "terms":{
+                  "field":"industry"
+               }
+            }
+         }
+      }
+   }
+}
+
 ###
 POST http://206.189.133.87:9200/gorilla.jobadds/_search?size=0
 content-type: application/json
