@@ -16,6 +16,7 @@ import passport from "passport";
 import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
 import job_add_search_controller from "./controllers/job_add_search_controller";
+import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
 import Candidate from "./models/CandidateProfile";
@@ -95,6 +96,12 @@ const routes = [
     auth: false,
     path: "/jobadds",
     controller: job_add_controller.postJobs,
+  },
+  {
+    method: "get",
+    auth: false,
+    path: "/jobsummary/industry",
+    controller: job_summary_controller.sumaryByIndustry,
   },
   {
     method: "get",

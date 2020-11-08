@@ -428,6 +428,11 @@ Content-Type: image/png
 
 GET {{proto}}://{{host}}:{{port}}/api/matrix/industry
 
+### Job Summary By location
+
+GET {{proto}}://{{host}}:{{port}}/api/jobsummary/industry
+
+
 ############### DIRECT ElasticSearch ########################
 
 ###
