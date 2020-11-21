@@ -1,4 +1,9 @@
 
+DELETE http://206.189.133.87:9200/gorilla.autocomplete
+content-type: application/json
+
+
+
 ###
 PUT http://206.189.133.87:9200/gorilla.autocomplete
 content-type: application/json
