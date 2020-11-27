@@ -16,6 +16,7 @@ import passport from "passport";
 import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
 import job_add_search_controller from "./controllers/job_add_search_controller";
+import job_application_controller from "./controllers/job_application_controller";
 import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
@@ -235,6 +236,21 @@ const routes = [
     controller: (req, res) => {
       res.send("SUCCESS LAA");
     },
+  },
+  //apply for job
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/application",
+    controller: job_application_controller.get_jobs_applied_by_candidate,
+  },
+  {
+    method: "post",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/application",
+    controller: job_application_controller.candidate_apply_for_a_job,
   },
 ];
 

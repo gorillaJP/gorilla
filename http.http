@@ -857,3 +857,25 @@ PUT /my-index/_mapping
     }
   }
 }
+
+
+
+#### Apply for a Job by an candidate
+POST {{proto}}://{{host}}:{{port}}/api/application
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+{
+    "jobId" : "2349823yuashdflahf92032y0uahsldufasf23" , 
+    "name" : "Dimuthu Senanayaka",
+    "expectedSalary" : "40'000 - 65,000 LKR",
+    "pitch": " I am suitable for this job",
+    "phoneNumber": "+65 9100 2505",
+    "questionerAnswersId" : "asdfasdf"
+}
+
+
+#### Apply for a Job by an candidate
+GET {{proto}}://{{host}}:{{port}}/api/application
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+content-type: application/json

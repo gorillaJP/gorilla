@@ -54,6 +54,12 @@ const getJobsPaginated = (req, res) => {
   });
 };
 
+const getCandidateAppliedJobs = (email) => {
+
+
+  
+};
+
 const buildQuery = (qObj, limit, offset) => {
   const fuzzySearchFields: string[] = ["company", "title", "overview"]; // taken to multimatch field
 
