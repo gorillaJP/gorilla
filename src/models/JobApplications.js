@@ -19,10 +19,19 @@ var JobApplicationFields = {
   phoneNumber: {
     type: String,
   },
-  expectedSalary: {
+  salaryMin: {
+    type: String,
+  },
+  salaryMax: {
+    type: String,
+  },
+  salaryCurrency: {
     type: String,
   },
   name: {
+    type: String,
+  },
+  resume: {
     type: String,
   },
   pitch: {

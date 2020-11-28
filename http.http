@@ -868,7 +868,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 {
     "jobId" : "2349823yuashdflahf92032y0uahsldufasf23" , 
     "name" : "Dimuthu Senanayaka",
-    "expectedSalary" : "40'000 - 65,000 LKR",
+    "salaryMin" : "40000",
+    "salaryMax" : "50000",
+    "salaryCurrency" : "LKR",
     "pitch": " I am suitable for this job",
     "phoneNumber": "+65 9100 2505",
     "questionerAnswersId" : "asdfasdf"
