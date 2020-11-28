@@ -31,9 +31,7 @@ const candidate_apply_for_a_job = (req, res) => {
 const get_jobs_applied_by_candidate = (req, res) => {
   console.log(req.body.email);
   JobApplication.find({ email: req.body.email }).then((candidateDB) => {
-    res.json({
-      user: candidateDB,
-    }); //here the req.user is set by the auth filter ( read from the token itself)
+    res.send(success(candidateDB));
   });
 };
 
