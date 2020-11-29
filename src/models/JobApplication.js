@@ -13,16 +13,10 @@ var JobApplicationFields = {
     type: String,
     index: true,
   },
-  resume: {
-    type: String,
-  },
   phoneNumber: {
     type: String,
   },
-  salaryMin: {
-    type: String,
-  },
-  salaryMax: {
+  expectedSalary: {
     type: String,
   },
   salaryCurrency: {
