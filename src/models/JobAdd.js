@@ -69,6 +69,14 @@ var jobAdd = {
     type: Boolean,
     default: false,
   },
+  applyExternally: {
+    type: Boolean,
+    default: false,
+  },
+  applyExternalUrl: {
+    type: String,
+    default: false,
+  },
 };
 
 var jobAddSchema = new mongoose.Schema(jobAdd, {

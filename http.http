@@ -63,7 +63,7 @@ content-type: application/json
 }
 
 ###
-GET {{proto}}://{{host}}:8080/api/jobadds?q=java&location=kandy&location=colombo&type=contract
+GET {{proto}}://{{host}}:{{port}}/api/jobadds?q=java&location=kandy&location=colombo&type=contract
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55Ijp7ImlkIjoiNWU5MGFhM2I1OGU3MjI3NmFiOTE1NGQ4In0sImZpcnN0bmFtZSI6IkRpbXV0aHUiLCJsYXN0bmFtZSI6IlNlbmFuYXlha2EiLCJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJwaG9uZW51bWJlciI6Ijg0OTQ0NDc0NCIsImRvbWFpbiI6ImVtcGxveWVyIiwiaWQiOiI1ZTkwYWEzYjU4ZTcyMjc2YWI5MTU0ZDciLCJpYXQiOjE1ODY2MTcxNDl9.5y5oX-9s-gLDHRUup3v3uguc2OvX6BtIkSzY5siuZGk 
 content-type: application/json
 
@@ -393,12 +393,12 @@ content-type: application/json
 POST http://example.com/api/upload
 ###
 
-POST {{proto}}://{{host}}:{{port}}/api/HTTP/1.1
+POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
 content-type: application/json
 
 {
- "company" : "Sampath Bank",
- "title" : "Coparate banker",
+ "company" : "Com Bank",
+ "title" : "Com banker",
  "overview" : "project manager with telecommunication backgroud" ,
  "description" : "looking for a talented coparate banker",
  "location" : "Colombo",
@@ -414,7 +414,9 @@ content-type: application/json
  "expireDate" : 1598998690472 ,
  "notifyEmail" : "dim912@gmailcom",
  "redirectURL" : "carrers@gorilla.lk",
- "skills" : [ "account handling" , "front desk", "banking", "account"] 
+ "skills" : [ "account handling" , "front desk", "banking", "account"] ,
+ "applyExternally" : true ,
+ "applyExternalUrl" :  "www.combank.lk/careers/234"
 }
 
 ### 
