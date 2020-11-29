@@ -17,6 +17,7 @@ import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
 import job_add_search_controller from "./controllers/job_add_search_controller";
 import job_application_controller from "./controllers/job_application_controller";
+import job_saved_controller from "./controllers/job_saved_controller";
 import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
@@ -250,6 +251,28 @@ const routes = [
     auth: true,
     path: "/application",
     controller: job_application_controller.candidate_apply_for_a_job,
+  },
+  //save a job
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/savedjob",
+    controller: job_saved_controller.get_jobs_saved_by_candidate,
+  },
+  {
+    method: "post",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/savedjob",
+    controller: job_saved_controller.candidate_apply_for_a_job,
+  },
+  {
+    method: "delete",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/savedjob/:id",
+    controller: job_saved_controller.delete_jobs_saved_by_candidate,
   },
 ];
 

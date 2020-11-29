@@ -2,7 +2,7 @@ import * as HttpStatus from "http-status-codes";
 import { mongooseErrorToRes } from "../models/MongoUtil";
 import _ from "lodash";
 import logger from "../util/logger";
-import JobApplication from "../models/JobApplication";
+import JobSaved from "../models/JobSaved";
 import { success, error } from "../util/constants";
 
 /**
@@ -10,9 +10,9 @@ import { success, error } from "../util/constants";
  */
 
 const candidate_apply_for_a_job = (req, res) => {
-  const jobApplication = new JobApplication(req.body);
+  const jobSaved = new JobSaved(req.body);
 
-  jobApplication
+  jobSaved
     .save()
     .then((resp) => {
       res.status(HttpStatus.OK).send(success(resp));
@@ -25,11 +25,27 @@ const candidate_apply_for_a_job = (req, res) => {
     });
 };
 
-const get_jobs_applied_by_candidate = (req, res) => {
+const get_jobs_saved_by_candidate = (req, res) => {
   console.log(req.body.email);
-  JobApplication.find({ email: req.body.email }).then((candidateDB) => {
+  JobSaved.find({ email: req.body.email }).then((candidateDB) => {
     res.send(success(candidateDB));
   });
 };
 
-export default { candidate_apply_for_a_job, get_jobs_applied_by_candidate };
+const delete_jobs_saved_by_candidate = (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body.email);
+  const idToRemove = req.params.id;
+  JobSaved.findOneAndRemove({ _id: idToRemove, email: req.body.email }).then(
+    (x) => {
+      console.log(x);
+      res.status(HttpStatus.OK).send();
+    }
+  );
+};
+
+export default {
+  candidate_apply_for_a_job,
+  get_jobs_saved_by_candidate,
+  delete_jobs_saved_by_candidate,
+};

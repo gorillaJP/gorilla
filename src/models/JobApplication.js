@@ -43,7 +43,11 @@ var JobApplicationFields = {
 };
 
 var JobApplicationSchema = new mongoose.Schema(JobApplicationFields, {
-  autoCreate: true,
+  timestamps: {
+    createdAt: "createdat",
+    updatedAt: "updatedat",
+    autoCreate: true,
+  },
 });
 
 JobApplicationSchema.plugin(uniqueValidator, {

@@ -884,8 +884,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
     "questionerAnswersId" : "asdfasdf Funkey"
 }
 
-
 #### Apply for a Job by an candidate
 GET {{proto}}://{{host}}:{{port}}/api/application
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+content-type: application/json
+
+
+#### Apply for a Job by an candidate
+GET {{proto}}://{{host}}:{{port}}/api/savedjob
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+content-type: application/json
+
+#### POST saved jobs
+POST {{proto}}://{{host}}:{{port}}/api/savedjob
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+{
+    "jobId" : "5e3851723c1e351f0cfe0ef5" , 
+}
+
+
+#### Apply for a Job by an candidate
+DELETE {{proto}}://{{host}}:{{port}}/api/savedjob/5fc3724d59b42608021895bd
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 content-type: application/json

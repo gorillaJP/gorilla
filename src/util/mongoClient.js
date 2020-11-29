@@ -5,6 +5,7 @@ const connection = new Promise((resolve, reject) => {
   mongoose.connect(config.mongourl, {
     useNewUrlParser: true,
     autoReconnect: true,
+    useFindAndModify: false,
     reconnectInterval: 10000,
   });
   //    mongoose.set('debug', true);
