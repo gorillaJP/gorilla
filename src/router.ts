@@ -20,7 +20,6 @@ import job_application_controller from "./controllers/job_application_controller
 import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
-import Candidate from "./models/CandidateProfile";
 
 const router = express.Router();
 
@@ -337,6 +336,7 @@ const getRoleVerificationFilter = (allowedRoles: Array<Role>) => {
 routes.forEach((route) => {
   console.log("adding a rout to :", route.method, route.path, route.domain);
 
+  //where authntication is mandatory
   if (route.auth) {
     //JWT extraction
     router[route.method](route.path, authFilter); //middleware to check the JWT token and, decode JWT stratergy. this filter append req.user from decoded jwt
@@ -344,9 +344,6 @@ routes.forEach((route) => {
     //the email in the request body is not trusted => becaue of that => replace it with what is found from JWT token
     router[route.method](route.path, (req, res, next) => {
       req.body.email = req.user.email; //
-      console.log("^^^");
-      console.log(req.body);
-      console.log("^^^");
       next();
     }); //middleware to check the JWT token and, decode JWT stratergy
 
@@ -362,10 +359,29 @@ routes.forEach((route) => {
       getRoleVerificationFilter(route.roles), //check if the the loggin user has the reqired dole ( authorizention)
       route.controller
     );
+    //authntication is not mandatory
+  } else {
+    router[route.method](
+      route.path,
+      (req, res, next) => {
+        //if the token is available -> it should be a valid token -> then extract the user -> and set to the req body, so that the controller can use it to get the logged in user information
+        if (req.headers.authorization) {
+          passport.authenticate("jwt", function (err, user, info) {
+            if (user) {
+              req.body.email = user.email;
+              next();
+            } else {
+              res.status(401).send();
+            }
+          })(req, res, next);
+          //if no token is available -> just skip
+        } else {
+          next();
+        }
+      },
+      route.controller
+    );
   }
-
-  //non protected filters
-  router[route.method](route.path, route.controller);
 });
 
 export default router;

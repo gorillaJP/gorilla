@@ -3,6 +3,7 @@ import _ from "lodash";
 import * as esb from "elastic-builder";
 import logger from "../util/logger";
 import JobAdd from "../models/JobAdd";
+import JobApplication from "../models/JobApplication";
 import { success, error } from "../util/constants";
 
 const maxNumberOfResults = 50; // ceil at 50 records
@@ -11,6 +12,14 @@ const maxNumberOfResults = 50; // ceil at 50 records
  */
 
 const getJobsPaginated = (req, res) => {
+  console.log(req.body.email);
+
+  /*
+  JobApplication.find({ email: "dim912@gmail.com" }).then((p) => {
+    console.log(p);
+  });
+  */
+
   const correlationId = res.getHeaders()["x-request-id"];
   const startHrTime = process.hrtime();
 
@@ -54,11 +63,7 @@ const getJobsPaginated = (req, res) => {
   });
 };
 
-const getCandidateAppliedJobs = (email) => {
-
-
-  
-};
+const getCandidateAppliedJobs = (email) => {};
 
 const buildQuery = (qObj, limit, offset) => {
   const fuzzySearchFields: string[] = ["company", "title", "overview"]; // taken to multimatch field

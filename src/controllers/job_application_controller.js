@@ -4,7 +4,7 @@ import _ from "lodash";
 import * as esb from "elastic-builder";
 import logger from "../util/logger";
 import JobAdd from "../models/JobAdd";
-import JobApplication from "../models/JobApplications";
+import JobApplication from "../models/JobApplication";
 import { success, error } from "../util/constants";
 import { readdir } from "fs";
 
