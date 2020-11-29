@@ -12,6 +12,8 @@ import meta_controller from "./controllers/meta_controller";
 import autocomplete_controller from "./controllers/autocomplete_controller";
 import fileupload_controller from "./controllers/filupload_controller";
 import matrix_controller from "./controllers/matrixe_controller";
+import questioner_controller from "./controllers/questioner_controller";
+
 import passport from "passport";
 import { logFilter } from "./filters/filter";
 import job_add_controller from "./controllers/job_add_controller";
@@ -273,6 +275,19 @@ const routes = [
     auth: true,
     path: "/savedjob/:id",
     controller: job_saved_controller.delete_jobs_saved_by_candidate,
+  },
+  {
+    method: "post",
+    auth: false,
+    path: "/questioner",
+    controller: questioner_controller.create_questioner,
+  },
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/questioner/:id",
+    controller: questioner_controller.get_questioner_by_id,
   },
 ];
 

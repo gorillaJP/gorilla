@@ -915,3 +915,60 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 DELETE {{proto}}://{{host}}:{{port}}/api/savedjob/5fc39b4fdbbe6f116bf63218
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 content-type: application/json
+
+
+#### Create a Questioner
+POST {{proto}}://{{host}}:{{port}}/api/questioner
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+{
+   "questions": [
+     {
+       "type" : "single_select",
+       "desc" : "select city where you wish to work the most",
+      "answerOptions" : [
+        {
+          "desc" : "Colombo"
+        },
+        {
+          "desc" : "Galle"
+        },
+        {
+          "desc" : "Kandy"
+        },
+        {
+          "desc" : "Sigiriya"
+        }
+      ]
+     },
+     {
+       "type" : "multi_select",
+       "desc" : "select languages that you can speak",
+      "answerOptions" : [
+        {
+          "desc" : "French"
+        },
+        {
+          "desc" : "English"
+        },
+        {
+          "desc" : "German"
+        },
+        {
+          "desc" : "Chineese"
+        }
+      ]
+     },
+     {
+       "type" : "essay",
+       "desc" : "Explain your experince as a tour guide in Sri Lanka ?"
+     }
+   ]
+}
+
+
+###
+GET {{proto}}://{{host}}:{{port}}/api/questioner/5fc3e48c8ca9cd2a198813f9
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
