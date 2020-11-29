@@ -181,7 +181,7 @@ const formatResposne = (esResults, limit, offset, jobApplications) => {
       limit,
       offset,
     },
-    esResults: res,
+    data: res,
   };
 };
 
