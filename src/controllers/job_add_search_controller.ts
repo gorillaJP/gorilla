@@ -14,12 +14,6 @@ const maxNumberOfResults = 50; // ceil at 50 records
 const getJobsPaginated = (req, res) => {
   console.log(req.body.email);
 
-  /*
-  JobApplication.find({ email: "dim912@gmail.com" }).then((p) => {
-    console.log(p);
-  });
-  */
-
   const correlationId = res.getHeaders()["x-request-id"];
   const startHrTime = process.hrtime();
 
@@ -33,34 +27,56 @@ const getJobsPaginated = (req, res) => {
       : maxNumberOfResults;
   logger.info("OUT" + " getJobsPaginated" + " " + correlationId);
 
-  JobAdd.esSearch(buildQuery(req.query, limit, offset), (err, results) => {
-    const elapsedHrTime = process.hrtime(startHrTime);
-    const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
+  //search jobs in elastic search
+  let esSearchP = new Promise((resolve, reject) => {
+    JobAdd.esSearch(buildQuery(req.query, limit, offset), (err, results) => {
+      const elapsedHrTime = process.hrtime(startHrTime);
+      const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
 
-    if (err) {
-      JSON.stringify("Error", err);
-    }
+      if (err) {
+        JSON.stringify("Error", err);
+      }
 
-    logger.info(
-      "OUT-IN" +
-        " getJobsPaginatedd" +
-        " " +
-        correlationId +
-        " " +
-        elapsedTimeInMs
-    );
-    if (
-      //check if the response from mongo is proper
-      results &&
-      results.body &&
-      results.body.hits &&
-      results.body.hits.hits
-    ) {
-      res.status(200).send(success(formatResposne(results, limit, offset)));
-      return;
-    }
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      logger.info(
+        "OUT-IN" +
+          " getJobsPaginatedd" +
+          " " +
+          correlationId +
+          " " +
+          elapsedTimeInMs
+      );
+      if (
+        //check if the response from mongo is proper
+        results &&
+        results.body &&
+        results.body.hits &&
+        results.body.hits.hits
+      ) {
+        resolve(results);
+      } else {
+        reject("error reading from ES");
+      }
+    });
   });
+
+  //read applied jobs from mongoDB
+  let jobApplications;
+  if (req.body.email) {
+    jobApplications = JobApplication.find({ email: req.body.email });
+  } else {
+    jobApplications = Promise.resolve([]);
+  }
+
+  //once both ES (search results) and Mongo(Applied jobs) are resoved -> respond to UI
+  Promise.all([esSearchP, jobApplications])
+    .then((vals) => {
+      res
+        .status(200)
+        .send(success(formatResposne(vals[0], limit, offset, vals[1])));
+    })
+    .catch((err) => {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    });
 };
 
 const getCandidateAppliedJobs = (email) => {};
@@ -141,19 +157,31 @@ const buildQuery = (qObj, limit, offset) => {
 
 //featured jobs
 
-const formatResposne = (data, limit, offset) => {
-  const res = data.body.hits.hits.map((u) => {
+const formatResposne = (esResults, limit, offset, jobApplications) => {
+  const res = esResults.body.hits.hits.map((u) => {
     u._source._id = u._id;
+
+    //check if the logged in user has already applied for this job
+    var matchingApplication = jobApplications.find((application) => {
+      return application.jobId == u._id;
+    });
+
+    if (matchingApplication) {
+      u._source.hasApplied = true;
+    } else {
+      u._source.hasApplied = false;
+    }
+
     return u._source;
   });
 
   return {
     meta: {
-      total: data.body.hits.total.value,
+      total: esResults.body.hits.total.value,
       limit,
       offset,
     },
-    data: res,
+    esResults: res,
   };
 };
 
