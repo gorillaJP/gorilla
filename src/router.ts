@@ -12,7 +12,7 @@ import meta_controller from "./controllers/meta_controller";
 import autocomplete_controller from "./controllers/autocomplete_controller";
 import fileupload_controller from "./controllers/filupload_controller";
 import matrix_controller from "./controllers/matrixe_controller";
-import questioner_controller from "./controllers/questioner_controller";
+import questionnaire_controller from "./controllers/questionnaire_controller";
 
 import passport from "passport";
 import { logFilter } from "./filters/filter";
@@ -279,15 +279,15 @@ const routes = [
   {
     method: "post",
     auth: false,
-    path: "/questioner",
-    controller: questioner_controller.create_questioner,
+    path: "/questionnaire",
+    controller: questionnaire_controller.create_questionnaire,
   },
   {
     method: "get",
     domain: [Domain.CANDIDATE],
     auth: true,
-    path: "/questioner/:id",
-    controller: questioner_controller.get_questioner_by_id,
+    path: "/questionnaire/:id",
+    controller: questionnaire_controller.get_questionnaire_by_id,
   },
 ];
 

@@ -31,7 +31,7 @@ var JobApplicationFields = {
   pitch: {
     type: String,
   },
-  questionerAnswersId: {
+  questionnaireAnswersId: {
     type: String,
   },
 };

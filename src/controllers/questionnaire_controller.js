@@ -1,12 +1,12 @@
-import Questioner from "../models/Questioner";
+import questionnaire from "../models/questionnaire";
 import { success, error } from "../util/constants";
 import HttpStatus from "http-status-codes";
-import Questiner from "../models/Questioner";
+import Questiner from "../models/questionnaire";
 
-const create_questioner = (req, res) => {
-  const questioner = new Questiner(req.body);
+const create_questionnaire = (req, res) => {
+  const questionnaire = new Questiner(req.body);
 
-  questioner
+  questionnaire
     .save()
     .then((q) => {
       res.send(q);
@@ -16,8 +16,9 @@ const create_questioner = (req, res) => {
     });
 };
 
-const get_questioner_by_id = (req, res) => {
-  Questioner.findById(req.params.id)
+const get_questionnaire_by_id = (req, res) => {
+  questionnaire
+    .findById(req.params.id)
     .exec()
     .then((data) => {
       res.status(200).send(success(data));
@@ -28,4 +29,4 @@ const get_questioner_by_id = (req, res) => {
     });
 };
 
-export default { create_questioner, get_questioner_by_id };
+export default { create_questionnaire, get_questionnaire_by_id };

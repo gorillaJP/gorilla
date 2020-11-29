@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import normalize from "normalize-mongoose";
 
-var questionerFields = {
+var questionnaireFields = {
   questions: [
     {
       order: {
@@ -27,15 +27,15 @@ var questionerFields = {
   ],
 };
 
-var questionerSchema = new mongoose.Schema(questionerFields, {
+var questionnaireSchema = new mongoose.Schema(questionnaireFields, {
   timestamps: {
     createdAt: "createdat",
     updatedAt: "updatedat",
   },
 });
 
-questionerSchema.plugin(normalize); //replace _id with id and remove v
+questionnaireSchema.plugin(normalize); //replace _id with id and remove v
 
-var Questiner = mongoose.model("Questioner", questionerSchema);
+var Questiner = mongoose.model("questionnaire", questionnaireSchema);
 
 export default Questiner;
