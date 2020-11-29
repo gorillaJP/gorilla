@@ -4,6 +4,7 @@ import * as esb from "elastic-builder";
 import logger from "../util/logger";
 import JobAdd from "../models/JobAdd";
 import JobApplication from "../models/JobApplication";
+import JobSaved from "../models/JobSaved";
 import { success, error } from "../util/constants";
 
 const maxNumberOfResults = 50; // ceil at 50 records
@@ -61,18 +62,23 @@ const getJobsPaginated = (req, res) => {
 
   //read applied jobs from mongoDB
   let jobApplications;
+  let jobSaveds;
   if (req.body.email) {
     jobApplications = JobApplication.find({ email: req.body.email });
+    jobSaveds = JobSaved.find({ email: req.body.email });
   } else {
     jobApplications = Promise.resolve([]);
+    jobSaveds = Promise.resolve([]);
   }
 
   //once both ES (search results) and Mongo(Applied jobs) are resoved -> respond to UI
-  Promise.all([esSearchP, jobApplications])
+  Promise.all([esSearchP, jobApplications, jobSaveds])
     .then((vals) => {
       res
         .status(200)
-        .send(success(formatResposne(vals[0], limit, offset, vals[1])));
+        .send(
+          success(formatResposne(vals[0], limit, offset, vals[1], vals[2]))
+        );
     })
     .catch((err) => {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
@@ -156,8 +162,13 @@ const buildQuery = (qObj, limit, offset) => {
 };
 
 //featured jobs
-
-const formatResposne = (esResults, limit, offset, jobApplications) => {
+const formatResposne = (
+  esResults,
+  limit,
+  offset,
+  jobApplications,
+  jobSaves
+) => {
   const res = esResults.body.hits.hits.map((u) => {
     u._source._id = u._id;
 
@@ -166,10 +177,21 @@ const formatResposne = (esResults, limit, offset, jobApplications) => {
       return application.jobId == u._id;
     });
 
+    var matchingJobSave = jobSaves.find((jobSave) => {
+      return jobSave.jobId == u._id;
+    });
+
+    //is logged in candidate applied for this job ?
     if (matchingApplication) {
       u._source.hasApplied = true;
     } else {
       u._source.hasApplied = false;
+    }
+    //is logged in candidate has saved this job
+    if (matchingJobSave) {
+      u._source.hasSaved = true;
+    } else {
+      u._source.hasSaved = false;
     }
 
     return u._source;
