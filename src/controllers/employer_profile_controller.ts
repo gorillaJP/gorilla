@@ -2,7 +2,7 @@ import EmployerProfile from "../models/EmployerProfile";
 import CompanyProfile from "../models/CompanyProfile";
 import { success, error } from "../util/constants";
 import * as HttpStatus from "http-status-codes";
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 import { Email, emailSend, EmailTemeplate } from "../util/emailer";
 import { mongooseErrorToRes } from "../models/MongoUtil";
 
