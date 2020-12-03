@@ -1,5 +1,4 @@
 import CandidateProfile from "../models/CandidateProfile";
-import mongoose from "mongoose";
 import CandiateEducation from "../models/CandidateEducation";
 import CandidateExperience from "../models/CandidateExperience";
 import { success, error } from "../util/constants";
