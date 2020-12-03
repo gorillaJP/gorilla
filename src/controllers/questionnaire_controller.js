@@ -1,7 +1,7 @@
-import questionnaire from "../models/questionnaire";
+import questionnaire from "../models/Questionnaire";
 import { success, error } from "../util/constants";
 import HttpStatus from "http-status-codes";
-import Questiner from "../models/questionnaire";
+import Questiner from "../models/Questionnaire";
 
 const create_questionnaire = (req, res) => {
   const questionnaire = new Questiner(req.body);
