@@ -81,6 +81,10 @@ var jobAdd = {
     type: Boolean,
     default: true,
   },
+  questionnaireId: {
+    type: Boolean,
+    default: true,
+  },
 };
 
 var jobAddSchema = new mongoose.Schema(jobAdd, {
