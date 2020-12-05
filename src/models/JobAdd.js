@@ -82,7 +82,7 @@ var jobAdd = {
     default: true,
   },
   questionnaireId: {
-    type: Boolean,
+    type: String,
     default: true,
   },
 };

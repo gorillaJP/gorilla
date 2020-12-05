@@ -403,7 +403,7 @@ content-type: application/json
 
 {
  "company" : "Com Bank 20201205",
- "title" : "Com banker",
+ "title" : "Com banker 20201205",
  "overview" : "project manager with telecommunication backgroud" ,
  "description" : "looking for a talented coparate banker",
  "location" : "Colombo",
@@ -422,7 +422,8 @@ content-type: application/json
  "skills" : [ "account handling" , "front desk", "banking", "account"] ,
  "applyExternally" : true ,
  "applyExternalUrl" :  "www.combank.lk/careers/234",
- "isPitchRequired" :  true
+ "isPitchRequired" :  true,
+ "questionnaireId" : "5fcb2a025e50bb4799afcced"
 }
 
 ### 
@@ -794,7 +795,7 @@ content-type: application/json
       "name.keywordstring": "a"
     }
   }
-}
+}`
 
 
 ### N grams approach ( this is an improvemnt on prfix search)
