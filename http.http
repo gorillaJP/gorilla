@@ -402,7 +402,7 @@ POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
 content-type: application/json
 
 {
- "company" : "Com Bank",
+ "company" : "Com Bank 20201205",
  "title" : "Com banker",
  "overview" : "project manager with telecommunication backgroud" ,
  "description" : "looking for a talented coparate banker",
@@ -421,7 +421,8 @@ content-type: application/json
  "redirectURL" : "carrers@gorilla.lk",
  "skills" : [ "account handling" , "front desk", "banking", "account"] ,
  "applyExternally" : true ,
- "applyExternalUrl" :  "www.combank.lk/careers/234"
+ "applyExternalUrl" :  "www.combank.lk/careers/234",
+ "isPitchRequired" :  true
 }
 
 ### 

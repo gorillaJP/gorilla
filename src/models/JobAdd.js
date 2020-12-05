@@ -75,7 +75,11 @@ var jobAdd = {
   },
   applyExternalUrl: {
     type: String,
-    default: false,
+    default: null,
+  },
+  isPitchRequired: {
+    type: Boolean,
+    default: true,
   },
 };
 
