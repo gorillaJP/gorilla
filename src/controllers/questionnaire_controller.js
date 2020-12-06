@@ -1,4 +1,5 @@
 import questionnaire from "../models/Questionnaire";
+import QuestionnaireAnswer from "../models/QuestionnaireAnswer";
 import { success, error } from "../util/constants";
 import HttpStatus from "http-status-codes";
 import Questiner from "../models/Questionnaire";
@@ -29,4 +30,21 @@ const get_questionnaire_by_id = (req, res) => {
     });
 };
 
-export default { create_questionnaire, get_questionnaire_by_id };
+const create_questionnaireAnswer = (req, res) => {
+  const questionnaireAnswer = new QuestionnaireAnswer(req.body);
+
+  questionnaireAnswer
+    .save()
+    .then((q) => {
+      res.send(success(q));
+    })
+    .catch((err) => {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error(err));
+    });
+};
+
+export default {
+  create_questionnaire,
+  get_questionnaire_by_id,
+  create_questionnaireAnswer,
+};

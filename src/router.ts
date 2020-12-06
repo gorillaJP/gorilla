@@ -289,6 +289,13 @@ const routes = [
     path: "/questionnaire/:id",
     controller: questionnaire_controller.get_questionnaire_by_id,
   },
+  {
+    method: "post",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/questionnaireanswer",
+    controller: questionnaire_controller.create_questionnaireAnswer,
+  },
 ];
 
 //This is an special route. with the redirect from google, route to front end URL with jwt as a qury param
