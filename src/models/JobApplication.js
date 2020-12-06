@@ -31,8 +31,36 @@ var JobApplicationFields = {
   pitch: {
     type: String,
   },
-  questionnaireAnswersId: {
-    type: String,
+  questionnaireAnswer: {
+    questionnaireId: {
+      type: String,
+    },
+    questions: [
+      {
+        order: {
+          type: Number,
+          default: 0,
+        },
+        type: {
+          type: String,
+          enum: ["single_select", "multi_select", "essay"],
+          default: "essay",
+        },
+        desc: {
+          type: String,
+        },
+        answerOptions: [
+          {
+            desc: {
+              type: String,
+            },
+          },
+        ],
+        answer: {
+          type: String,
+        },
+      },
+    ],
   },
 };
 

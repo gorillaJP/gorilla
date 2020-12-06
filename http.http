@@ -897,7 +897,69 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
     "salaryCurrency" : "LKR",
     "pitch": "like to take this challenge",
     "phoneNumber": "+65 9100 2508",
-    "questionnaireAnswersId" : "asdfasdf Funkey"
+    "questionnaireAnswer" : {
+      "questionnaireId": "5fc3e636a139532b9603914f",
+      "questions": [
+        {
+          "order": 0,
+          "type": "single_select",
+          "answer" : "Galle",
+          "answerOptions": [
+            {
+              "_id": "5fc3e636a139532b96039151",
+              "desc": "Colombo"
+            },
+            {
+              "_id": "5fc3e636a139532b96039152",
+              "desc": "Galle"
+            },
+            {
+              "_id": "5fc3e636a139532b96039153",
+              "desc": "Kandy"
+            },
+            {
+              "_id": "5fc3e636a139532b96039154",
+              "desc": "Sigiriya"
+            }
+          ],
+          "_id": "5fc3e636a139532b96039150",
+          "desc": "select city where you wish to work the most"
+        },
+        {
+          "order": 0,
+          "type": "multi_select",
+          "answer" : "French",
+          "answerOptions": [
+            {
+              "_id": "5fc3e636a139532b96039156",
+              "desc": "French"
+            },
+            {
+              "_id": "5fc3e636a139532b96039157",
+              "desc": "English"
+            },
+            {
+              "_id": "5fc3e636a139532b96039158",
+              "desc": "German"
+            },
+            {
+              "_id": "5fc3e636a139532b96039159",
+              "desc": "Chineese"
+            }
+          ],
+          "_id": "5fc3e636a139532b96039155",
+          "desc": "select languages that you can speak"
+        },
+        {
+          "order": 0,
+          "type": "essay",
+          "answerOptions": [],
+          "_id": "5fc3e636a139532b9603915a",
+          "desc": "Explain your experince as a tour guide in Sri Lanka ?",
+          "answer" : "I am an experienced professional"
+        }
+      ],
+  } 
 }
 
 
@@ -980,7 +1042,7 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 
-#### Create a questionnaire
+#### Create a questionnaire - @depricated
 POST {{proto}}://{{host}}:{{port}}/api/questionnaireanswer
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
