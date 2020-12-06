@@ -103,6 +103,12 @@ const routes = [
   {
     method: "get",
     auth: false,
+    path: "/jobadds/:id",
+    controller: job_add_controller.getJobById,
+  },
+  {
+    method: "get",
+    auth: false,
     path: "/jobsummary/industry",
     controller: job_summary_controller.sumaryByIndustry,
   },
