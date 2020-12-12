@@ -56,9 +56,7 @@ var JobApplicationFields = {
             },
           },
         ],
-        answer: {
-          type: String,
-        },
+        answer: {},
       },
     ],
   },
