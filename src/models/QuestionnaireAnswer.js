@@ -26,9 +26,7 @@ var questionnaireanswersFields = {
           },
         },
       ],
-      answer: {
-        type: String,
-      },
+      answer: {},
     },
   ],
 };
