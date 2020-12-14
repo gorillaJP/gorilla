@@ -23,10 +23,60 @@ const candidateprofile = (req, res) => {
   }
 
   CandidateProfile.findOne({ email: req.body.email }).then((candidateDB) => {
+    let completeness = calcProfileCompleteness(candidateDB);
+    candidateDB.completeness = completeness.total;
+    candidateDB.nextAction = completeness.nextAction;
+    calcProfileCompleteness(candidateDB);
     res.json({
       user: candidateDB,
     }); //here the req.user is set by the auth filter ( read from the token itself)
   });
+};
+
+let calcProfileCompleteness = (condidateDB) => {
+  //start with 10 becase user has filled name email username and passwrod
+  var totalScore = 0;
+  var nextAction = null;
+
+  weightsGrid.forEach((w) => {
+    var pathPieces = w.key.split(".");
+
+    //read the value of the perticular key to pointingObj
+    var pointingObj = condidateDB;
+    pathPieces.forEach((path) => {
+      if (pointingObj != undefined && pointingObj != null) {
+        pointingObj = pointingObj[path];
+      }
+    });
+
+    //if the expected value is just value
+    if (
+      //should not be undefind or null
+      (w.type == "val" && pointingObj !== null && pointingObj != undefined) ||
+      //if it is a string should not be emtpy
+      (typeof pointingObj == "string" && pointingObj != "")
+    ) {
+      totalScore += w.weight;
+      //if the expected value is an array
+    } else if (
+      w.type == "array" &&
+      pointingObj !== null &&
+      pointingObj !== undefined &&
+      Array.isArray(pointingObj) &&
+      pointingObj.length > 0
+    ) {
+      totalScore += w.weight;
+    } else {
+      //only the reuired action is taken as the nextAction. let the user complete this. then it will show the next one
+      if (nextAction == null) {
+        nextAction = w.desc;
+      }
+    }
+  });
+  return {
+    total: totalScore < 10 ? 10 : totalScore > 100 ? 100 : totalScore,
+    nextAction: nextAction,
+  };
 };
 
 //create a fresh profile
@@ -58,8 +108,6 @@ const createCandidate = (req, res) => {
 
 //create update on candidate profile
 const createOnProfile = (req, res) => {
-  console.log(req.body._id);
-
   CandidateProfile.findOne({ email: req.body.email })
     .then((candidateDB) => {
       candidateDB = populatedUpdatedProfile(
@@ -211,6 +259,143 @@ let sendSignUpCandidateEmail = (candidate): void => {
   };
   emailSend(email);
 };
+
+const weightsGrid = [
+  //15
+  {
+    key: "personalInfo.mobilePhoneNumber",
+    type: "val",
+    weight: 3,
+    desc: "Add Mobile Phone Number",
+  },
+  {
+    key: "personalInfo.dateOfBirth",
+    type: "val",
+    weight: 3,
+    desc: "Add Date Of Birth",
+  },
+  {
+    key: "personalInfo.homeTown",
+    type: "val",
+    weight: 2,
+    desc: "Add Home Town",
+  },
+  {
+    key: "personalInfo.gender",
+    type: "val",
+    weight: 2,
+    desc: "Add Gender",
+  },
+  {
+    key: "personalInfo.address",
+    type: "val",
+    weight: 2,
+    desc: "Add Address",
+  },
+  {
+    key: "personalInfo.introduction",
+    type: "val",
+    weight: 2,
+    desc: "Add Personal Intorduction",
+  },
+  /*
+    {
+      key: "personalInfo.homePhoneNumber",
+      type: "val",
+      weight: 0,
+      desc: "Add Home Phone Number",
+    },
+    */
+  {
+    key: "personalInfo.martialStatus",
+    type: "val",
+    weight: 1,
+    desc: "Add Martial Status",
+  },
+
+  //15
+  {
+    key: "jobPreference.industry",
+    type: "val",
+    weight: 3,
+    desc: "Add Industry",
+  },
+  {
+    key: "jobPreference.category",
+    type: "val",
+    weight: 2,
+    desc: "Add Prefered Job Category",
+  },
+  {
+    key: "jobPreference.jobType",
+    type: "val",
+    weight: 2,
+    desc: "Add Prefered Job Type",
+  },
+  {
+    key: "jobPreference.role",
+    type: "val",
+    weight: 2,
+    desc: "Add Prefered Job Role",
+  },
+  {
+    key: "jobPreference.preferredLocation",
+    type: "val",
+    weight: 2,
+    desc: "Add Preferred Location",
+  },
+  {
+    key: "jobPreference.expectedSalary",
+    type: "val",
+    weight: 2,
+    desc: "Add Expected Salary",
+  },
+  {
+    key: "jobPreference.expectedSalaryCurrency",
+    type: "val",
+    weight: 2,
+    desc: "Add Currency of Expected Salry",
+  },
+
+  //60
+  {
+    key: "resumes",
+    type: "array",
+    weight: 10,
+    desc: "Add Resumes",
+  },
+  {
+    key: "profileImage",
+    type: "val",
+    weight: 12,
+    desc: "Add Profile Image",
+  },
+  {
+    key: "skills",
+    type: "array",
+    weight: 12,
+    desc: "Add Skills",
+  },
+  {
+    key: "languages",
+    type: "array",
+    weight: 12,
+    desc: "Add Languages",
+  },
+  {
+    key: "educations",
+    type: "array",
+    weight: 12,
+    desc: "Add Education",
+  },
+  {
+    key: "experiences",
+    type: "array",
+    weight: 12,
+    desc: "Add Experience",
+  },
+];
+
 export default {
   createCandidate,
   createOnProfile,
