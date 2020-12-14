@@ -12,6 +12,34 @@ var JobSavedFields = {
     type: String,
     index: true,
   },
+  jobAdd: {
+    _id: false,
+    jobId: {
+      type: String,
+    },
+    title: {
+      type: String,
+    },
+    company: {
+      type: String,
+    },
+    companyid: {
+      type: String,
+    },
+    location: {
+      type: String,
+    },
+    type: {
+      //Perm / Contract / Parttimee
+      type: String,
+    },
+    salaryMin: {
+      type: Number,
+    },
+    salarymax: {
+      type: Number,
+    },
+  },
 };
 
 var JobSavedSchema = new mongoose.Schema(JobSavedFields, {

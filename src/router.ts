@@ -254,6 +254,14 @@ const routes = [
     controller: job_application_controller.get_jobs_applied_by_candidate,
   },
   {
+    method: "get",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/application/jobadd",
+    controller:
+      job_application_controller.get_jobs_applied_by_candidate_job_add,
+  },
+  {
     method: "post",
     domain: [Domain.CANDIDATE],
     auth: true,
@@ -267,6 +275,13 @@ const routes = [
     auth: true,
     path: "/savedjob",
     controller: job_saved_controller.get_jobs_saved_by_candidate,
+  },
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE],
+    auth: true,
+    path: "/savedjob/jobadd",
+    controller: job_saved_controller.get_jobs_saved_by_candidate_jobadd,
   },
   {
     method: "post",

@@ -3,6 +3,7 @@ import { mongooseErrorToRes } from "../models/MongoUtil";
 import _ from "lodash";
 import logger from "../util/logger";
 import JobApplication from "../models/JobApplication";
+import JobAdd from "../models/JobAdd";
 import { success, error } from "../util/constants";
 
 /**
@@ -10,19 +11,35 @@ import { success, error } from "../util/constants";
  */
 
 const candidate_apply_for_a_job = (req, res) => {
-  const jobApplication = new JobApplication(req.body);
+  //fetch the jobAdd
+  JobAdd.findById(req.body.jobId)
+    .lean()
+    .then((jobAdd) => {
+      const applicationIn = req.body;
+      applicationIn.jobAdd = jobAdd;
+      applicationIn.jobAdd.jobId = req.body.jobId;
 
-  jobApplication
-    .save()
-    .then((resp) => {
-      res.status(HttpStatus.OK).send(success(resp));
+      var jobApplication = new JobApplication(applicationIn);
+
+      jobApplication
+        .save()
+        .then((resp) => {
+          res.status(HttpStatus.OK).send(success(resp));
+        })
+        .catch((err) => {
+          logger.error(err);
+          res
+            .status(HttpStatus.BAD_REQUEST)
+            .send(error(mongooseErrorToRes("", err)));
+        });
     })
     .catch((err) => {
-      logger.error(err);
       res
         .status(HttpStatus.BAD_REQUEST)
         .send(error(mongooseErrorToRes("", err)));
     });
+
+  //copy values from jobAdd to jobapplication
 };
 
 const get_jobs_applied_by_candidate = (req, res) => {
@@ -32,4 +49,18 @@ const get_jobs_applied_by_candidate = (req, res) => {
   });
 };
 
-export default { candidate_apply_for_a_job, get_jobs_applied_by_candidate };
+const get_jobs_applied_by_candidate_job_add = (req, res) => {
+  console.log(req.body.email);
+  JobApplication.find({ email: req.body.email }).then((candidateDB) => {
+    const jobAdds = candidateDB.map((rec) => {
+      return rec.jobAdd;
+    });
+    res.send(success(jobAdds));
+  });
+};
+
+export default {
+  candidate_apply_for_a_job,
+  get_jobs_applied_by_candidate,
+  get_jobs_applied_by_candidate_job_add,
+};
