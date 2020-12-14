@@ -1,6 +1,7 @@
 import HttpStatus from "http-status-codes";
 
 import JobAdd from "../models/JobAdd";
+import CompanyProfile from "../models/CompanyProfile";
 import { success, error } from "../util/constants";
 
 const maxNumberOfResults = 100; //max number of results to return in one api call
@@ -124,18 +125,26 @@ const postJobs = (req, res) => {
     ? new Date(req.body.expireDate)
     : null;
 
-  var jobAdd = new JobAdd(req.body);
+  CompanyProfile.findById(req.body.companyid)
+    .then((company) => {
+      const jobAddIn = req.body;
+      jobAddIn.companylogo = company.logo;
 
-  jobAdd
-    .save()
-    .then((resp, resp1) => {
-      jobAdd.id = resp.id;
+      var jobAdd = new JobAdd(jobAddIn);
 
-      res.status(HttpStatus.OK).send(success(jobAdd));
+      jobAdd
+        .save()
+        .then((resp, resp1) => {
+          jobAdd.id = resp.id;
+
+          res.status(HttpStatus.OK).send(success(jobAdd));
+        })
+        .catch((err) => {
+          res.status(HttpStatus.BAD_REQUEST).send(error());
+        });
     })
     .catch((err) => {
-      console.log(err);
-      res.status(HttpStatus.BAD_REQUEST).send(error());
+      res.status(HttpStatus.BAD_REQUEST).send(error(err));
     });
 };
 

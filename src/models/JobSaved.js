@@ -26,6 +26,9 @@ var JobSavedFields = {
     companyid: {
       type: String,
     },
+    companylogo: {
+      type: String,
+    },
     location: {
       type: String,
     },

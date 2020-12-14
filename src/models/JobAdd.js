@@ -8,6 +8,9 @@ var jobAdd = {
   companyid: {
     type: String,
   },
+  companylogo: {
+    type: String,
+  },
   title: {
     type: String,
   },

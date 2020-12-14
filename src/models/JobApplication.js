@@ -27,6 +27,9 @@ var JobApplicationFields = {
     companyid: {
       type: String,
     },
+    companylogo: {
+      type: String,
+    },
     location: {
       type: String,
     },

@@ -406,8 +406,9 @@ POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
 content-type: application/json
 
 {
- "company" : "Com Bank 20201213",
- "title" : "Com banker 20201213",
+ "title" : "Cargills 20201214_2",
+ "company" : "Cargills 20201214",
+ "companyid" : "5eca53762ae14c0d16e26a33",
  "overview" : "project manager with telecommunication backgroud" ,
  "description" : "looking for a talented coparate banker",
  "location" : "Colombo",
@@ -987,7 +988,7 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
 
 {
-    "jobId" : "5e3851703c1e351f0cfe0eeb"  
+    "jobId" : "5fd72faff166722c6f3f6b15"  
 }
 
 #### Delete jobSaved
