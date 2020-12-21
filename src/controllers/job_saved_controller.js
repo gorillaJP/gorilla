@@ -17,6 +17,7 @@ const candidate_apply_for_a_job = (req, res) => {
     .then((jobAdd) => {
       const saveJobIn = req.body;
       saveJobIn.jobAdd = jobAdd;
+      saveJobIn.jobAdd.hasSaved = true;
       saveJobIn.jobAdd.jobId = req.body.jobId;
 
       const jobSaved = new JobSaved(saveJobIn);

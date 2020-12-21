@@ -17,6 +17,7 @@ const candidate_apply_for_a_job = (req, res) => {
     .then((jobAdd) => {
       const applicationIn = req.body;
       applicationIn.jobAdd = jobAdd;
+      applicationIn.jobAdd.hasApplied = true;
       applicationIn.jobAdd.jobId = req.body.jobId;
 
       var jobApplication = new JobApplication(applicationIn);

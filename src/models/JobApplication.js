@@ -15,7 +15,10 @@ var JobApplicationFields = {
   },
   jobAdd: {
     _id: false,
-    jobId: {
+    hasApplied: {
+      type: Boolean,
+    },
+    _id: {
       type: String,
     },
     title: {

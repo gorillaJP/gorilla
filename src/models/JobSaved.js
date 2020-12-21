@@ -14,8 +14,11 @@ var JobSavedFields = {
   },
   jobAdd: {
     _id: false,
-    jobId: {
+    _id: {
       type: String,
+    },
+    hasSaved: {
+      type: Boolean,
     },
     title: {
       type: String,
