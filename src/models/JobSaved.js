@@ -17,6 +17,9 @@ var JobSavedFields = {
     _id: {
       type: String,
     },
+    hasApplied: {
+      type: Boolean,
+    },
     hasSaved: {
       type: Boolean,
     },

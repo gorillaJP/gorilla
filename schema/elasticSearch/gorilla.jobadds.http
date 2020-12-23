@@ -84,6 +84,9 @@ content-type: application/json
         "companyid": {
           "type": "text"
         },
+        "companylogo" : {
+          "type": "text"
+        },
         "createdat": {
           "type": "date"
         },

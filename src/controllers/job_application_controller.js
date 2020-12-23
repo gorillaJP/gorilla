@@ -3,6 +3,7 @@ import { mongooseErrorToRes } from "../models/MongoUtil";
 import _ from "lodash";
 import logger from "../util/logger";
 import JobApplication from "../models/JobApplication";
+import JobSaved from "../models/JobSaved";
 import JobAdd from "../models/JobAdd";
 import { success, error } from "../util/constants";
 
@@ -51,13 +52,34 @@ const get_jobs_applied_by_candidate = (req, res) => {
 };
 
 const get_jobs_applied_by_candidate_job_add = (req, res) => {
-  console.log(req.body.email);
-  JobApplication.find({ email: req.body.email }).then((candidateDB) => {
-    const jobAdds = candidateDB.map((rec) => {
-      return rec.jobAdd;
+  //jobApplications = JobApplication.find({ email: req.body.email });
+  let jobSavedsPromise = JobSaved.find({ email: req.body.email });
+
+  let jobApplicationsPromise = JobApplication.find({ email: req.body.email });
+
+  Promise.all([jobSavedsPromise, jobApplicationsPromise])
+    .then((vals) => {
+      let jobSaves = vals[0];
+      let jobApplications = vals[1];
+
+      const apiResp = jobApplications.map((rec) => {
+        //chec if the applied job is available in savedJob list
+        var matchingJobSave = jobSaves.find((jobSave) => {
+          return (
+            jobSave.jobAdd && rec.jobAdd && jobSave.jobAdd._id == rec.jobAdd._id
+          );
+        });
+
+        rec.jobAdd.hasSaved = matchingJobSave ? true : false;
+
+        return rec.jobAdd;
+      });
+
+      res.send(success(apiResp));
+    })
+    .catch((err) => {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
     });
-    res.send(success(jobAdds));
-  });
 };
 
 export default {

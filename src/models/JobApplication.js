@@ -18,6 +18,9 @@ var JobApplicationFields = {
     hasApplied: {
       type: Boolean,
     },
+    hasSaved: {
+      type: Boolean,
+    },
     _id: {
       type: String,
     },
