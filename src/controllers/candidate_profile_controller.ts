@@ -260,6 +260,43 @@ let sendSignUpCandidateEmail = (candidate): void => {
   emailSend(email);
 };
 
+const candidatejobmatrix = (req, res) => {
+  var data = [
+    {
+      count: 20,
+      displayText: "Recommended Jobs",
+      endpoint: "/savedjob/jobadd",
+    },
+    {
+      count: 22,
+      displayText: "Applied Jobs",
+      endpoint: "/application/jobadd",
+    },
+    {
+      count: 24,
+      displayText: "Saved Jobs",
+      endpoint: "/savedjob/jobadd",
+    },
+    {
+      count: 25,
+      displayText: "Followed Companies",
+      endpoint: "/savedjob/jobadd",
+    },
+    {
+      count: 27,
+      displayText: "Viewed Your Profile",
+      endpoint: "/savedjob/jobadd",
+    },
+    {
+      count: 29,
+      displayText: "Contacted You",
+      endpoint: "/savedjob/jobadd",
+    },
+  ];
+
+  res.send(success(data));
+};
+
 const weightsGrid = [
   //15
   {
@@ -402,4 +439,5 @@ export default {
   deleteOnProfile,
   verifyEmail,
   candidateprofile,
+  candidatejobmatrix,
 };
