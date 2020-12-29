@@ -94,11 +94,13 @@ const get_jobs_saved_by_candidate_jobadd = (req, res) => {
 
 const delete_jobs_saved_by_candidate = (req, res) => {
   const idToRemove = req.params.id;
-  JobSaved.findOneAndRemove({ _id: idToRemove, email: req.body.email }).then(
-    (x) => {
-      res.status(HttpStatus.OK).send();
-    }
-  );
+
+  JobSaved.deleteMany({
+    "jobAdd._id": idToRemove,
+    email: req.body.email,
+  }).then((x) => {
+    res.status(HttpStatus.OK).send();
+  });
 };
 
 export default {

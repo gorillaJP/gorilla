@@ -11,6 +11,8 @@ import { mongooseErrorToRes } from "../models/MongoUtil";
 import CandidateEducation from "../models/CandidateEducation";
 import Candidate from "../models/CandidateProfile";
 import { EDQUOT } from "constants";
+import JobSaved from "../models/JobSaved";
+import JobApplication from "../models/JobApplication";
 
 //------- PROFILE  ------------
 
@@ -261,41 +263,63 @@ let sendSignUpCandidateEmail = (candidate): void => {
 };
 
 const candidatejobmatrix = (req, res) => {
-  var data = [
-    {
-      count: 20,
-      displayText: "Recommended Jobs",
-      endpoint: "/savedjob/jobadd",
-    },
-    {
-      count: 22,
-      displayText: "Applied Jobs",
-      endpoint: "/application/jobadd",
-    },
-    {
-      count: 24,
-      displayText: "Saved Jobs",
-      endpoint: "/savedjob/jobadd",
-    },
-    {
-      count: 25,
-      displayText: "Followed Companies",
-      endpoint: "/savedjob/jobadd",
-    },
-    {
-      count: 27,
-      displayText: "Viewed Your Profile",
-      endpoint: "/savedjob/jobadd",
-    },
-    {
-      count: 29,
-      displayText: "Contacted You",
-      endpoint: "/savedjob/jobadd",
-    },
-  ];
+  let jobSavedsCountPromise = JobSaved.countDocuments({
+    email: req.body.email,
+  });
 
-  res.send(success(data));
+  let jobApplicationsCountPromise = JobApplication.countDocuments({
+    email: req.body.email,
+  });
+
+  Promise.all([jobSavedsCountPromise, jobApplicationsCountPromise]).then(
+    (vals) => {
+      let apiResp = candidateMatrixProps.slice();
+
+      apiResp.push({
+        count: vals[0],
+        displayText: "Saved Jobs",
+        key: "savedjob",
+        type: "jobadd",
+      });
+
+      apiResp.push({
+        count: vals[1],
+        displayText: "Applied Jobs",
+        key: "application",
+        type: "jobadd",
+      });
+
+      res.send(success(apiResp));
+    }
+  );
 };
+
+const candidateMatrixProps = [
+  {
+    count: 0,
+    displayText: "Recommended Jobs",
+    key: "recommended",
+    type: "jobadd",
+  },
+  {
+    count: 0,
+    displayText: "Followed Companies",
+    key: "followed",
+    type: "company",
+  },
+  {
+    count: 0,
+    displayText: "Viewed Your Profile",
+    key: "profileviewed",
+    type: "company",
+  },
+  {
+    count: 0,
+    displayText: "Contacted You",
+    key: "candidatecontacted",
+    type: "company",
+  },
+];
 
 const weightsGrid = [
   //15
