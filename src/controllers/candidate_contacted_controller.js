@@ -23,6 +23,7 @@ const create_contacted_candidate = (req, res) => {
       var candidateDB = dtaDB[0];
       var jobAdd = dtaDB[1];
 
+      //create object to save to DB
       var contactedCondidateObj = req.body;
 
       contactedCondidateObj.jobAdd = jobAdd;
@@ -44,8 +45,6 @@ const create_contacted_candidate = (req, res) => {
             .status(HttpStatus.BAD_REQUEST)
             .send(error(mongooseErrorToRes("", err)));
         });
-
-      res.send(contactedCadidate);
     })
     .catch((err) => {
       res
@@ -53,6 +52,23 @@ const create_contacted_candidate = (req, res) => {
         .send(error(mongooseErrorToRes("", err)));
     });
 };
+
+const get_contacted_candidate = (req, res) => {
+  console.log(req.body.email);
+
+  CandidateContacted.find({ candidateEmail: req.body.email })
+    //CandidateContacted.find({})
+    .then((dta) => {
+      res.status(HttpStatus.OK).send(dta);
+    })
+    .catch((err) => {
+      logger.error(err);
+      res
+        .status(HttpStatus.BAD_REQUEST)
+        .send(error(mongooseErrorToRes("", err)));
+    });
+};
+
 /*
   JobAdd.findById(req.body.jobId)
     .then((jobAdd) => {
@@ -169,4 +185,5 @@ const get_candidate_contacted_company = (req, res) => {
 
 export default {
   create_contacted_candidate,
+  get_contacted_candidate,
 };

@@ -332,6 +332,13 @@ const routes = [
     path: "/contactedcandidate",
     controller: candidate_contacted_controller.create_contacted_candidate,
   },
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/contactedcandidate",
+    controller: candidate_contacted_controller.get_contacted_candidate,
+  },
 ];
 
 //This is an special route. with the redirect from google, route to front end URL with jwt as a qury param

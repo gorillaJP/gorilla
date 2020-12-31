@@ -5,12 +5,10 @@ var uniqueValidator = require("mongoose-unique-validator");
 var CandidateContactedFields = {
   employerEmail: {
     type: String,
-    index: true,
     required: true,
   },
   candidateEmail: {
     type: String,
-    index: true,
     required: true,
   },
   message: {
