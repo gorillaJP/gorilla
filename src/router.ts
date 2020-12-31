@@ -5,6 +5,7 @@ import auth_controller from "./controllers/auth_controller";
 import company_profile_controller from "./controllers/company_profile_controller";
 import employer_profile_controller from "./controllers/employer_profile_controller";
 import candidate_profile_controller from "./controllers/candidate_profile_controller";
+import candidate_contacted_controller from "./controllers/candidate_contacted_controller";
 import hello_controller from "./controllers/hello_controller";
 import seeker_controller from "./controllers/seeker_controller";
 import register_controller from "./controllers/register_controller";
@@ -323,6 +324,13 @@ const routes = [
     auth: true,
     path: "/candidate/jobmatrix",
     controller: candidate_profile_controller.candidatejobmatrix,
+  },
+  {
+    method: "post",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/contactedcandidate",
+    controller: candidate_contacted_controller.create_contacted_candidate,
   },
 ];
 

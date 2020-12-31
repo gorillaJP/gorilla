@@ -1142,3 +1142,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
     "questionnaireId": "5fc3e636a139532b9603914f"
   }
 
+
+
+#### POST contacted candidate
+POST {{proto}}://{{host}}:{{port}}/api/contactedcandidate
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+{
+    "jobId" : "5fd72faff166722c6f3f6b15",
+    "candidateId" : "5f3141addfef9811189bed65"  , 
+    "message" : "you have the qualifications to apply for this position. plese apply"
+}
