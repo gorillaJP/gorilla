@@ -48,6 +48,12 @@ var JobSavedFields = {
     salarymax: {
       type: Number,
     },
+    expireDate: {
+      type: String,
+    },
+    updatedat: {
+      type: String,
+    },
   },
 };
 

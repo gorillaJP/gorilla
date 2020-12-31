@@ -49,6 +49,12 @@ var JobApplicationFields = {
     salarymax: {
       type: Number,
     },
+    expireDate: {
+      type: String,
+    },
+    updatedat: {
+      type: String,
+    },
   },
   phoneNumber: {
     type: String,
