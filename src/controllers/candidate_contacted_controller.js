@@ -10,6 +10,8 @@ import CandidateProfile from "../models/CandidateProfile";
 import Company from "../models/CompanyProfile";
 import JobAdd from "../models/JobAdd";
 import JobAdd from "../models/";
+import JobApplication from "../models/JobApplication";
+import JobSaved from "../models/JobSaved";
 
 const create_contacted_candidate = (req, res) => {
   //read the job
@@ -56,6 +58,64 @@ const create_contacted_candidate = (req, res) => {
 const get_contacted_candidate = (req, res) => {
   console.log(req.body.email);
 
+  //saved jobs
+  let jobSavedsPromise = JobSaved.find({ email: req.body.email });
+
+  //applied jobs
+  let jobApplicationsPromise = JobApplication.find({ email: req.body.email });
+
+  //contacteds
+  let candidateContactedsPromise = CandidateContacted.find({
+    candidateEmail: req.body.email,
+  });
+
+  Promise.all([
+    jobSavedsPromise,
+    jobApplicationsPromise,
+    candidateContactedsPromise,
+  ])
+    .then((mongoDBResp) => {
+      var jobSaveds = mongoDBResp[0];
+      var jobAppliactions = mongoDBResp[1];
+      var candidateContacteds = mongoDBResp[2];
+
+      console.log(candidateContacteds.length);
+      console.log(jobAppliactions);
+
+      //iterat all the candidateContacteds
+      candidateContacteds = candidateContacteds.map((rec) => {
+        //check if the candidate has already applied to this job
+        var matchingJobApplication = jobAppliactions.find((jobApplication) => {
+          return (
+            jobApplication.jobAdd &&
+            rec.jobAdd &&
+            jobApplication.jobAdd._id == rec.jobAdd._id
+          );
+        });
+        rec.jobAdd.hasApplied = matchingJobApplication ? true : false;
+
+        //check if the candidate has already saved this job
+        var matchingSavedJob = jobSaveds.find((jobSaved) => {
+          return (
+            jobSaved.jobAdd &&
+            rec.jobAdd &&
+            jobSaved.jobAdd._id == rec.jobAdd._id
+          );
+        });
+
+        rec.jobAdd.hasSaved = matchingSavedJob ? true : false;
+        return rec;
+      });
+      res.status(HttpStatus.OK).send(candidateContacteds);
+    })
+    .catch((err) => {
+      logger.error(err);
+      res
+        .status(HttpStatus.BAD_REQUEST)
+        .send(error(mongooseErrorToRes("", err)));
+    });
+
+  /*
   CandidateContacted.find({ candidateEmail: req.body.email })
     //CandidateContacted.find({})
     .then((dta) => {
@@ -67,6 +127,7 @@ const get_contacted_candidate = (req, res) => {
         .status(HttpStatus.BAD_REQUEST)
         .send(error(mongooseErrorToRes("", err)));
     });
+    */
 };
 
 /*
