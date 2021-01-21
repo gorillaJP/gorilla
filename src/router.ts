@@ -329,14 +329,14 @@ const routes = [
     method: "post",
     domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
     auth: true,
-    path: "/contactedcandidate",
+    path: "/candidatecontacted",
     controller: candidate_contacted_controller.create_contacted_candidate,
   },
   {
     method: "get",
     domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
     auth: true,
-    path: "/contactedcandidate",
+    path: "/candidatecontacted/jobadd",
     controller: candidate_contacted_controller.get_contacted_candidate,
   },
 ];
