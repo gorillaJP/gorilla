@@ -106,7 +106,7 @@ const get_contacted_candidate = (req, res) => {
         rec.jobAdd.hasSaved = matchingSavedJob ? true : false;
         return rec;
       });
-      res.status(HttpStatus.OK).send(candidateContacteds);
+      res.status(HttpStatus.OK).send(success(candidateContacteds));
     })
     .catch((err) => {
       logger.error(err);
