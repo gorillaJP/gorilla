@@ -2,14 +2,13 @@ import mongoose from "mongoose";
 import normalize from "normalize-mongoose";
 var uniqueValidator = require("mongoose-unique-validator");
 
-var CandidateContactedFields = {
-  employerEmail: {
-    type: String,
-    required: true,
-  },
+var RecommendedFields = {
   candidateEmail: {
     type: String,
     required: true,
+  },
+  matchingFactor: {
+    type: Number,
   },
   jobAdd: {
     _id: false,
@@ -53,13 +52,10 @@ var CandidateContactedFields = {
     updatedat: {
       type: String,
     },
-    message: {
-      type: String,
-    },
   },
 };
 
-var CandidateContactedSchema = new mongoose.Schema(CandidateContactedFields, {
+var RecommendedSchema = new mongoose.Schema(RecommendedFields, {
   timestamps: {
     createdAt: "createdat",
     updatedAt: "updatedat",
@@ -67,15 +63,12 @@ var CandidateContactedSchema = new mongoose.Schema(CandidateContactedFields, {
   },
 });
 
-CandidateContactedSchema.plugin(uniqueValidator, {
+RecommendedSchema.plugin(uniqueValidator, {
   message: "Error, expected {PATH} to be unique.",
 });
 
-CandidateContactedSchema.plugin(normalize); //replace _id with id and remove v
+RecommendedSchema.plugin(normalize); //replace _id with id and remove v
 
-var CandidateContacted = mongoose.model(
-  "CandidateContacted",
-  CandidateContactedSchema
-);
+var Recommended = mongoose.model("Recommended", RecommendedSchema);
 
-export default CandidateContacted;
+export default Recommended;

@@ -36,6 +36,8 @@ const create_contacted_candidate = (req, res) => {
 
       var contactedCadidate = new CandidateContacted(contactedCondidateObj);
 
+      contactedCadidate.jobAdd.message = req.body.message;
+
       contactedCadidate
         .save()
         .then((resp) => {
@@ -56,8 +58,6 @@ const create_contacted_candidate = (req, res) => {
 };
 
 const get_contacted_candidate = (req, res) => {
-  console.log(req.body.email);
-
   //saved jobs
   let jobSavedsPromise = JobSaved.find({ email: req.body.email });
 
@@ -78,9 +78,6 @@ const get_contacted_candidate = (req, res) => {
       var jobSaveds = mongoDBResp[0];
       var jobAppliactions = mongoDBResp[1];
       var candidateContacteds = mongoDBResp[2];
-
-      console.log(candidateContacteds.length);
-      console.log(jobAppliactions);
 
       //iterat all the candidateContacteds
       candidateContacteds = candidateContacteds.map((rec) => {
@@ -104,7 +101,11 @@ const get_contacted_candidate = (req, res) => {
         });
 
         rec.jobAdd.hasSaved = matchingSavedJob ? true : false;
-        return rec;
+
+        //transform the message from cantacted to jobAdd (this is to keep the uniformness between APIs, in settings icon)
+        //rec.jobAdd.message = rec.message;
+
+        return rec.jobAdd;
       });
       res.status(HttpStatus.OK).send(success(candidateContacteds));
     })
