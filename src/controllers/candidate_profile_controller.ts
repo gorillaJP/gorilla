@@ -276,33 +276,35 @@ const candidatejobmatrix = (req, res) => {
     email: req.body.email,
   });
 
-  Promise.all([jobSavedsCountPromise, jobApplicationsCountPromise]).then(
-    (vals) => {
-      let apiResp = candidateMatrixProps.slice();
+  Promise.all([
+    jobSavedsCountPromise,
+    jobApplicationsCountPromise,
+    candidateContactedCount,
+  ]).then((vals) => {
+    let apiResp = candidateMatrixProps.slice();
 
-      apiResp.push({
-        count: vals[0],
-        displayText: "Saved Jobs",
-        key: "savedjob",
-        type: "jobadd",
-      });
+    apiResp.push({
+      count: vals[0],
+      displayText: "Saved Jobs",
+      key: "savedjob",
+      type: "jobadd",
+    });
 
-      apiResp.push({
-        count: vals[1],
-        displayText: "Applied Jobs",
-        key: "application",
-        type: "jobadd",
-      });
+    apiResp.push({
+      count: vals[1],
+      displayText: "Applied Jobs",
+      key: "application",
+      type: "jobadd",
+    });
 
-      apiResp.push({
-        count: vals[1],
-        displayText: "Contacted You",
-        key: "candidatecontacted",
-        type: "jobadd",
-      });
-      res.send(success(apiResp));
-    }
-  );
+    apiResp.push({
+      count: vals[2],
+      displayText: "Contacted You",
+      key: "candidatecontacted",
+      type: "jobadd",
+    });
+    res.send(success(apiResp));
+  });
 };
 
 const candidateMatrixProps = [
