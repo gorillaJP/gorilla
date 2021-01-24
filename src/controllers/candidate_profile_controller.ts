@@ -273,7 +273,7 @@ const candidatejobmatrix = (req, res) => {
   });
 
   let candidateContactedCount = CandidateContacted.countDocuments({
-    email: req.body.email,
+    candidateEmail: req.body.email,
   });
 
   Promise.all([
