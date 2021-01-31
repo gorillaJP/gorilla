@@ -3,10 +3,6 @@ import normalize from "normalize-mongoose";
 var uniqueValidator = require("mongoose-unique-validator");
 
 var CandidateContactedFields = {
-  employerEmail: {
-    type: String,
-    required: true,
-  },
   candidateEmail: {
     type: String,
     required: true,

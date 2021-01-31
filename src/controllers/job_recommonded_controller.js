@@ -6,6 +6,8 @@ import JobRecommended from "../models/JobRecommended";
 import JobSaved from "../models/JobSaved";
 import JobApplication from "../models/JobApplication";
 import JobAdd from "../models/JobAdd";
+import JobApplication from "../models/JobApplication";
+import JobSaved from "../models/JobSaved";
 import { success, error } from "../util/constants";
 
 /**
@@ -19,7 +21,7 @@ const create_job_recommonded = (req, res) => {
     .then((jobAdd) => {
       const jobRecommendedIn = req.body;
       jobRecommendedIn.jobAdd = jobAdd;
-      jobRecommendedIn.jobAdd.hasSaved = true;
+
       jobRecommendedIn.jobAdd.jobId = req.body.jobId;
 
       const jobRecommendedSaved = new JobRecommended(jobRecommendedIn);
@@ -44,8 +46,63 @@ const create_job_recommonded = (req, res) => {
 };
 
 const get_jobsRecommended_by_candidate = (req, res) => {
-  JobRecommended.find({ email: req.body.email }).then((candidateDB) => {
-    res.send(success(candidateDB));
+  //job Recommonded
+  let jobRecommendedPromise = JobRecommended.find({
+    candidateEmail: req.body.email,
+  });
+
+  //saved jobs
+  let jobSavedsPromise = JobSaved.find({ email: req.body.email });
+
+  //applied jobs
+  let jobApplicationsPromise = JobApplication.find({ email: req.body.email });
+
+  Promise.all([
+    jobSavedsPromise,
+    jobApplicationsPromise,
+    jobRecommendedPromise,
+  ]).then((mongoDBResp) => {
+    var jobSaveds = mongoDBResp[0];
+    var jobAppliactions = mongoDBResp[1];
+    var jobsRecommonded = mongoDBResp[2];
+
+    jobsRecommonded = jobsRecommonded
+      .map((rec) => {
+        //iterat all the jobsRecommonded
+        jobsRecommonded = jobsRecommonded.map((rec) => {
+          //check if the candidate has already applied to this job
+          var matchingJobApplication = jobAppliactions.find(
+            (jobApplication) => {
+              return (
+                jobApplication.jobAdd &&
+                rec.jobAdd &&
+                jobApplication.jobAdd._id == rec.jobAdd._id
+              );
+            }
+          );
+          rec.jobAdd.hasApplied = matchingJobApplication ? true : false;
+
+          //check if the candidate has already saved this job
+          var matchingSavedJob = jobSaveds.find((jobSaved) => {
+            return (
+              jobSaved.jobAdd &&
+              rec.jobAdd &&
+              jobSaved.jobAdd._id == rec.jobAdd._id
+            );
+          });
+
+          rec.jobAdd.hasSaved = matchingSavedJob ? true : false;
+
+          return rec.jobAdd;
+        });
+        res.send(jobsRecommonded);
+      })
+      .catch((err) => {
+        logger.error(err);
+        res
+          .status(HttpStatus.BAD_REQUEST)
+          .send(error(mongooseErrorToRes("", err)));
+      });
   });
 };
 /*

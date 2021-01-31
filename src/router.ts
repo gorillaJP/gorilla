@@ -21,6 +21,7 @@ import job_add_controller from "./controllers/job_add_controller";
 import job_add_search_controller from "./controllers/job_add_search_controller";
 import job_application_controller from "./controllers/job_application_controller";
 import job_saved_controller from "./controllers/job_saved_controller";
+import job_recommonded_controller from "./controllers/job_recommonded_controller";
 import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
@@ -338,6 +339,20 @@ const routes = [
     auth: true,
     path: "/candidatecontacted/jobadd",
     controller: candidate_contacted_controller.get_contacted_candidate,
+  },
+  {
+    method: "post",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/recommended",
+    controller: job_recommonded_controller.create_job_recommonded,
+  },
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/recommended/jobadd",
+    controller: job_recommonded_controller.get_jobsRecommended_by_candidate,
   },
 ];
 
