@@ -1143,8 +1143,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
   }
 
 
-
-#### POST contacted candidate
+#### POST contacted candidate candidatecontacted
 POST {{proto}}://{{host}}:{{port}}/api/candidatecontacted
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
@@ -1159,3 +1158,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 GET {{proto}}://{{host}}:{{port}}/api/candidatecontacted/jobadd
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+
+#### POST recommended ## this API should be called from an AIML engine
+POST {{proto}}://{{host}}:{{port}}/api/recommended
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+{
+    "jobId" : "5fd72faff166722c6f3f6b15",
+    "candidateEmail" : "dim912@gmail.com"
+}
+
+#### GET  recommonded candidate
+GET {{proto}}://{{host}}:{{port}}/api/recommended/jobadd
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+
+
