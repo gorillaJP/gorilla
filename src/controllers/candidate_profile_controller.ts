@@ -14,6 +14,7 @@ import { EDQUOT } from "constants";
 import JobSaved from "../models/JobSaved";
 import JobApplication from "../models/JobApplication";
 import CandidateContacted from "../models/CanddidateContacted";
+import JobRecommended from "../models/JobRecommended";
 
 //------- PROFILE  ------------
 
@@ -276,10 +277,15 @@ const candidatejobmatrix = (req, res) => {
     candidateEmail: req.body.email,
   });
 
+  let recommondedCount = JobRecommended.countDocuments({
+    candidateEmail: req.body.email,
+  });
+
   Promise.all([
     jobSavedsCountPromise,
     jobApplicationsCountPromise,
     candidateContactedCount,
+    recommondedCount,
   ]).then((vals) => {
     let apiResp = candidateMatrixProps.slice();
 
@@ -303,17 +309,17 @@ const candidatejobmatrix = (req, res) => {
       key: "candidatecontacted",
       type: "jobadd",
     });
+    apiResp.push({
+      count: vals[3],
+      displayText: "Recommended Jobs",
+      key: "recommended",
+      type: "jobadd",
+    });
     res.send(success(apiResp));
   });
 };
 
 const candidateMatrixProps = [
-  {
-    count: 0,
-    displayText: "Recommended Jobs",
-    key: "recommended",
-    type: "jobadd",
-  },
   {
     count: 0,
     displayText: "Followed Companies",
