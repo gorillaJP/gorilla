@@ -23,6 +23,7 @@ import job_application_controller from "./controllers/job_application_controller
 import job_saved_controller from "./controllers/job_saved_controller";
 import followed_company_controller from "./controllers/followed_company_controller";
 import job_recommonded_controller from "./controllers/job_recommonded_controller";
+import viewed_profile_controller from "./controllers/viewed_profile_controller";
 import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
@@ -375,6 +376,27 @@ const routes = [
     auth: true,
     path: "/followedcompany/:id",
     controller: followed_company_controller.delete_followed_companies,
+  },
+  {
+    method: "post",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/viewedprofile",
+    controller: viewed_profile_controller.create_viewed_profile,
+  },
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/viewedprofile",
+    controller: viewed_profile_controller.get_viewed_profiles,
+  },
+  {
+    method: "delete",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/viewedprofile/:id",
+    controller: viewed_profile_controller.delete_viewed_profile,
   },
 ];
 
