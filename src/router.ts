@@ -21,6 +21,7 @@ import job_add_controller from "./controllers/job_add_controller";
 import job_add_search_controller from "./controllers/job_add_search_controller";
 import job_application_controller from "./controllers/job_application_controller";
 import job_saved_controller from "./controllers/job_saved_controller";
+import followed_company_controller from "./controllers/followed_company_controller";
 import job_recommonded_controller from "./controllers/job_recommonded_controller";
 import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
@@ -353,6 +354,27 @@ const routes = [
     auth: true,
     path: "/recommended/jobadd",
     controller: job_recommonded_controller.get_jobsRecommended_by_candidate,
+  },
+  {
+    method: "post",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/followedcompany",
+    controller: followed_company_controller.create_followed_company,
+  },
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/followedcompany",
+    controller: followed_company_controller.get_followed_companies,
+  },
+  {
+    method: "delete",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/followedcompany/:id",
+    controller: followed_company_controller.delete_followed_companies,
   },
 ];
 
