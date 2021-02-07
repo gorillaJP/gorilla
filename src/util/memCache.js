@@ -45,26 +45,9 @@ setInterval(() => {
         val: company._doc,
       };
 
-      console.log(obj);
       return obj;
     });
     memcache.mset(companiesToCache);
-  });
-}, 10000);
-
-//load the count of jobs for each company from mongo
-setInterval(() => {
-  //TODO -> here the aggrigation should be done by companyId. to to this companyId should be saved into jobAdd collection
-  JobAdd.aggregate([
-    {
-      $group: {
-        _id: "$company",
-        companyId: { $first: "$title" },
-        count: { $sum: 1 },
-      },
-    },
-  ]).then((pp) => {
-    //console.log(pp);
   });
 }, 10000);
 
