@@ -21,18 +21,6 @@ const create_followed_company = (req, res) => {
 };
 
 const get_followed_companies = (req, res) => {
-  JobAdd.aggregate([
-    {
-      $group: {
-        _id: "$company",
-        companyId: { $first: "$title" },
-        count: { $sum: 1 },
-      },
-    },
-  ]).then((pp) => {
-    console.log(pp);
-  });
-
   FollowedCompany.find({ candidateEmail: req.body.email })
     .then((followedCompanies) => {
       const withCompanyData = followedCompanies.map((followedCompany) => {
