@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 import esClient from "../util/esClient";
 
 var jobAdd = {
+  status: {
+    //type = inprogress, draft, deleted, pending publish,  (consider as expired if expiredDate < currentDate)
+    type: String,
+    enum: ["draft", "pending_publish", "inprogress", "deleted"],
+    default: "inprogress",
+  },
   company: {
     type: String,
   },

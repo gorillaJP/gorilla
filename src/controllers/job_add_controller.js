@@ -178,4 +178,47 @@ const getJobsPaginatedOld = (req, res) => {
       res.status(HttpStatus.BAD_REQUEST).send(error());
     });
 };
-export default { getJobs, getJobById, postJobs, getJobsPaginatedOld };
+
+const employerjobadds = (req, res) => {
+  console.log(req.query.status);
+
+  var query;
+
+  //if the expired date is less than current date => then it takes as expired
+  if (req.query.status == "expired") {
+    query = {
+      expireDate: {
+        $lt: new Date(),
+      },
+    };
+  } else {
+    //if expired date if future => then check the status as well
+    query = {
+      status: req.query.status,
+      expireDate: {
+        $gte: new Date(),
+      },
+    };
+  }
+
+  console.log(query);
+
+  JobAdd.find(query)
+    .then((jobs) => {
+      res.send(success(jobs));
+    })
+    .catch((e) => {
+      res.send(error(e));
+    });
+};
+
+export default {
+  //for candidateveiew
+  getJobs,
+  postJobs,
+  getJobsPaginatedOld,
+  //for employer view
+  employerjobadds,
+  //common view
+  getJobById,
+};

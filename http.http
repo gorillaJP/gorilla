@@ -1215,3 +1215,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 DELETE {{proto}}://{{host}}:{{port}}/api/viewedprofile/5eca53762ae14c0d16e26a33
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEaW11dGh1IiwibGFzdG5hbWUiOiJTZW5hbmF5YWthIiwiZW1haWwiOiJkaW05MTJAZ21haWwuY29tIiwiZG9tYWluIjoiY2FuZGlkYXRlIiwiaWQiOiI1ZWI4MzhhNTU3MTNkZDcyNzA5ZWIyZTUiLCJpYXQiOjE1OTE1Mzc1MTF9.i0QvfXbUzG-oN2nLzwT7Hr_l1TR8BuCeEQWzCc2xQfI 
+
+
+####     enum: ["draft", "pending_publish", "inprogress", "deleted"],
+GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=draft
+content-type: application/json
+####
+GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=pending_publish
+content-type: application/json
+####
+GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=inprogress
+content-type: application/json
+
+####
+GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=deleted
+content-type: application/json
+
+####
+GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=expired
+content-type: application/json

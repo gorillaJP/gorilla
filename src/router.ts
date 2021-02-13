@@ -99,6 +99,12 @@ const routes = [
     controller: meta_controller.getMeta,
   },
   {
+    method: "get",
+    auth: false,
+    path: "/employerjobadds",
+    controller: job_add_controller.employerjobadds,
+  },
+  {
     method: "post",
     auth: false,
     path: "/jobadds",
@@ -388,14 +394,14 @@ const routes = [
     method: "get",
     domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
     auth: true,
-    path: "/viewedprofile",
+    path: "/followedcompany",
     controller: viewed_profile_controller.get_viewed_profiles,
   },
   {
     method: "delete",
     domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
     auth: true,
-    path: "/viewedprofile/:id",
+    path: "/followedcompany/:id",
     controller: viewed_profile_controller.delete_viewed_profile,
   },
 ];
