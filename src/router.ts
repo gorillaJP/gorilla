@@ -373,7 +373,7 @@ const routes = [
     method: "get",
     domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
     auth: true,
-    path: "/followedcompany",
+    path: "/followedcompany/company",
     controller: followed_company_controller.get_followed_companies,
   },
   {
@@ -382,6 +382,13 @@ const routes = [
     auth: true,
     path: "/followedcompany/:id",
     controller: followed_company_controller.delete_followed_companies,
+  },
+  {
+    method: "get",
+    domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
+    auth: true,
+    path: "/viewedprofile/company",
+    controller: viewed_profile_controller.get_viewed_profiles,
   },
   {
     method: "post",
