@@ -201,10 +201,12 @@ const employerjobadds = (req, res) => {
     };
   }
 
-  console.log(query);
-
   JobAdd.find(query)
     .then((jobs) => {
+      jobs = jobs.map((job) => {
+        delete job._doc.description;
+        return job._doc;
+      });
       res.send(success(jobs));
     })
     .catch((e) => {

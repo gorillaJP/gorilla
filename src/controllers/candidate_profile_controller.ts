@@ -323,13 +323,13 @@ const candidateMatrixProps = [
   {
     count: 0,
     displayText: "Followed Companies",
-    key: "followed",
+    key: "followedcompany",
     type: "company",
   },
   {
     count: 0,
     displayText: "Viewed Your Profile",
-    key: "profileviewed",
+    key: "viewedprofile",
     type: "company",
   },
 ];
