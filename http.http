@@ -1,3 +1,10 @@
+
+
+
+//employer token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxMzMwNTczM30.2kQ4ixvZc7dUvW741dP2P2hYHFITgqFHoaz4UXHSMjI
+
+
+
 //backed by REST Client 
 // ----------------------------------- ATTENTION : KEEP THE FILE CLEAN ---------------
 
@@ -1220,17 +1227,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJEa
 ####     enum: ["draft", "pending_publish", "inprogress", "deleted"],
 GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=draft
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxMzMwNTczM30.2kQ4ixvZc7dUvW741dP2P2hYHFITgqFHoaz4UXHSMjI
+
 ####
 GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=pending_publish
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxMzMwNTczM30.2kQ4ixvZc7dUvW741dP2P2hYHFITgqFHoaz4UXHSMjI
+
 ####
 GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=inprogress
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxMzMwNTczM30.2kQ4ixvZc7dUvW741dP2P2hYHFITgqFHoaz4UXHSMjI
 
 ####
 GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=deleted
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxMzMwNTczM30.2kQ4ixvZc7dUvW741dP2P2hYHFITgqFHoaz4UXHSMjI
 
 ####
 GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=expired
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxMzMwNTczM30.2kQ4ixvZc7dUvW741dP2P2hYHFITgqFHoaz4UXHSMjI

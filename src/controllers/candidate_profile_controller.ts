@@ -15,6 +15,8 @@ import JobSaved from "../models/JobSaved";
 import JobApplication from "../models/JobApplication";
 import CandidateContacted from "../models/CanddidateContacted";
 import JobRecommended from "../models/JobRecommended";
+import FollowedCompanies from "../models/FollowedCompany";
+import ViewedProfile from "../models/ViewedProfile";
 
 //------- PROFILE  ------------
 
@@ -281,13 +283,23 @@ const candidatejobmatrix = (req, res) => {
     candidateEmail: req.body.email,
   });
 
+  let followdCompanyCount = FollowedCompanies.countDocuments({
+    candidateEmail: req.body.email,
+  });
+
+  let viewedYourProfileCount = ViewedProfile.countDocuments({
+    candidateEmail: req.body.email,
+  });
+
   Promise.all([
     jobSavedsCountPromise,
     jobApplicationsCountPromise,
     candidateContactedCount,
     recommondedCount,
+    followdCompanyCount,
+    viewedYourProfileCount,
   ]).then((vals) => {
-    let apiResp = candidateMatrixProps.slice();
+    let apiResp = [];
 
     apiResp.push({
       count: vals[0],
@@ -315,24 +327,21 @@ const candidatejobmatrix = (req, res) => {
       key: "recommended",
       type: "jobadd",
     });
+    apiResp.push({
+      count: vals[4],
+      displayText: "Followed Companies",
+      key: "followedcompany",
+      type: "company",
+    });
+    apiResp.push({
+      count: vals[5],
+      displayText: "Viewed Your Profile",
+      key: "viewedprofile",
+      type: "company",
+    });
     res.send(success(apiResp));
   });
 };
-
-const candidateMatrixProps = [
-  {
-    count: 0,
-    displayText: "Followed Companies",
-    key: "followedcompany",
-    type: "company",
-  },
-  {
-    count: 0,
-    displayText: "Viewed Your Profile",
-    key: "viewedprofile",
-    type: "company",
-  },
-];
 
 const weightsGrid = [
   //15

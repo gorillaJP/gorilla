@@ -100,8 +100,9 @@ const routes = [
   },
   {
     method: "get",
-    auth: false,
+    auth: true,
     path: "/employerjobadds",
+    domain: [Domain.EMPLOYER],
     controller: job_add_controller.employerjobadds,
   },
   {
@@ -503,6 +504,8 @@ routes.forEach((route) => {
 
     //the email in the request body is not trusted => becaue of that => replace it with what is found from JWT token
     router[route.method](route.path, (req, res, next) => {
+      console.log(req.user);
+
       req.body.email = req.user.email; //
       next();
     }); //middleware to check the JWT token and, decode JWT stratergy
