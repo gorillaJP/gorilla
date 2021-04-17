@@ -2,9 +2,115 @@ import EmployerProfile from "../models/EmployerProfile";
 import CompanyProfile from "../models/CompanyProfile";
 import { success, error } from "../util/constants";
 import * as HttpStatus from "http-status-codes";
-const mongoose = require("mongoose");
+import * as mongoose from 'mongoose';
 import { Email, emailSend, EmailTemeplate } from "../util/emailer";
 import { mongooseErrorToRes } from "../models/MongoUtil";
+import JobAdd from "../models/JobAdd";
+
+const employerjobmatrix = (req, res) => {
+
+  const expiredPromise = JobAdd.countDocuments({
+    expireDate: {
+      $lt: new Date(),
+    }
+  })
+    .then((data) => {
+      return data;
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  const inProgressPromise = JobAdd.countDocuments({
+    status: "inprogress",
+    expireDate: {
+      $gte: new Date(),
+    }
+  })
+    .then((data) => {
+      return data;
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  const draftPromise = JobAdd.countDocuments({
+    status: "draft",
+    expireDate: {
+      $gte: new Date(),
+    }
+  })
+    .then((data) => {
+      return data;
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  const pendingPublishPromise = JobAdd.countDocuments({
+    status: "pending_publish",
+    expireDate: {
+      $gte: new Date(),
+    }
+  })
+    .then((data) => {
+      return data;
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  const deletedPromise = JobAdd.countDocuments({
+    status: "deleted",
+    expireDate: {
+      $gte: new Date(),
+    }
+  })
+    .then((data) => {
+      return data;
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  Promise.all([
+    inProgressPromise,
+    draftPromise,
+    expiredPromise,
+    deletedPromise,
+    pendingPublishPromise
+  ]).then((vals) => {
+    let apiResp = [];
+    apiResp.push({
+      count: vals[0],
+      displayText: "Inprogress Jobs",
+      key: "inprogress",
+      type: "jobadd",
+    });
+    apiResp.push({
+      count: vals[1],
+      displayText: "Draft Jobs",
+      key: "draft",
+      type: "jobadd",
+    });
+    apiResp.push({
+      count: vals[2],
+      displayText: "Expired Jobs",
+      key: "expired",
+      type: "jobadd",
+    });
+    apiResp.push({
+      count: vals[3],
+      displayText: "Deleted Jobs",
+      key: "deleted",
+      type: "jobadd",
+    });
+    apiResp.push({
+      count: vals[4],
+      displayText: "Pending to Publish",
+      key: "pending_publish",
+      type: "jobadd",
+    });
+    res.send(success(apiResp));
+  }).catch((e) => {
+    res.send(error(e));
+  })
+}
 
 /**
  * Save the Employee and company
@@ -77,4 +183,4 @@ let sendEmail = (employer): void => {
   emailSend(email);
 };
 
-export default { registerEmployer };
+export default { registerEmployer, employerjobmatrix };

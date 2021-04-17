@@ -1248,3 +1248,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxM
 GET {{proto}}://{{host}}:{{port}}/api/employerjobadds?status=expired
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxMzMwNTczM30.2kQ4ixvZc7dUvW741dP2P2hYHFITgqFHoaz4UXHSMjI
+
+### Check protected API
+GET {{proto}}://{{host}}:{{port}}/api/employer/jobmatrix
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYxODY2NTQ4Mn0.ng8Fmb4HgIT9DK49WrfkJPbnIrfoDfFhiZ3OzivN83E
+content-type: application/json

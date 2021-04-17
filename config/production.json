@@ -4,6 +4,8 @@
   "swagger": {
     "host": "159.89.161.233",
     "port": "443",
-    "schemas": ["https"]
+    "schemas": [
+      "https"
+    ]
   }
 }

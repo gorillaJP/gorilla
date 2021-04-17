@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "dev": "cross-env NODE_ENV=localhost nodemon --watch src -e js,ts --exec \"rm -rf ./tsbuild/ && tsc && babel-node tsbuild/index.js\"",
+    "devw": "cross-env NODE_ENV=localhost nodemon --watch src -e js,ts --exec \"tsc && babel-node tsbuild/index.js\"",
+    "dev": "cross-env NODE_ENV=localhost nodemon --watch src -e js,ts --exec \"tsc && babel-node tsbuild/index.js\"",
     "tsrun": "cross-env NODE_ENV=localhost nodemon --exec babel-node tsbuild/index.js",
     "devjs": "cross-env NODE_ENV=localhost nodemon --exec babel-node src/index.js",
     "debug": "cross-env NODE_ENV=localhost nodemon --inspect=9229 --exec babel-node  src/index.js",
