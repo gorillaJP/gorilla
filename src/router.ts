@@ -336,6 +336,13 @@ const routes = [
     controller: candidate_profile_controller.candidatejobmatrix,
   },
   {
+    method: "get",
+    domain: [Domain.EMPLOYER],
+    auth: true,
+    path: "/employer/jobmatrix",
+    controller: employer_profile_controller.employerjobmatrix,
+  },
+  {
     method: "post",
     domain: [Domain.CANDIDATE], //TODO this should only be allowed to companies
     auth: true,

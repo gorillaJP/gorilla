@@ -1,5 +1,6 @@
 import EmployerProfile from "../models/EmployerProfile";
 import CompanyProfile from "../models/CompanyProfile";
+import JobAdd from "../models/JobAdd";
 import { success, error } from "../util/constants";
 import * as HttpStatus from "http-status-codes";
 const mongoose = require("mongoose");
@@ -77,4 +78,31 @@ let sendEmail = (employer): void => {
   emailSend(email);
 };
 
-export default { registerEmployer };
+const employerjobmatrix = (req, res) => {
+  console.log(req.body.email);
+
+  const x = EmployerProfile.findOne({ email: req.body.email }).then(
+    (employer) => {
+      JobAdd.aggregate([
+        /*
+        {
+          $match: {
+            companyid: employer.companies[0].id,
+          },
+        },
+        */
+        {
+          $group: {
+            _id: "$status",
+            status: { $first: "$status" }, //TODO change this to companyId
+            count: { $sum: 1 },
+          },
+        },
+      ]).then((x) => {
+        res.send(x);
+      });
+    }
+  );
+};
+
+export default { registerEmployer, employerjobmatrix };
