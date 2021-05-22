@@ -11,17 +11,34 @@ import { success, error } from "../util/constants";
  *
  */
 const getCompanyList = (req, res) => {
+  let dbQuery;
   let regEx;
+
   if (req.query.type == "prefix") {
     regEx = getSearchRegExByPrefix(req.query.q);
   } else {
     regEx = getSearchRegEx(req.query.q);
   }
 
-  CompanyProfile.find({ name: regEx }, { name: 1, id: 1 })
+  //prepare dbquery + reponsecon
+  if (req.query.scope == "full") {
+    dbQuery = CompanyProfile.find({ name: regEx });
+  } else {
+    dbQuery = CompanyProfile.find({ name: regEx }, { name: 1, id: 1 });
+  }
+
+  //fire
+  dbQuery
     .exec()
     .then((data) => {
-      res.status(HttpStatus.OK).send(success(data));
+      let resData;
+      if (req.query.scope == "full") {
+        resData = data.map((e) => {
+          e._doc.activeJobs = 5; //read from cache or ES
+          return e;
+        });
+      }
+      res.status(HttpStatus.OK).send(success(resData));
     })
     .catch((e) => {
       logger.error(e);

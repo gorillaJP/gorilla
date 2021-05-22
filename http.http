@@ -407,11 +407,11 @@ GET {{proto}}://{{host}}:{{port}}/api/matrix/tophiringcompanies
 
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/company?q=a HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/company?q= HTTP/1.1
 content-type: application/json
 
 ###
-GET {{proto}}://{{host}}:{{port}}/api/company?q=a&type=prefix HTTP/1.1
+GET {{proto}}://{{host}}:{{port}}/api/company?q=m&type=prefix&scope=full HTTP/1.1
 content-type: application/json
 
 ###
