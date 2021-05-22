@@ -330,6 +330,13 @@ const routes = [
   },
   {
     method: "get",
+    domain: [Domain.EMPLOYER],
+    auth: true,
+    path: "/employer/jobmatrix",
+    controller: employer_profile_controller.employerjobmatrix,
+  },
+  {
+    method: "get",
     domain: [Domain.CANDIDATE],
     auth: true,
     path: "/candidate/jobmatrix",
@@ -429,12 +436,12 @@ router.get(
   (req, res) => {
     return res.redirect(
       app.uiAppURL +
-        uiLoginRedirect +
-        "?jwt=" +
-        jwt.sign(
-          { email: req.user.email, domain: req.user.domain },
-          "your_jwt_secret"
-        )
+      uiLoginRedirect +
+      "?jwt=" +
+      jwt.sign(
+        { email: req.user.email, domain: req.user.domain },
+        "your_jwt_secret"
+      )
     );
   }
 );
@@ -463,7 +470,7 @@ const getDomainVerificatonFilter = (allowedDomain) => {
         .status(401)
         .send(
           "Authorization failure. not allowed to acces this api for domain" +
-            req.user.domain
+          req.user.domain
         );
     }
   };
