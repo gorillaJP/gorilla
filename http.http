@@ -445,6 +445,10 @@ GET {{proto}}://{{host}}:{{port}}/api/company?q=m&type=prefix&scope=full HTTP/1.
 content-type: application/json
 
 ###
+GET {{proto}}://{{host}}:{{port}}/api/company?q=&type=prefix&scope=full HTTP/1.1
+content-type: application/json
+
+###
 POST http://example.com/api/upload
 ###
 

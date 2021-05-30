@@ -4,6 +4,8 @@ import CompanyProfile from "../models/CompanyProfile";
 import logger from "../util/logger";
 import { success, error } from "../util/constants";
 
+const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 /**
  * Save the Employee and company
  *
@@ -15,6 +17,11 @@ const getCompanyList = (req, res) => {
   let regEx;
 
   if (req.query.type == "prefix") {
+    //if the letter is not mentiond -> then decide it based on the current date. rotates daily
+    if (!req.query.q || req.query.q == null || req.query.q == "") {
+      const letterIndex = Math.floor((Date.now() / (1000 * 60 * 60 * 24)) % 26); //get a letter rotats daly
+      req.query.q = allLetters.charAt(letterIndex);
+    }
     regEx = getSearchRegExByPrefix(req.query.q);
   } else {
     regEx = getSearchRegEx(req.query.q);
