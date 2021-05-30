@@ -390,15 +390,45 @@ content-type: application/json
 ###
 POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYyMjM4NzAxMH0.tA9O3KgGQ_HognYK-CjlrHVHXYyQ7OnFiiXZidhgtgk
 
 {
  "company" : "wso2",
  "companyid" : "5eca6e91b7845a0f0a154bc8",
  "description" : "Job Description\nTo do Application Development\nExperience in Java programming language . Will use SQL (mysql, oracle, etc. ) , Angular js, spring, Hibernate, etc.\nWill handle technical development concepts, latest software tools and technologies, strong database concepts and designing techniques\n\nJob Requirement:\nAble to do development, modification, enhancement and support\nAt least 2 year experience working on Java\/J2EE environments and related technologies.\nInterested applicants may send in their detailed resumes, with subject title: 105 \u2013 Java, CV written in MS Word for immediate processing:\nWe regret that only shortlisted candidates will be notified.\nIT Consultancy & Services Pte Ltd\nVisit our website: www.itcspl.com\nEA License No.: 92C5311",
- "title" : "Senior Java Developr",
+ "title" : "MY SQL Developer Test",
  "location" : "Colombo",
  "experiance" : "3 years ",
  "skills" : [ "Angular" , ".Net"] 
+}
+
+###
+POST {{proto}}://{{host}}:{{port}}/api/jobadds HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbTkxMkBnbWFpbC5jb20iLCJkb21haW4iOiJlbXBsb3llciIsImlhdCI6MTYyMjM4NzAxMH0.tA9O3KgGQ_HognYK-CjlrHVHXYyQ7OnFiiXZidhgtgk
+
+{
+  "status": "deleted",
+    "skills": [
+      "Angular",
+      ".Net"
+    ],
+    "isfeatured": false,
+    "applyExternally": false,
+    "applyExternalUrl": null,
+    "isPitchRequired": true,
+    "questionnaireId": "true",
+    "_id": "60b3c26356025c7ccccdf1bb",
+    "company": "wso2",
+    "companyid": "5eca6e91b7845a0f0a154bc8",
+    "description": "Job Description\nTo do Application Development\nExperience in Java programming language . Will use SQL (mysql, oracle, etc. ) , Angular js, spring, Hibernate, etc.\nWill handle technical development concepts, latest software tools and technologies, strong database concepts and designing techniques\n\nJob Requirement:\nAble to do development, modification, enhancement and support\nAt least 2 year experience working on Java/J2EE environments and related technologies.\nInterested applicants may send in their detailed resumes, with subject title: 105 – Java, CV written in MS Word for immediate processing:\nWe regret that only shortlisted candidates will be notified.\nIT Consultancy & Services Pte Ltd\nVisit our website: www.itcspl.com\nEA License No.: 92C5311",
+    "title": "MY SQL Developer Test",
+    "location": "Colombo",
+    "expireDate": null,
+    "companylogo": "upload_ef070c2602dae1adfe247c5568ac418d1.png",
+    "createdat": "2021-05-30T16:50:43.025Z",
+    "updatedat": "2021-05-30T16:50:43.025Z",
+    "__v": 0
 }
 
 ### Matrix

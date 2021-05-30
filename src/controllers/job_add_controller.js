@@ -1,6 +1,7 @@
 import HttpStatus from "http-status-codes";
 
 import JobAdd from "../models/JobAdd";
+import logger from "../util/logger";
 import CompanyProfile from "../models/CompanyProfile";
 import { success, error } from "../util/constants";
 
@@ -121,32 +122,54 @@ const formWildQuery = (q) => {
  * the expiry date is expected to be null or milliseconds
  */
 const postJobs = (req, res) => {
-  req.body.expireDate = req.body.expireDate
-    ? new Date(req.body.expireDate)
-    : null;
+  if (req.body._id) {
+    updateJobs(req, res);
+  } else {
+    req.body.expireDate = req.body.expireDate
+      ? new Date(req.body.expireDate)
+      : null;
 
-  CompanyProfile.findById(req.body.companyid)
-    .then((company) => {
-      const jobAddIn = req.body;
-      jobAddIn.companylogo = company.logo;
+    CompanyProfile.findById(req.body.companyid)
+      .then((company) => {
+        const jobAddIn = req.body;
+        jobAddIn.companylogo = company.logo;
 
-      var jobAdd = new JobAdd(jobAddIn);
+        var jobAdd = new JobAdd(jobAddIn);
 
-      jobAdd
-        .save()
-        .then((resp, resp1) => {
-          jobAdd.id = resp.id;
+        jobAdd
+          .save()
+          .then((resp, resp1) => {
+            jobAdd.id = resp.id;
 
-          res.status(HttpStatus.OK).send(success(jobAdd));
-        })
-        .catch((err) => {
-          res.status(HttpStatus.BAD_REQUEST).send(error());
-        });
-    })
-    .catch((err) => {
-      res.status(HttpStatus.BAD_REQUEST).send(error(err));
-    });
+            res.status(HttpStatus.OK).send(success(jobAdd));
+          })
+          .catch((err) => {
+            res.status(HttpStatus.BAD_REQUEST).send(error());
+          });
+      })
+      .catch((err) => {
+        res.status(HttpStatus.BAD_REQUEST).send(error(err));
+      });
+  }
 };
+
+/** start update job */
+const updateJobs = (req, res) => {
+  if (req.body._id) {
+    const _idIn = req.body._id;
+    JobAdd.findOneAndUpdate({ _id: _idIn }, req.body)
+      .then((jobAddSaved) => {
+        JobAdd.find({ _id: _idIn }).then((jobAddRead) => {
+          res.status(HttpStatus.OK).send(success(jobAddRead));
+        });
+      })
+      .catch((err) => {
+        logger.error(err);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+      });
+  }
+};
+/** end update job */
 
 /***
  * pagination control with pagination data meta
@@ -180,8 +203,6 @@ const getJobsPaginatedOld = (req, res) => {
 };
 
 const employerjobadds = (req, res) => {
-  console.log(req.query.status);
-
   var query;
 
   //if the expired date is less than current date => then it takes as expired
