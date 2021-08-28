@@ -107,8 +107,7 @@ const routes = [
   },
   {
     method: "post",
-    auth: true,
-    domain: [Domain.EMPLOYER],
+    auth: false,
     path: "/jobadds",
     controller: job_add_controller.postJobs,
   },
