@@ -27,6 +27,7 @@ import viewed_profile_controller from "./controllers/viewed_profile_controller";
 import job_summary_controller from "./controllers/job_add_sumary_controller";
 import { Domain, Role } from "./filters/auth";
 import { app, uiLoginRedirect } from "./config";
+import logger from "./util/logger"
 
 const router = express.Router();
 
@@ -459,7 +460,7 @@ const getDomainVerificatonFilter = (allowedDomain) => {
   return (req, res, next) => {
     //if the domain in JWT payload (req.user.domain) is not the domain of this API => reject
 
-    console.log('user domain:' + req.user.domain)
+    logger.info('user domain:' + req.user.domain)
     if (
       (Array.isArray(allowedDomain) &&
         allowedDomain.includes(req.user.domain)) ||
