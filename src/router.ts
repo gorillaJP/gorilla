@@ -459,6 +459,7 @@ const getDomainVerificatonFilter = (allowedDomain) => {
   return (req, res, next) => {
     //if the domain in JWT payload (req.user.domain) is not the domain of this API => reject
 
+    console.log('user domain:' + req.user.domain)
     if (
       (Array.isArray(allowedDomain) &&
         allowedDomain.includes(req.user.domain)) ||
